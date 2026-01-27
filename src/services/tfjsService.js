@@ -46,20 +46,23 @@ class TFJSService {
       console.log('📥 Model inputs:', this.model.inputNodes);
       console.log('📤 Model outputs:', this.model.outputNodes);
 
-      // Load classes dan nutrition data
-      const [classesResponse, nutritionResponse] = await Promise.all([
+      // Load classes, nutrition data, dan descriptions
+      const [classesResponse, nutritionResponse, descriptionsResponse] = await Promise.all([
         fetch('/models/classes.json'),
-        fetch('/models/nutrition.json')
+        fetch('/models/nutrition.json'),
+        fetch('/models/descriptions.json')
       ]);
 
       this.classes = await classesResponse.json();
       this.nutritionData = await nutritionResponse.json();
+      this.descriptionData = await descriptionsResponse.json();
 
       this.isModelLoaded = true;
       this.isLoading = false;
 
       console.log(`✅ Classes loaded: ${this.classes.length} classes`);
       console.log(`✅ Nutrition data loaded: ${Object.keys(this.nutritionData).length} items`);
+      console.log(`✅ Descriptions loaded: ${Object.keys(this.descriptionData).length} items`);
 
       return this.model;
     } catch (error) {
@@ -71,21 +74,23 @@ class TFJSService {
 
   /**
    * Preprocess gambar sebelum diprediksi
-   * Sesuai dengan preprocessing saat training di Google Colab
+   * SESUAI COLAB: image_dataset_from_directory scale ke [0, 1]
+   * dan tf.keras.utils.img_to_array() return [0, 255] lalu model accept itu
    */
   preprocessImage(imageElement) {
     return tf.tidy(() => {
-      // Convert image ke tensor
+      // Convert image ke tensor (RGB) - returns [0, 255]
       const tensor = tf.browser.fromPixels(imageElement);
 
       // Resize ke 224x224
       const resized = tf.image.resizeBilinear(tensor, [224, 224]);
 
-      // Normalisasi ke [0, 1]
-      const normalized = resized.div(255.0);
+      // NORMAL: cast ke float32 dan range [0, 255] (sesuai img_to_array)
+      // Lalu model akan handle preprocessing-nya sendiri
+      const floatImg = resized.toFloat();
 
       // Add batch dimension
-      const batched = normalized.expandDims(0);
+      const batched = floatImg.expandDims(0);
 
       return batched;
     });
@@ -103,17 +108,30 @@ class TFJSService {
       // Preprocess gambar
       const preprocessed = this.preprocessImage(imageElement);
       console.log('📸 Preprocessed shape:', preprocessed.shape);
+      console.log('📸 Preprocessed min/max:', await preprocessed.min().data(), await preprocessed.max().data());
 
-      // Prediksi menggunakan execute dengan input mapping
-      const inputName = this.model.inputNodes[0];
-      console.log('🔍 Using input node:', inputName);
+      // Coba beberapa cara untuk memanggil model
+      let predictionTensor;
+      let result;
 
-      const result = this.model.execute({ [inputName]: preprocessed });
+      // Cara 1: Gunakan signature inputs/outputs (recommended)
+      try {
+        result = this.model.predict({ 'input_2': preprocessed });
+        console.log('✅ Using signature predict with input_2');
+      } catch (e) {
+        console.log('⚠️ Signature predict failed, trying execute...');
+
+        // Cara 2: Gunakan execute dengan input node
+        const inputName = this.model.inputNodes[0];
+        console.log('🔍 Using input node:', inputName);
+
+        result = this.model.execute({ [inputName]: preprocessed });
+      }
+
       console.log('📊 Execute result type:', typeof result);
       console.log('📊 Is tensor?', result instanceof tf.Tensor);
 
       // Handle output - bisa tensor atau object
-      let predictionTensor;
       if (result instanceof tf.Tensor) {
         predictionTensor = result;
         console.log('✅ Result is a tensor');
@@ -139,13 +157,21 @@ class TFJSService {
 
       console.log('✅ Prediction tensor shape:', predictionTensor.shape);
 
-      // Apply softmax untuk convert logits ke probabilities
-      const probabilitiesTensor = tf.softmax(predictionTensor);
-      const probabilities = await probabilitiesTensor.data();
-      console.log('📈 Probabilities sample:', Array.from(probabilities).slice(0, 5));
+      // Model di Colab punya activation='softmax' di layer terakhir
+      // Jadi output SUDAH probabilities, TIDAK perlu softmax lagi!
+      const probabilities = await predictionTensor.data();
+      console.log('📈 Raw probabilities sample (first 5):', Array.from(probabilities).slice(0, 5));
 
-      // Cleanup softmax tensor
-      probabilitiesTensor.dispose();
+      // Verify sum mendekati 1
+      const sum = Array.from(probabilities).reduce((a, b) => a + b, 0);
+      console.log('📊 Sum of probabilities (should be ~1.0):', sum.toFixed(4));
+
+      console.log('📈 Top 5 Probabilities:', Array.from(probabilities)
+        .map((p, i) => ({ idx: i, prob: p }))
+        .sort((a, b) => b.prob - a.prob)
+        .slice(0, 5)
+        .map(x => `${this.classes[x.idx] || 'class_' + x.idx}: ${(x.prob * 100).toFixed(2)}%`)
+      );
 
       // Sort dan ambil top 5
       const topIndices = Array.from(probabilities)
@@ -160,13 +186,15 @@ class TFJSService {
         const className = this.classes[item.index];
         const confidence = (item.prob * 100).toFixed(2);
         const nutrition = this.nutritionData[className] || null;
+        const description = this.descriptionData[className] || null;
 
         return {
           rank: rank + 1,
           className,
           displayName: this.formatClassName(className),
           confidence,
-          nutrition
+          nutrition,
+          description
         };
       });
 

@@ -108,6 +108,24 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
             )}
           </div>
 
+          {topResult.description && (
+            <div className="description-info">
+              <div className="description-header">
+                <h4>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                    <polyline points="10 9 9 9 8 9" />
+                  </svg>
+                  Deskripsi Makanan
+                </h4>
+              </div>
+              <p className="description-text">{topResult.description}</p>
+            </div>
+          )}
+
           {topResult.nutrition && (
             <div className="nutrition-info">
               <div className="nutrition-header">
@@ -438,6 +456,30 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
           color: #991b1b;
         }
 
+        .description-info {
+          background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+          padding: 1.5rem;
+          border-radius: 16px;
+          border: 1px solid #fbbf24;
+          margin-top: 1rem;
+        }
+
+        .description-header h4 {
+          color: #92400e;
+          margin: 0 0 1rem 0;
+          font-size: 1.1rem;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .description-text {
+          color: #78350f;
+          line-height: 1.7;
+          margin: 0;
+          font-size: 0.95rem;
+        }
+
         .nutrition-info {
           background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
           padding: 1.5rem;
@@ -665,6 +707,7 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
             grid-template-columns: 1fr;
           }
 
+          .description-info,
           .nutrition-info,
           .other-predictions,
           .model-details {
