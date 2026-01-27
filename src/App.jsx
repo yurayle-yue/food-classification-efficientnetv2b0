@@ -137,17 +137,6 @@ function App() {
           <h4>{titles[modelStatus]}</h4>
           <p>{statusMessage}</p>
         </div>
-        {modelStatus === 'ready' && modelInfo && (
-          <div className="model-info-badge">
-            <span className="accuracy-badge">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                <polyline points="22 4 12 14.01 9 11.01" />
-              </svg>
-              Akurasi: {modelInfo.accuracy}
-            </span>
-          </div>
-        )}
       </div>
     );
   };
@@ -180,13 +169,15 @@ function App() {
             </svg>
             EfficientNetV2B0
           </span>
-          <span className="badge">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-              <polyline points="22 4 12 14.01 9 11.01" />
-            </svg>
-            Akurasi: {modelInfo?.accuracy || '94.8%'}
-          </span>
+          {predictionResults && (
+            <span className="badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                <polyline points="22 4 12 14.01 9 11.01" />
+              </svg>
+              Akurasi: {predictionResults[0]?.confidence || '0'}%
+            </span>
+          )}
           <span className="badge">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />

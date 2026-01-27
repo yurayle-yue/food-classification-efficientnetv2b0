@@ -71,6 +71,7 @@ class TFJSService {
 
   /**
    * Preprocess gambar sebelum diprediksi
+   * Menggunakan preprocessing yang sesuai dengan EfficientNetV2
    */
   preprocessImage(imageElement) {
     return tf.tidy(() => {
@@ -80,8 +81,9 @@ class TFJSService {
       // Resize ke 224x224
       const resized = tf.image.resizeBilinear(tensor, [224, 224]);
 
-      // Normalisasi ke [0, 1]
-      const normalized = resized.div(255.0);
+      // Normalisasi ke [-1, 1] untuk EfficientNetV2
+      // (resized / 127.5) - 1.0
+      const normalized = resized.div(127.5).sub(1.0);
 
       // Add batch dimension
       const batched = normalized.expandDims(0);
