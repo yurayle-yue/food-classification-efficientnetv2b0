@@ -1,0 +1,709 @@
+{
+  "apple_pie": {
+    "kalori": "300",
+    "protein": "3",
+    "lemak": "12",
+    "karbohidrat": "45",
+    "takaran": "100g"
+  },
+  "baby_back_ribs": {
+    "kalori": "540",
+    "protein": "38",
+    "lemak": "33",
+    "karbohidrat": "15",
+    "takaran": "150g"
+  },
+  "baklava": {
+    "kalori": "330",
+    "protein": "6",
+    "lemak": "16",
+    "karbohidrat": "40",
+    "takaran": "100g"
+  },
+  "beef_carpaccio": {
+    "kalori": "200",
+    "protein": "20",
+    "lemak": "12",
+    "karbohidrat": "1",
+    "takaran": "100g"
+  },
+  "beef_tartare": {
+    "kalori": "250",
+    "protein": "25",
+    "lemak": "15",
+    "karbohidrat": "2",
+    "takaran": "100g"
+  },
+  "beet_salad": {
+    "kalori": "80",
+    "protein": "3",
+    "lemak": "2",
+    "karbohidrat": "12",
+    "takaran": "100g"
+  },
+  "beignets": {
+    "kalori": "400",
+    "protein": "6",
+    "lemak": "20",
+    "karbohidrat": "50",
+    "takaran": "100g"
+  },
+  "bibimbap": {
+    "kalori": "450",
+    "protein": "15",
+    "lemak": "12",
+    "karbohidrat": "60",
+    "takaran": "300g"
+  },
+  "bread_pudding": {
+    "kalori": "250",
+    "protein": "6",
+    "lemak": "10",
+    "karbohidrat": "35",
+    "takaran": "100g"
+  },
+  "breakfast_burrito": {
+    "kalori": "400",
+    "protein": "20",
+    "lemak": "15",
+    "karbohidrat": "40",
+    "takaran": "200g"
+  },
+  "bruschetta": {
+    "kalori": "200",
+    "protein": "6",
+    "lemak": "8",
+    "karbohidrat": "30",
+    "takaran": "100g"
+  },
+  "caesar_salad": {
+    "kalori": "300",
+    "protein": "10",
+    "lemak": "20",
+    "karbohidrat": "15",
+    "takaran": "200g"
+  },
+  "cannoli": {
+    "kalori": "400",
+    "protein": "8",
+    "lemak": "20",
+    "karbohidrat": "50",
+    "takaran": "100g"
+  },
+  "caprese_salad": {
+    "kalori": "200",
+    "protein": "8",
+    "lemak": "15",
+    "karbohidrat": "10",
+    "takaran": "150g"
+  },
+  "carrot_cake": {
+    "kalori": "350",
+    "protein": "4",
+    "lemak": "18",
+    "karbohidrat": "45",
+    "takaran": "100g"
+  },
+  "ceviche": {
+    "kalori": "200",
+    "protein": "20",
+    "lemak": "5",
+    "karbohidrat": "10",
+    "takaran": "150g"
+  },
+  "cheesecake": {
+    "kalori": "350",
+    "protein": "6",
+    "lemak": "22",
+    "karbohidrat": "30",
+    "takaran": "100g"
+  },
+  "cheese_plate": {
+    "kalori": "450",
+    "protein": "20",
+    "lemak": "35",
+    "karbohidrat": "5",
+    "takaran": "150g"
+  },
+  "chicken_curry": {
+    "kalori": "300",
+    "protein": "20",
+    "lemak": "15",
+    "karbohidrat": "15",
+    "takaran": "200g"
+  },
+  "chicken_quesadilla": {
+    "kalori": "350",
+    "protein": "20",
+    "lemak": "15",
+    "karbohidrat": "25",
+    "takaran": "150g"
+  },
+  "chicken_wings": {
+    "kalori": "300",
+    "protein": "20",
+    "lemak": "20",
+    "karbohidrat": "10",
+    "takaran": "100g"
+  },
+  "chocolate_cake": {
+    "kalori": "400",
+    "protein": "5",
+    "lemak": "20",
+    "karbohidrat": "50",
+    "takaran": "100g"
+  },
+  "chocolate_mousse": {
+    "kalori": "300",
+    "protein": "5",
+    "lemak": "20",
+    "karbohidrat": "25",
+    "takaran": "100g"
+  },
+  "churros": {
+    "kalori": "400",
+    "protein": "6",
+    "lemak": "20",
+    "karbohidrat": "50",
+    "takaran": "100g"
+  },
+  "clam_chowder": {
+    "kalori": "250",
+    "protein": "10",
+    "lemak": "12",
+    "karbohidrat": "20",
+    "takaran": "200g"
+  },
+  "club_sandwich": {
+    "kalori": "400",
+    "protein": "20",
+    "lemak": "18",
+    "karbohidrat": "35",
+    "takaran": "200g"
+  },
+  "crab_cakes": {
+    "kalori": "250",
+    "protein": "15",
+    "lemak": "15",
+    "karbohidrat": "10",
+    "takaran": "100g"
+  },
+  "creme_brulee": {
+    "kalori": "300",
+    "protein": "5",
+    "lemak": "20",
+    "karbohidrat": "25",
+    "takaran": "100g"
+  },
+  "croque_madame": {
+    "kalori": "450",
+    "protein": "20",
+    "lemak": "25",
+    "karbohidrat": "30",
+    "takaran": "200g"
+  },
+  "cup_cakes": {
+    "kalori": "-",
+    "protein": "-",
+    "lemak": "-",
+    "karbohidrat": "-",
+    "takaran": "-"
+  },
+  "deviled_eggs": {
+    "kalori": "200",
+    "protein": "12",
+    "lemak": "16",
+    "karbohidrat": "2",
+    "takaran": "100g"
+  },
+  "donuts": {
+    "kalori": "400",
+    "protein": "6",
+    "lemak": "20",
+    "karbohidrat": "50",
+    "takaran": "100g"
+  },
+  "dumplings": {
+    "kalori": "250",
+    "protein": "8",
+    "lemak": "10",
+    "karbohidrat": "30",
+    "takaran": "100g"
+  },
+  "edamame": {
+    "kalori": "120",
+    "protein": "11",
+    "lemak": "5",
+    "karbohidrat": "10",
+    "takaran": "100g"
+  },
+  "eggs_benedict": {
+    "kalori": "400",
+    "protein": "20",
+    "lemak": "25",
+    "karbohidrat": "20",
+    "takaran": "200g"
+  },
+  "escargots": {
+    "kalori": "200",
+    "protein": "15",
+    "lemak": "12",
+    "karbohidrat": "5",
+    "takaran": "100g"
+  },
+  "falafel": {
+    "kalori": "300",
+    "protein": "10",
+    "lemak": "16",
+    "karbohidrat": "30",
+    "takaran": "100g"
+  },
+  "filet_mignon": {
+    "kalori": "375",
+    "protein": "30",
+    "lemak": "25",
+    "karbohidrat": "0",
+    "takaran": "150g"
+  },
+  "fish_and_chips": {
+    "kalori": "500",
+    "protein": "20",
+    "lemak": "25",
+    "karbohidrat": "40",
+    "takaran": "200g"
+  },
+  "foie_gras": {
+    "kalori": "400",
+    "protein": "10",
+    "lemak": "40",
+    "karbohidrat": "4",
+    "takaran": "100g"
+  },
+  "french_fries": {
+    "kalori": "300",
+    "protein": "4",
+    "lemak": "15",
+    "karbohidrat": "35",
+    "takaran": "100g"
+  },
+  "french_onion_soup": {
+    "kalori": "250",
+    "protein": "10",
+    "lemak": "12",
+    "karbohidrat": "20",
+    "takaran": "200g"
+  },
+  "french_toast": {
+    "kalori": "250",
+    "protein": "8",
+    "lemak": "10",
+    "karbohidrat": "30",
+    "takaran": "100g"
+  },
+  "fried_calamari": {
+    "kalori": "300",
+    "protein": "15",
+    "lemak": "15",
+    "karbohidrat": "20",
+    "takaran": "100g"
+  },
+  "fried_rice": {
+    "kalori": "300",
+    "protein": "8",
+    "lemak": "10",
+    "karbohidrat": "50",
+    "takaran": "200g"
+  },
+  "frozen_yogurt": {
+    "kalori": "150",
+    "protein": "4",
+    "lemak": "3",
+    "karbohidrat": "25",
+    "takaran": "100g"
+  },
+  "garlic_bread": {
+    "kalori": "300",
+    "protein": "8",
+    "lemak": "12",
+    "karbohidrat": "40",
+    "takaran": "100g"
+  },
+  "gnocchi": {
+    "kalori": "250",
+    "protein": "6",
+    "lemak": "5",
+    "karbohidrat": "40",
+    "takaran": "150g"
+  },
+  "greek_salad": {
+    "kalori": "250",
+    "protein": "8",
+    "lemak": "18",
+    "karbohidrat": "15",
+    "takaran": "200g"
+  },
+  "grilled_cheese_sandwich": {
+    "kalori": "-",
+    "protein": "-",
+    "lemak": "-",
+    "karbohidrat": "-",
+    "takaran": "-"
+  },
+  "grilled_salmon": {
+    "kalori": "300",
+    "protein": "35",
+    "lemak": "15",
+    "karbohidrat": "0",
+    "takaran": "150g"
+  },
+  "guacamole": {
+    "kalori": "200",
+    "protein": "4",
+    "lemak": "16",
+    "karbohidrat": "10",
+    "takaran": "100g"
+  },
+  "gyoza": {
+    "kalori": "200",
+    "protein": "8",
+    "lemak": "8",
+    "karbohidrat": "20",
+    "takaran": "100g"
+  },
+  "hamburger": {
+    "kalori": "375",
+    "protein": "20",
+    "lemak": "18",
+    "karbohidrat": "30",
+    "takaran": "150g"
+  },
+  "hot_and_sour_soup": {
+    "kalori": "150",
+    "protein": "8",
+    "lemak": "5",
+    "karbohidrat": "15",
+    "takaran": "200g"
+  },
+  "hot_dog": {
+    "kalori": "250",
+    "protein": "10",
+    "lemak": "15",
+    "karbohidrat": "15",
+    "takaran": "100g"
+  },
+  "huevos_rancheros": {
+    "kalori": "300",
+    "protein": "15",
+    "lemak": "15",
+    "karbohidrat": "20",
+    "takaran": "200g"
+  },
+  "hummus": {
+    "kalori": "200",
+    "protein": "8",
+    "lemak": "12",
+    "karbohidrat": "16",
+    "takaran": "100g"
+  },
+  "ice_cream": {
+    "kalori": "200",
+    "protein": "4",
+    "lemak": "10",
+    "karbohidrat": "25",
+    "takaran": "100g"
+  },
+  "lasagna": {
+    "kalori": "400",
+    "protein": "20",
+    "lemak": "20",
+    "karbohidrat": "40",
+    "takaran": "200g"
+  },
+  "lobster_bisque": {
+    "kalori": "250",
+    "protein": "10",
+    "lemak": "15",
+    "karbohidrat": "15",
+    "takaran": "200g"
+  },
+  "lobster_roll_sandwich": {
+    "kalori": "-",
+    "protein": "-",
+    "lemak": "-",
+    "karbohidrat": "-",
+    "takaran": "-"
+  },
+  "macaroni_and_cheese": {
+    "kalori": "400",
+    "protein": "12",
+    "lemak": "18",
+    "karbohidrat": "50",
+    "takaran": "200g"
+  },
+  "macarons": {
+    "kalori": "400",
+    "protein": "6",
+    "lemak": "20",
+    "karbohidrat": "50",
+    "takaran": "100g"
+  },
+  "miso_soup": {
+    "kalori": "100",
+    "protein": "6",
+    "lemak": "3",
+    "karbohidrat": "10",
+    "takaran": "200g"
+  },
+  "mussels": {
+    "kalori": "200",
+    "protein": "25",
+    "lemak": "8",
+    "karbohidrat": "5",
+    "takaran": "150g"
+  },
+  "nachos": {
+    "kalori": "500",
+    "protein": "10",
+    "lemak": "25",
+    "karbohidrat": "50",
+    "takaran": "200g"
+  },
+  "omelette": {
+    "kalori": "250",
+    "protein": "15",
+    "lemak": "18",
+    "karbohidrat": "2",
+    "takaran": "150g"
+  },
+  "onion_rings": {
+    "kalori": "300",
+    "protein": "4",
+    "lemak": "15",
+    "karbohidrat": "35",
+    "takaran": "100g"
+  },
+  "oysters": {
+    "kalori": "100",
+    "protein": "10",
+    "lemak": "3",
+    "karbohidrat": "5",
+    "takaran": "100g"
+  },
+  "pad_thai": {
+    "kalori": "400",
+    "protein": "15",
+    "lemak": "12",
+    "karbohidrat": "60",
+    "takaran": "200g"
+  },
+  "paella": {
+    "kalori": "350",
+    "protein": "20",
+    "lemak": "10",
+    "karbohidrat": "40",
+    "takaran": "200g"
+  },
+  "pancakes": {
+    "kalori": "250",
+    "protein": "6",
+    "lemak": "8",
+    "karbohidrat": "35",
+    "takaran": "100g"
+  },
+  "panna_cotta": {
+    "kalori": "300",
+    "protein": "5",
+    "lemak": "20",
+    "karbohidrat": "25",
+    "takaran": "100g"
+  },
+  "peking_duck": {
+    "kalori": "400",
+    "protein": "30",
+    "lemak": "25",
+    "karbohidrat": "10",
+    "takaran": "150g"
+  },
+  "pho": {
+    "kalori": "350",
+    "protein": "20",
+    "lemak": "8",
+    "karbohidrat": "50",
+    "takaran": "300g"
+  },
+  "pizza": {
+    "kalori": "500",
+    "protein": "20",
+    "lemak": "20",
+    "karbohidrat": "60",
+    "takaran": "200g"
+  },
+  "pork_chop": {
+    "kalori": "350",
+    "protein": "30",
+    "lemak": "22",
+    "karbohidrat": "0",
+    "takaran": "150g"
+  },
+  "poutine": {
+    "kalori": "500",
+    "protein": "10",
+    "lemak": "25",
+    "karbohidrat": "50",
+    "takaran": "200g"
+  },
+  "prime_rib": {
+    "kalori": "600",
+    "protein": "40",
+    "lemak": "45",
+    "karbohidrat": "0",
+    "takaran": "200g"
+  },
+  "pulled_pork_sandwich": {
+    "kalori": "400",
+    "protein": "20",
+    "lemak": "15",
+    "karbohidrat": "40",
+    "takaran": "200g"
+  },
+  "ramen": {
+    "kalori": "400",
+    "protein": "15",
+    "lemak": "10",
+    "karbohidrat": "60",
+    "takaran": "300g"
+  },
+  "ravioli": {
+    "kalori": "300",
+    "protein": "12",
+    "lemak": "10",
+    "karbohidrat": "40",
+    "takaran": "200g"
+  },
+  "red_velvet_cake": {
+    "kalori": "350",
+    "protein": "5",
+    "lemak": "18",
+    "karbohidrat": "45",
+    "takaran": "100g"
+  },
+  "risotto": {
+    "kalori": "300",
+    "protein": "8",
+    "lemak": "8",
+    "karbohidrat": "50",
+    "takaran": "200g"
+  },
+  "samosa": {
+    "kalori": "300",
+    "protein": "6",
+    "lemak": "12",
+    "karbohidrat": "40",
+    "takaran": "100g"
+  },
+  "sashimi": {
+    "kalori": "150",
+    "protein": "25",
+    "lemak": "5",
+    "karbohidrat": "0",
+    "takaran": "100g"
+  },
+  "scallops": {
+    "kalori": "120",
+    "protein": "20",
+    "lemak": "3",
+    "karbohidrat": "2",
+    "takaran": "100g"
+  },
+  "seaweed_salad": {
+    "kalori": "50",
+    "protein": "2",
+    "lemak": "1",
+    "karbohidrat": "8",
+    "takaran": "100g"
+  },
+  "shrimp_and_grits": {
+    "kalori": "300",
+    "protein": "20",
+    "lemak": "10",
+    "karbohidrat": "30",
+    "takaran": "200g"
+  },
+  "spaghetti_bolognese": {
+    "kalori": "350",
+    "protein": "15",
+    "lemak": "12",
+    "karbohidrat": "40",
+    "takaran": "200g"
+  },
+  "spaghetti_carbonara": {
+    "kalori": "400",
+    "protein": "15",
+    "lemak": "18",
+    "karbohidrat": "45",
+    "takaran": "200g"
+  },
+  "spring_rolls": {
+    "kalori": "200",
+    "protein": "6",
+    "lemak": "8",
+    "karbohidrat": "30",
+    "takaran": "100g"
+  },
+  "steak": {
+    "kalori": "375",
+    "protein": "35",
+    "lemak": "25",
+    "karbohidrat": "0",
+    "takaran": "150g"
+  },
+  "strawberry_shortcake": {
+    "kalori": "300",
+    "protein": "4",
+    "lemak": "12",
+    "karbohidrat": "40",
+    "takaran": "100g"
+  },
+  "sushi": {
+    "kalori": "200",
+    "protein": "8",
+    "lemak": "2",
+    "karbohidrat": "30",
+    "takaran": "100g"
+  },
+  "tacos": {
+    "kalori": "250",
+    "protein": "10",
+    "lemak": "12",
+    "karbohidrat": "20",
+    "takaran": "100g"
+  },
+  "takoyaki": {
+    "kalori": "200",
+    "protein": "8",
+    "lemak": "8",
+    "karbohidrat": "25",
+    "takaran": "100g"
+  },
+  "tiramisu": {
+    "kalori": "300",
+    "protein": "6",
+    "lemak": "15",
+    "karbohidrat": "30",
+    "takaran": "100g"
+  },
+  "tuna_tartare": {
+    "kalori": "150",
+    "protein": "20",
+    "lemak": "5",
+    "karbohidrat": "2",
+    "takaran": "100g"
+  },
+  "waffles": {
+    "kalori": "300",
+    "protein": "6",
+    "lemak": "12",
+    "karbohidrat": "40",
+    "takaran": "100g"
+  }
+}

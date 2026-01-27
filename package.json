@@ -1,0 +1,57 @@
+{
+  "name": "food-classification-efficientnetv2",
+  "version": "1.0.0",
+  "description": "Implementasi EfficientNetV2B0 untuk Klasifikasi Citra Makanan dan Informasi Gizi Berbasis Web",
+  "private": true,
+  "author": "Thesis Project",
+  "keywords": [
+    "food-classification",
+    "efficientnetv2",
+    "tensorflowjs",
+    "cnn",
+    "food-101",
+    "nutrition",
+    "react"
+  ],
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^4.2.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "overrides": {
+    "semver": "^7.6.3",
+    "word-wrap": "^1.2.5",
+    "nth-check": "^2.0.1",
+    "postcss": "^8.4.31"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  }
+}
