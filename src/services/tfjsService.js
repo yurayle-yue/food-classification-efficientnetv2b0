@@ -71,7 +71,7 @@ class TFJSService {
 
   /**
    * Preprocess gambar sebelum diprediksi
-   * Menggunakan preprocessing yang sesuai dengan EfficientNetV2
+   * Sesuai dengan preprocessing saat training di Google Colab
    */
   preprocessImage(imageElement) {
     return tf.tidy(() => {
@@ -81,9 +81,8 @@ class TFJSService {
       // Resize ke 224x224
       const resized = tf.image.resizeBilinear(tensor, [224, 224]);
 
-      // Normalisasi ke [-1, 1] untuk EfficientNetV2
-      // (resized / 127.5) - 1.0
-      const normalized = resized.div(127.5).sub(1.0);
+      // Normalisasi ke [0, 1]
+      const normalized = resized.div(255.0);
 
       // Add batch dimension
       const batched = normalized.expandDims(0);
@@ -140,9 +139,13 @@ class TFJSService {
 
       console.log('✅ Prediction tensor shape:', predictionTensor.shape);
 
-      // Ambil probabilities
-      const probabilities = await predictionTensor.data();
+      // Apply softmax untuk convert logits ke probabilities
+      const probabilitiesTensor = tf.softmax(predictionTensor);
+      const probabilities = await probabilitiesTensor.data();
       console.log('📈 Probabilities sample:', Array.from(probabilities).slice(0, 5));
+
+      // Cleanup softmax tensor
+      probabilitiesTensor.dispose();
 
       // Sort dan ambil top 5
       const topIndices = Array.from(probabilities)
