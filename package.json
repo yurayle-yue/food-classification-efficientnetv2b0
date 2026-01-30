@@ -1,9 +1,9 @@
 {
   "name": "food-classification-efficientnetv2",
   "version": "1.0.0",
-  "description": "Implementasi EfficientNetV2B0 untuk Klasifikasi Citra Makanan dan Informasi Gizi Berbasis Web",
+  "description": "Implementasi EfficientNetV2B0 untuk Klasifikasi Citra Makanan dan Informasi Gizi Berbasis Web dengan Farm-to-Table Theme",
   "private": true,
-  "author": "Thesis Project",
+  "author": "Satria Tarigan",
   "keywords": [
     "food-classification",
     "efficientnetv2",
@@ -11,7 +11,9 @@
     "cnn",
     "food-101",
     "nutrition",
-    "react"
+    "react",
+    "farm-to-table-theme",
+    "indonesia"
   ],
   "dependencies": {
     "@tensorflow/tfjs": "^4.22.0",

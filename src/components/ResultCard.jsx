@@ -200,55 +200,68 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
             </div>
           )}
 
-          {results.length > 1 && (
-            <div className="other-predictions">
-              <h4>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="8" y1="6" x2="21" y2="6" />
-                  <line x1="8" y1="12" x2="21" y2="12" />
-                  <line x1="8" y1="18" x2="21" y2="18" />
-                  <line x1="3" y1="6" x2="3.01" y2="6" />
-                  <line x1="3" y1="12" x2="3.01" y2="12" />
-                  <line x1="3" y1="18" x2="3.01" y2="18" />
-                </svg>
-                Prediksi Lainnya
-              </h4>
-              <ul>
-                {results.slice(1, 4).map((result) => (
-                  <li key={result.className}>
-                    <span className="rank">#{result.rank}</span>
-                    <span className="name">{result.displayName}</span>
-                    <div className="confidence-bar">
-                      <div className="confidence-fill" style={{ width: `${result.confidence}%` }}></div>
-                      <span className="confidence-value">{result.confidence}%</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
       </div>
 
       <style jsx>{`
         .result-card {
-          background: white;
-          border-radius: 20px;
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+          background: rgba(255, 255, 255, 0.95);
+          border-radius: 16px;
+          box-shadow: 0 10px 40px rgba(139, 149, 86, 0.18);
           overflow: hidden;
-          max-width: 1000px;
+          max-width: 1100px;
           margin: 0 auto;
+          backdrop-filter: blur(10px);
+          border: 2px solid #D4CDB8;
+          animation: slideUp 0.6s ease-out;
+          position: relative;
+        }
+
+        /* Decorative top border */
+        .result-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: linear-gradient(90deg, #8B9556, #9CAF88, #8B9556);
+        }
+
+        @keyframes slideUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
 
         .result-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 1.5rem 2rem;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          color: white;
+          padding: 2rem 2.5rem;
+          background: linear-gradient(135deg, rgba(139, 149, 86, 0.1) 0%, rgba(166, 123, 91, 0.08) 100%);
+          color: #2c2c2c;
           flex-wrap: wrap;
           gap: 1rem;
+          position: relative;
+          overflow: hidden;
+          border-bottom: 1px solid #EBE5DE;
+        }
+
+        /* Soft gradient effect */
+        .result-header::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: radial-gradient(circle at 20% 50%, rgba(139, 149, 86, 0.05) 0%, transparent 50%);
         }
 
         .header-title {
@@ -259,35 +272,58 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
 
         .header-title h2 {
           margin: 0;
-          font-size: 1.5rem;
+          font-size: 1.75rem;
+          font-weight: 600;
+          position: relative;
+          z-index: 1;
+          letter-spacing: 1px;
+          font-family: 'Segoe UI', 'Georgia', serif;
         }
 
         .model-accuracy {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
-          font-size: 0.9rem;
-          opacity: 0.95;
+          gap: 0.6rem;
+          font-size: 0.95rem;
+          background: rgba(139, 149, 86, 0.12);
+          padding: 0.5rem 1rem;
+          border-radius: 20px;
+          backdrop-filter: blur(10px);
+          border: 1px solid #9CAF88;
+          position: relative;
+          z-index: 1;
+          color: #4A5D3A;
+          letter-spacing: 0.5px;
+          font-family: 'Segoe UI', 'Georgia', serif;
         }
 
         .reset-button {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
-          padding: 0.75rem 1.5rem;
-          background: rgba(255, 255, 255, 0.2);
-          border: 2px solid white;
-          border-radius: 10px;
+          gap: 0.6rem;
+          padding: 0.9rem 1.8rem;
+          background: linear-gradient(135deg, #8B9556 0%, #7A8449 100%);
+          border: none;
           color: white;
-          font-weight: 600;
+          font-weight: 500;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          position: relative;
+          z-index: 1;
+          box-shadow: 0 4px 15px rgba(139, 149, 86, 0.3);
+          letter-spacing: 0.5px;
+          font-family: 'Segoe UI', 'Georgia', serif;
+          border-radius: 25px;
         }
 
         .reset-button:hover {
-          background: white;
-          color: #667eea;
+          background: linear-gradient(135deg, #7A8449 0%, #6B7540 100%);
+          box-shadow: 0 6px 20px rgba(139, 149, 86, 0.35);
           transform: translateY(-2px);
+        }
+
+        .reset-button:active {
+          transform: translateY(0);
         }
 
         .result-content {
@@ -307,8 +343,9 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
           position: relative;
           border-radius: 16px;
           overflow: hidden;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 6px 25px rgba(139, 149, 86, 0.2);
           aspect-ratio: 1;
+          border: 3px solid #9CAF88;
         }
 
         .image-preview img {
@@ -323,30 +360,35 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
           bottom: 0;
           left: 0;
           right: 0;
-          background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+          background: linear-gradient(transparent, rgba(44, 44, 44, 0.9));
           padding: 1rem;
+          border-top: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .overlay-label {
-          color: white;
+          color: #FAF7F2;
           font-size: 0.85rem;
           font-weight: 500;
+          font-family: 'Segoe UI', 'Georgia', serif;
+          letter-spacing: 0.5px;
         }
 
         .model-details {
-          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+          background: rgba(139, 149, 86, 0.08);
           padding: 1.5rem;
           border-radius: 12px;
-          border: 1px solid #cbd5e1;
+          border: 1px solid #EBE5DE;
         }
 
         .model-details h4 {
-          color: #1e293b;
+          color: #2c2c2c;
           margin: 0 0 1rem 0;
           font-size: 1rem;
           display: flex;
           align-items: center;
           gap: 0.5rem;
+          letter-spacing: 0.5px;
+          font-family: 'Segoe UI', 'Georgia', serif;
         }
 
         .detail-grid {
@@ -356,26 +398,29 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
         }
 
         .detail-item {
-          background: white;
+          background: rgba(255, 255, 255, 0.8);
           padding: 0.75rem;
           border-radius: 8px;
+          border: 1px solid #EBE5DE;
         }
 
         .detail-label {
           display: block;
           font-size: 0.75rem;
-          color: #64748b;
+          color: #8B9556;
           margin-bottom: 0.25rem;
+          letter-spacing: 0.5px;
         }
 
         .detail-value {
           display: block;
-          font-weight: 600;
-          color: #1e293b;
+          font-weight: 500;
+          color: #2c2c2c;
+          font-family: 'Segoe UI', 'Georgia', serif;
         }
 
         .detail-value.accuracy {
-          color: #059669;
+          color: #7A8449;
         }
 
         .predictions {
@@ -386,49 +431,81 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
 
         .top-prediction {
           text-align: center;
-          padding: 1.5rem;
-          background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+          padding: 2rem;
+          background: linear-gradient(135deg, rgba(139, 149, 86, 0.12) 0%, rgba(156, 175, 136, 0.08) 100%);
           border-radius: 16px;
-          border: 2px solid #f59e0b;
+          border: 2px solid #9CAF88;
+          box-shadow: 0 4px 20px rgba(139, 149, 86, 0.15);
+          position: relative;
+          overflow: hidden;
+        }
+
+        /* Organic texture effect */
+        .top-prediction::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          opacity: 0.2;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle fill='%239CAF88' fill-opacity='0.3' cx='50' cy='50' r='40'/%3E%3C/svg%3E");
+          background-size: 60px 60px;
         }
 
         .prediction-badge {
           display: inline-flex;
           align-items: center;
-          gap: 0.5rem;
-          margin-bottom: 1rem;
+          gap: 0.7rem;
+          margin-bottom: 1.2rem;
+          position: relative;
+          z-index: 1;
         }
 
         .prediction-badge .rank {
-          background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+          background: linear-gradient(135deg, #8B9556 0%, #7A8449 100%);
           color: white;
-          padding: 0.4rem 1rem;
-          border-radius: 25px;
-          font-weight: 700;
-          font-size: 1rem;
+          padding: 0.5rem 1.2rem;
+          border-radius: 20px;
+          font-weight: 600;
+          font-size: 1.1rem;
+          box-shadow: 0 4px 15px rgba(139, 149, 86, 0.3);
+          font-family: 'Segoe UI', 'Georgia', serif;
         }
 
         .prediction-badge .confidence {
-          background: #ecfdf5;
-          color: #059669;
-          padding: 0.4rem 1rem;
-          border-radius: 25px;
-          font-weight: 700;
-          font-size: 1rem;
+          background: rgba(122, 132, 73, 0.2);
+          color: #7A8449;
+          padding: 0.5rem 1.2rem;
+          border-radius: 20px;
+          font-weight: 600;
+          font-size: 1.1rem;
+          box-shadow: 0 4px 15px rgba(122, 132, 73, 0.2);
+          border: 1px solid #7A8449;
+          font-family: 'Segoe UI', 'Georgia', serif;
         }
 
         .top-prediction h3 {
-          color: #1e293b;
-          font-size: 2rem;
-          margin: 0 0 0.5rem 0;
-          font-weight: 800;
+          color: #2c2c2c;
+          font-size: 2.5rem;
+          margin: 0 0 0.75rem 0;
+          font-weight: 600;
+          letter-spacing: 1px;
+          font-family: 'Segoe UI', 'Georgia', serif;
+          position: relative;
+          z-index: 1;
         }
 
         .class-name {
-          color: #64748b;
-          font-size: 1rem;
-          font-family: monospace;
-          margin-bottom: 1rem;
+          color: #6B5D4F;
+          font-size: 1.05rem;
+          font-family: 'Segoe UI', 'Georgia', serif;
+          margin-bottom: 1.2rem;
+          font-weight: 400;
+          opacity: 0.8;
+          position: relative;
+          z-index: 1;
+          font-style: italic;
         }
 
         .confidence-indicator {
@@ -438,53 +515,61 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
           padding: 0.5rem 1rem;
           border-radius: 20px;
           font-size: 0.85rem;
-          font-weight: 600;
+          font-weight: 500;
+          position: relative;
+          z-index: 1;
+          font-family: 'Segoe UI', 'Georgia', serif;
         }
 
         .confidence-indicator.high {
-          background: #d1fae5;
-          color: #065f46;
+          background: rgba(122, 132, 73, 0.15);
+          color: #7A8449;
+          border: 1px solid #7A8449;
         }
 
         .confidence-indicator.medium {
-          background: #fef3c7;
-          color: #92400e;
+          background: rgba(196, 150, 58, 0.15);
+          color: #C4963A;
+          border: 1px solid #C4963A;
         }
 
         .confidence-indicator.low {
-          background: #fee2e2;
-          color: #991b1b;
+          background: rgba(196, 127, 107, 0.15);
+          color: #C47F6B;
+          border: 1px solid #C47F6B;
         }
 
         .description-info {
-          background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+          background: rgba(139, 149, 86, 0.08);
           padding: 1.5rem;
-          border-radius: 16px;
-          border: 1px solid #fbbf24;
+          border-radius: 12px;
+          border: 1px solid #EBE5DE;
           margin-top: 1rem;
         }
 
         .description-header h4 {
-          color: #92400e;
+          color: #2c2c2c;
           margin: 0 0 1rem 0;
           font-size: 1.1rem;
           display: flex;
           align-items: center;
           gap: 0.5rem;
+          letter-spacing: 0.5px;
+          font-family: 'Segoe UI', 'Georgia', serif;
         }
 
         .description-text {
-          color: #78350f;
+          color: #4a4a4a;
           line-height: 1.7;
           margin: 0;
           font-size: 0.95rem;
         }
 
         .nutrition-info {
-          background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+          background: rgba(139, 149, 86, 0.08);
           padding: 1.5rem;
-          border-radius: 16px;
-          border: 1px solid #86efac;
+          border-radius: 12px;
+          border: 1px solid #B8D4B8;
         }
 
         .nutrition-header {
@@ -495,21 +580,25 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
         }
 
         .nutrition-header h4 {
-          color: #166534;
+          color: #2c2c2c;
           margin: 0;
           font-size: 1.1rem;
           display: flex;
           align-items: center;
           gap: 0.5rem;
+          letter-spacing: 0.5px;
+          font-family: 'Segoe UI', 'Georgia', serif;
         }
 
         .serving-badge {
-          background: #166534;
-          color: white;
+          background: rgba(122, 132, 73, 0.2);
+          color: #7A8449;
           padding: 0.35rem 0.85rem;
           border-radius: 15px;
           font-size: 0.8rem;
-          font-weight: 600;
+          font-weight: 500;
+          border: 1px solid #7A8449;
+          font-family: 'Segoe UI', 'Georgia', serif;
         }
 
         .nutrition-grid {
@@ -522,35 +611,36 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
           display: flex;
           align-items: center;
           gap: 1rem;
-          background: white;
+          background: rgba(255, 255, 255, 0.9);
           padding: 1rem;
           border-radius: 12px;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-          transition: transform 0.2s ease;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          border: 1px solid #EBE5DE;
         }
 
         .nutrition-item:hover {
           transform: translateY(-2px);
+          box-shadow: 0 4px 15px rgba(139, 149, 86, 0.15);
         }
 
         .nutrition-item.calories .nutrition-icon {
-          color: #ef4444;
-          background: #fee2e2;
+          color: #C47F6B;
+          background: rgba(196, 127, 107, 0.15);
         }
 
         .nutrition-item.protein .nutrition-icon {
-          color: #3b82f6;
-          background: #dbeafe;
+          color: #6B8FCE;
+          background: rgba(107, 143, 206, 0.15);
         }
 
         .nutrition-item.fat .nutrition-icon {
-          color: #f59e0b;
-          background: #fef3c7;
+          color: #C4963A;
+          background: rgba(196, 150, 58, 0.15);
         }
 
         .nutrition-item.carbs .nutrition-icon {
-          color: #10b981;
-          background: #d1fae5;
+          color: #7A8449;
+          background: rgba(122, 132, 73, 0.15);
         }
 
         .nutrition-icon {
@@ -559,7 +649,7 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
           display: flex;
           align-items: center;
           justify-content: center;
-          border-radius: 10px;
+          border-radius: 12px;
         }
 
         .nutrition-value {
@@ -569,101 +659,33 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
 
         .nutrition-value .value {
           font-size: 1.35rem;
-          font-weight: 700;
-          color: #1e293b;
+          font-weight: 600;
+          color: #2c2c2c;
           line-height: 1.2;
+          font-family: 'Segoe UI', 'Georgia', serif;
         }
 
         .nutrition-value .label {
           font-size: 0.85rem;
-          color: #64748b;
+          color: #6B5D4F;
         }
 
         .nutrition-value .unit {
           font-size: 0.7rem;
-          color: #94a3b8;
+          color: #8B9556;
         }
 
         .nutrition-note {
           margin-top: 1rem;
           padding-top: 1rem;
-          border-top: 1px solid #86efac;
-          color: #166534;
+          border-top: 1px solid #B8D4B8;
+          color: #6B5D4F;
           font-size: 0.8rem;
           display: flex;
           align-items: center;
           gap: 0.5rem;
-        }
-
-        .other-predictions {
-          background: #fffbeb;
-          padding: 1.5rem;
-          border-radius: 12px;
-          border: 1px solid #fed7aa;
-        }
-
-        .other-predictions h4 {
-          color: #92400e;
-          margin: 0 0 1rem 0;
-          font-size: 1rem;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-        }
-
-        .other-predictions ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
-
-        .other-predictions li {
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          padding: 0.85rem 0;
-          border-bottom: 1px solid #fed7aa;
-        }
-
-        .other-predictions li:last-child {
-          border-bottom: none;
-        }
-
-        .other-predictions .rank {
-          color: #d97706;
-          font-weight: 700;
-          font-size: 0.9rem;
-          min-width: 30px;
-        }
-
-        .other-predictions .name {
-          flex: 1;
-          color: #78350f;
-        }
-
-        .confidence-bar {
-          flex: 1;
-          height: 8px;
-          background: #fed7aa;
-          border-radius: 4px;
-          overflow: hidden;
-          position: relative;
-          max-width: 100px;
-        }
-
-        .confidence-fill {
-          height: 100%;
-          background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
-          border-radius: 4px;
-          transition: width 0.5s ease;
-        }
-
-        .other-predictions .confidence-value {
-          color: #92400e;
-          font-weight: 600;
-          font-size: 0.85rem;
-          min-width: 45px;
-          text-align: right;
+          font-family: 'Segoe UI', 'Georgia', serif;
+          font-style: italic;
         }
 
         @media (max-width: 900px) {
@@ -692,6 +714,7 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
 
           .result-header h2 {
             font-size: 1.25rem;
+            letter-spacing: 1px;
           }
 
           .result-content {
@@ -700,6 +723,7 @@ const ResultCard = ({ results, imageData, onReset, modelInfo }) => {
 
           .top-prediction h3 {
             font-size: 1.25rem;
+            letter-spacing: 1px;
           }
 
           .detail-grid,

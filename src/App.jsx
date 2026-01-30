@@ -12,6 +12,8 @@ import LoadingSpinner from './components/LoadingSpinner';
 function App() {
   const [modelStatus, setModelStatus] = useState('loading'); // loading, ready, error
   const [statusMessage, setStatusMessage] = useState('Memuat model...');
+  const [selectedImageData, setSelectedImageData] = useState(null); // Image selected but not submitted
+  const [selectedFile, setSelectedFile] = useState(null); // File object for re-submission
   const [imageData, setImageData] = useState(null);
   const [predictionResults, setPredictionResults] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -43,15 +45,29 @@ function App() {
   }, []);
 
   /**
-   * Handle gambar yang dipilih user
+   * Handle gambar yang dipilih user (belum submit)
    */
-  const handleImageSelect = useCallback(async (dataUrl, file) => {
+  const handleImageSelect = useCallback((dataUrl, file) => {
+    setSelectedImageData(dataUrl);
+    setSelectedFile(file);
+    setPredictionResults(null); // Clear previous results
+  }, []);
+
+  /**
+   * Handle submit untuk melakukan klasifikasi
+   */
+  const handleSubmit = useCallback(async () => {
     if (modelStatus !== 'ready') {
       alert('Model belum siap. Silakan tunggu sebentar.');
       return;
     }
 
-    setImageData(dataUrl);
+    if (!selectedImageData || !selectedFile) {
+      alert('Silakan pilih gambar terlebih dahulu.');
+      return;
+    }
+
+    setImageData(selectedImageData);
     setIsProcessing(true);
 
     try {
@@ -79,19 +95,29 @@ function App() {
         setIsProcessing(false);
         setImageData(null);
       };
-      img.src = dataUrl;
+      img.src = selectedImageData;
     } catch (error) {
       console.error('Error processing image:', error);
       alert('Terjadi kesalahan saat memproses gambar.');
       setIsProcessing(false);
       setImageData(null);
     }
-  }, [modelStatus]);
+  }, [modelStatus, selectedImageData, selectedFile]);
+
+  /**
+   * Handle cancel/ubah gambar
+   */
+  const handleCancelImage = useCallback(() => {
+    setSelectedImageData(null);
+    setSelectedFile(null);
+  }, []);
 
   /**
    * Reset ke awal
    */
   const handleReset = useCallback(() => {
+    setSelectedImageData(null);
+    setSelectedFile(null);
     setImageData(null);
     setPredictionResults(null);
   }, []);
@@ -204,7 +230,12 @@ function App() {
         {renderModelStatus()}
 
         {!predictionResults ? (
-          <ImageUploader onImageSelect={handleImageSelect} />
+          <ImageUploader
+            imageData={selectedImageData}
+            onImageSelect={handleImageSelect}
+            onSubmit={handleSubmit}
+            onCancel={handleCancelImage}
+          />
         ) : (
           <ResultCard
             results={predictionResults}
@@ -230,7 +261,7 @@ function App() {
           </div>
         </div>
         <p className="copyright">
-          © 2025 - Developed for Thesis Project | Berbasis Web (Browser-based Neural Network)
+          © 2025 - Satria Tarigan
         </p>
       </footer>
 

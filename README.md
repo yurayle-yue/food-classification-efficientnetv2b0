@@ -2,6 +2,26 @@
 
 **Judul Skripsi:** Implementasi Convolutional Neural Network (EfficientNetV2B0) untuk Klasifikasi Citra Makanan dan Informasi Gizi Berbasis Web
 
+**Author:** Satria Tarigan
+
+---
+
+## 🍃 Tema: Farm-to-Table
+
+Aplikasi ini menggunakan tema **Farm-to-Table** dengan nuansa organic, fresh, dan natural yang cocok untuk aplikasi klasifikasi makanan.
+
+### Palet Warna
+
+| Warna | Hex Code | Penggunaan |
+|-------|----------|-------------|
+| Olive Green | `#8B9556` | Primary buttons, accents |
+| Sage Green | `#9CAF88` | Secondary elements, borders |
+| Darker Olive | `#7A8449` | Hover states, text |
+| Earth Brown | `#A67B5B` | Secondary buttons, accents |
+| Warm Cream | `#FAF7F2` | Background |
+| Light Beige | `#EBE5DE` | Borders, dividers |
+| Terracotta | `#C47F6B` | Error states, warnings |
+
 ---
 
 ## 📊 Informasi Model
@@ -34,18 +54,18 @@
 Website/
 ├── src/                      # Source code React
 │   ├── App.jsx               # Main UI component
-│   ├── App.css              # Styling
+│   ├── App.css              # Styling Farm-to-Table
 │   ├── index.js             # Entry point
 │   ├── index.css            # Global styles
 │   ├── components/          # React components
-│   │   ├── ImageUploader.jsx
-│   │   ├── ResultCard.jsx
-│   │   └── LoadingSpinner.jsx
+│   │   ├── ImageUploader.jsx    # Upload dengan drag & drop
+│   │   ├── ResultCard.jsx      # Hasil klasifikasi & gizi
+│   │   └── LoadingSpinner.jsx  # Loading animation
 │   └── services/
 │       └── tfjsService.js   # TensorFlow.js service
 │
 ├── public/                  # Static files
-│   ├── index.html          # HTML template
+│   ├── index.html          # HTML template dengan preloader
 │   └── models/             # Model TensorFlow.js
 │       ├── model.json      # Model architecture
 │       ├── classes.json    # 101 label kelas
@@ -77,8 +97,9 @@ Aplikasi akan berjalan di **http://localhost:3000**
 ### 3. Upload dan Klasifikasi
 
 1. Klik area upload atau seret gambar makanan
-2. Klik "Klasifikasikan"
-3. Hasil prediksi dan informasi gizi akan muncul
+2. Preview gambar akan muncul
+3. Klik tombol **"Submit untuk Klasifikasi"**
+4. Hasil prediksi dan informasi gizi akan muncul
 
 ---
 
@@ -94,7 +115,9 @@ Aplikasi akan berjalan di **http://localhost:3000**
 | **Indikator Kepercayaan** | Visualisasi tingkat confidence prediksi |
 | **Responsive** | Desktop & mobile friendly |
 | **Drag & Drop** | Upload gambar mudah |
+| **Preview Sebelum Klasifikasi** | Lihat gambar sebelum submit |
 | **Real-time** | Prediksi instan tanpa server |
+| **Farm-to-Table Theme** | Desain organic dan natural |
 
 ---
 
@@ -103,6 +126,7 @@ Aplikasi akan berjalan di **http://localhost:3000**
 ### Frontend
 - **React 18** - UI Framework
 - **TensorFlow.js 4.22** - Deep Learning di Browser
+- **styled-jsx** - Component-scoped styling
 - **CSS3** - Modern styling dengan gradient dan animasi
 
 ### Model
@@ -114,28 +138,18 @@ Aplikasi akan berjalan di **http://localhost:3000**
 
 ---
 
-## 📁 File Model
-
-File yang diperlukan di `public/models/`:
-
-- ✅ `model.json` - Model architecture
-- ✅ `classes.json` - 101 label kelas
-- ✅ `nutrition.json` - Database gizi
-- ✅ `group1-shard*.bin` - Model weights
-
----
-
 ## 🎨 Tampilan Aplikasi
 
 ### Header
 - Icon aplikasi dengan gradient background
 - Judul dan subtitle informatif
-- Badge: EfficientNetV2B0, Akurasi 94.8%, Food-101, 101 Kelas
+- Badge: EfficientNetV2B0, Akurasi, Food-101, 101 Kelas
 
 ### Halaman Upload
-- Area drag & drop yang modern
-- Tombol kamera untuk mobile
-- Status loading dengan animasi
+- Area drag & drop yang modern dengan tema Farm-to-Table
+- Preview gambar sebelum klasifikasi
+- Tombol "Submit untuk Klasifikasi" (warna olive green)
+- Tombol "Ubah Gambar" (warna earth brown)
 
 ### Halaman Hasil
 - **Gambar Input** dengan overlay label
@@ -144,6 +158,24 @@ File yang diperlukan di `public/models/`:
 - **Indikator Kepercayaan** - Tinggi (≥80%), Sedang (50-79%), Rendah (<50%)
 - **Informasi Nilai Gizi** - Kalori, Protein, Lemak, Karbohidrat dengan icon berwarna
 - **Prediksi Lainnya** - Progress bar untuk prediksi #2-#4
+
+### Tema Farm-to-Table
+- Background warm cream (`#FAF7F2`)
+- Olive green primary buttons (`#8B9556`)
+- Earth brown secondary elements (`#A67B5B`)
+- Organic textures dan subtle patterns
+- Smooth animations dan transitions
+
+---
+
+## 📁 File Model
+
+File yang diperlukan di `public/models/`:
+
+- ✅ `model.json` - Model architecture
+- ✅ `classes.json` - 101 label kelas
+- ✅ `nutrition.json` - Database gizi
+- ✅ `group1-shard*.bin` - Model weights
 
 ---
 
@@ -187,6 +219,7 @@ tensorflowjs_converter --input_format=tf_saved_model \
 4. ✅ **Scalable** - Processing di device user
 5. ✅ **Offline-ready** - Bisa jalan tanpa internet setelah load model
 6. ✅ **Modern** - Teknologi web terbaru
+7. ✅ **Beautiful UI** - Tema Farm-to-Table yang cocok untuk food app
 
 ---
 
@@ -202,14 +235,15 @@ tensorflowjs_converter --input_format=tf_saved_model \
 5. **Preprocessing:** Resize 224x224, normalize [0,1]
 6. **Output:** Top-5 predictions + nutrition info
 7. **Akurasi:** 94.8%
+8. **Tema UI:** Farm-to-Table (Organic & Natural)
 
 ### Arsitektur Sistem
 
 ```
-User → Upload → React App → TensorFlow.js → Prediction → Result + Nutrition
-                              ↓
-                        EfficientNetV2B0 (browser)
-                        model.json + weights
+User → Upload Gambar → Preview → Submit → TensorFlow.js → Prediction → Result + Nutrition
+                                               ↓
+                                        EfficientNetV2B0 (browser)
+                                        model.json + weights
 ```
 
 ### EfficientNetV2B0
@@ -238,7 +272,7 @@ EfficientNetV2 adalah arsitektur CNN modern yang lebih cepat dan lebih akurat di
 1. **Install:** `npm install`
 2. **Start:** `npm start`
 3. **Buka:** http://localhost:3000
-4. **Upload gambar makanan dan lihat hasilnya!**
+4. **Upload gambar makanan, preview, submit, dan lihat hasilnya!**
 
 ---
 
@@ -294,6 +328,8 @@ Aplikasi akan dapat diakses di:
 
 ## 📄 License
 
-**© 2025 - Skripsi: Implementasi CNN untuk Klasifikasi Citra Makanan**
+**© 2025 - Satria Tarigan**
 
-**Tech Stack:** React 18 + TensorFlow.js 4.22 + EfficientNetV2B0 + Food-101
+**Skripsi:** Implementasi CNN untuk Klasifikasi Citra Makanan dan Informasi Gizi Berbasis Web
+
+**Tech Stack:** React 18 + TensorFlow.js 4.22 + EfficientNetV2B0 + Food-101 + Farm-to-Table Theme
