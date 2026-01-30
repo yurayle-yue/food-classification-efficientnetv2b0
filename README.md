@@ -181,13 +181,6 @@ File yang diperlukan di `public/models/`:
 
 ## 🔧 Troubleshooting
 
-### "Gagal memuat model"
-
-**Solusi:**
-1. Pastikan `public/models/` berisi semua file
-2. Cek browser console (F12)
-3. Disable Ad Blocker sementara
-
 ### Performance lambat
 
 **Solusi:**
