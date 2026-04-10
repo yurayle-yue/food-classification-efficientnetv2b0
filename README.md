@@ -163,8 +163,8 @@ TensorFlow.js   : 4.22.0
 
 ```bash
 # Clone repository
-git clone https://github.com/yurayle-yue/EfficientNetV2B0.git
-cd EfficientNetV2B0
+git clone https://github.com/yurayle-yue/food-classification-efficientnetv2b0.git
+cd food-classification-efficientnetv2b0
 
 # Install dependencies
 npm install
