@@ -1,5 +1,5 @@
 {
-  "name": "food-classification-efficientnetv2",
+  "name": "food-classification-efficientnetv2b0",
   "version": "1.0.0",
   "description": "Implementasi EfficientNetV2B0 untuk Klasifikasi Citra Makanan dan Informasi Gizi Berbasis Web dengan Farm-to-Table Theme",
   "private": true,

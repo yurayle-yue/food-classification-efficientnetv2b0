@@ -1,200 +1,482 @@
-# Klasifikasi Citra Makanan CNN - EfficientNetV2B0
+<div align="center">
 
-**Judul Skripsi:** Implementasi Convolutional Neural Network (EfficientNetV2B0) untuk Klasifikasi Citra Makanan dan Informasi Gizi Berbasis Web
+# Klasifikasi Citra Makanan
 
-**Author:** Satria Tarigan
+### EfficientNetV2B0 + TensorFlow.js
 
----
+Implementasi Convolutional Neural Network untuk Klasifikasi Citra Makanan dan Informasi Gizi Berbasis Web
 
-## 🍃 Tema: Farm-to-Table
-
-Aplikasi ini menggunakan tema **Farm-to-Table** dengan nuansa organic, fresh, dan natural yang cocok untuk aplikasi klasifikasi makanan.
-
-### Palet Warna
-
-| Warna | Hex Code | Penggunaan |
-|-------|----------|-------------|
-| Olive Green | `#8B9556` | Primary buttons, accents |
-| Sage Green | `#9CAF88` | Secondary elements, borders |
-| Darker Olive | `#7A8449` | Hover states, text |
-| Earth Brown | `#A67B5B` | Secondary buttons, accents |
-| Warm Cream | `#FAF7F2` | Background |
-| Light Beige | `#EBE5DE` | Borders, dividers |
-| Terracotta | `#C47F6B` | Error states, warnings |
+[![React](https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=white)](https://react.dev)
+[![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-4.22-FF6F00?logo=tensorflow&logoColor=white)](https://www.tensorflow.org/js)
+[![Food-101](https://img.shields.io/badge/Dataset-Food--101-8B9556)](https://www.kaggle.com/datasets/dansbecker/food-101)
+[![Accuracy](https://img.shields.io/badge/Akurasi-94.8%25-success)](/)
+[![License](https://img.shields.io/badge/License-%C2%A9%202025%20Satria%20Tarigan-blue)](/)
 
 ---
 
-## 📊 Informasi Model
+**Skripsi** oleh **Satria Tarigan**
 
-| Property | Value |
-|----------|-------|
-| **Arsitektur** | EfficientNetV2B0 |
-| **Dataset** | Food-101 |
-| **Jumlah Kelas** | 101 jenis makanan |
-| **Input Size** | 224 x 224 pixel |
-| **Akurasi** | **94.8%** |
+</div>
+
+---
+
+## Tentang Proyek
+
+Aplikasi web yang mampu mengklasifikasikan **101 jenis makanan** secara real-time langsung di browser menggunakan deep learning. Model **EfficientNetV2B0** dilatih pada dataset **Food-101** dan mencapai akurasi **94.8%**. Selain prediksi, aplikasi juga menampilkan **informasi nilai gizi** (kalori, protein, lemak, karbohidrat) untuk setiap makanan yang terdeteksi.
+
+Seluruh inferensi berjalan **client-side** menggunakan TensorFlow.js — tanpa server backend, tanpa mengirim data ke mana pun.
+
+---
+
+## Fitur Utama
+
+| No | Fitur | Deskripsi |
+|----|-------|-----------|
+| 1 | **Klasifikasi 101 Kelas** | Mengenali 101 jenis makanan dari dataset Food-101 |
+| 2 | **Informasi Gizi** | Kalori, protein, lemak, dan karbohidrat per sajian |
+| 3 | **Top-5 Predictions** | 5 prediksi teratas beserta tingkat confidence |
+| 4 | **Indikator Kepercayaan** | Visualisasi: Tinggi (>=80%), Sedang (50-79%), Rendah (<50%) |
+| 5 | **Client-side Inference** | Prediksi langsung di browser via TensorFlow.js |
+| 6 | **Drag & Drop Upload** | Upload gambar dengan mudah |
+| 7 | **Preview Gambar** | Lihat gambar sebelum submit klasifikasi |
+| 8 | **Responsive Design** | Optimal di desktop maupun mobile |
+| 9 | **Daftar 101 Makanan** | Katalog lengkap dengan pencarian dan filter kategori |
+| 10 | **Offline-ready** | Berjalan tanpa internet setelah model dimuat |
+
+---
+
+## 8 Fitur Pengujian Model
+
+Aplikasi ini dilengkapi **8 fitur khusus** untuk membuktikan bahwa model AI benar-benar bekerja:
+
+### 1. Sample Test Gallery (Challenge Mode)
+
+Pilih salah satu dari 15 jenis makanan populer (Pizza, Sushi, Hamburger, dll.), lalu upload foto makanan tersebut. Aplikasi akan mencocokkan prediksi model dengan makanan yang dipilih dan menampilkan apakah model **berhasil mengenali** atau **gagal**.
+
+### 2. Confusion Feedback (Benar / Salah)
+
+Setelah setiap prediksi, user dapat memberikan feedback:
+- **"Benar"** — prediksi model sesuai kenyataan
+- **"Salah"** — prediksi model tidak sesuai
+
+Statistik feedback ditampilkan secara real-time dan disimpan di `localStorage`:
+- Jumlah prediksi benar vs salah
+- Persentase akurasi berdasarkan feedback user
+
+### 3. Riwayat Prediksi (History)
+
+Semua prediksi yang pernah dilakukan tersimpan dalam tabel riwayat (maks 50 entri, disimpan di `localStorage`):
+
+| Kolom | Keterangan |
+|-------|------------|
+| Gambar | Thumbnail gambar input |
+| Prediksi | Nama makanan hasil prediksi |
+| Confidence | Persentase keyakinan model |
+| Waktu | Waktu inferensi (ms) |
+| Status | Feedback user (Benar/Salah/-) |
+
+### 4. Benchmark / Speed Test
+
+Setiap prediksi menampilkan **breakdown waktu** secara detail:
+
+| Tahap | Keterangan |
+|-------|------------|
+| **Preprocess** | Waktu resize & normalisasi gambar (ms) |
+| **Inferensi** | Waktu model memproses gambar (ms) |
+| **Postprocess** | Waktu sorting & formatting hasil (ms) |
+| **Total** | Total waktu keseluruhan (ms) |
+
+Ini membuktikan model berjalan di browser, bukan di server.
+
+### 5. Multi-Image Batch Test
+
+Upload **hingga 20 gambar sekaligus** untuk pengujian massal. Hasilnya ditampilkan dalam tabel dengan:
+- Thumbnail setiap gambar
+- Prediksi dan confidence per gambar
+- Waktu inferensi per gambar
+- Rata-rata confidence dan waktu keseluruhan
+
+### 6. Camera Capture (Ambil Foto Langsung)
+
+Buka kamera langsung dari browser:
+- Mendukung kamera depan dan belakang (switch)
+- Viewfinder dengan frame guide
+- Hasil foto langsung dikirim ke model untuk prediksi
+- Membuktikan model bekerja real-time dengan gambar nyata
+
+### 7. Confidence Distribution Chart
+
+Grafik batang interaktif yang menampilkan **probabilitas semua 101 kelas** untuk setiap prediksi:
+- Collapsible (bisa di-expand/collapse)
+- Menampilkan Top-10 secara default, bisa diperluas sampai 101
+- Bar chart proporsional terhadap prediksi tertinggi
+- Membuktikan model benar-benar menghitung probabilitas untuk semua kelas
+
+### 8. Model Info & Debug Panel
+
+Panel teknis yang menampilkan informasi internal:
+
+| Info | Keterangan |
+|------|------------|
+| TF.js Backend | WebGL / WASM / CPU |
+| TF.js Version | Versi TensorFlow.js |
+| WebGL Support | Apakah GPU acceleration aktif |
+| Active Tensors | Jumlah tensor di memori |
+| Memory Usage | Penggunaan memori model |
+| Input/Output Nodes | Node input/output model graph |
+| Model Architecture | EfficientNetV2B0 |
+| Input Size | 224 x 224 x 3 |
+
+---
+
+## Tech Stack
+
+| Layer | Teknologi | Versi |
+|-------|-----------|-------|
+| **UI Framework** | React | 18.3 |
+| **Deep Learning** | TensorFlow.js | 4.22 |
+| **Arsitektur CNN** | EfficientNetV2B0 | - |
+| **Dataset** | Food-101 | 101 kelas, 101K gambar |
+| **Styling** | CSS3 | Custom Farm-to-Table theme |
+| **Deploy** | Vercel | - |
 
 ### Environment Training
 
 ```
-✅ Python Version      : 3.12.12
-✅ TensorFlow          : 2.19.0
-✅ Keras (Native)      : 3.10.0
-✅ TF-Keras (Legacy)   : 2.19.0
-✅ TensorFlow.js Conv. : 4.22.0
+Python          : 3.12.12
+TensorFlow      : 2.19.0
+Keras (Native)  : 3.10.0
+TF-Keras        : 2.19.0
+TensorFlow.js   : 4.22.0
 ```
 
 ---
 
-## 🎯 Arsitektur Aplikasi
+## Quick Start
 
-**Single-App Architecture dengan TensorFlow.js (Browser-based)**
+### Prasyarat
 
-```
-Website/
-├── src/                      # Source code React
-│   ├── App.jsx               # Main UI component
-│   ├── App.css              # Styling Farm-to-Table
-│   ├── index.js             # Entry point
-│   ├── index.css            # Global styles
-│   ├── components/          # React components
-│   │   ├── ImageUploader.jsx    # Upload dengan drag & drop
-│   │   ├── ResultCard.jsx      # Hasil klasifikasi & gizi
-│   │   └── LoadingSpinner.jsx  # Loading animation
-│   └── services/
-│       └── tfjsService.js   # TensorFlow.js service
-│
-├── public/                  # Static files
-│   ├── index.html          # HTML template dengan preloader
-│   └── models/             # Model TensorFlow.js
-│       ├── model.json      # Model architecture
-│       ├── classes.json    # 101 label kelas
-│       ├── nutrition.json  # Database gizi
-│       └── group1-shard*.bin  # Model weights
-│
-├── package.json            # Dependencies
-└── README.md               # File ini
-```
+- **Node.js** >= 16.0.0
+- **npm** >= 8.0.0
 
----
-
-## 🚀 Cara Menjalankan
-
-### 1. Install Dependencies
+### Instalasi & Menjalankan
 
 ```bash
+# Clone repository
+git clone https://github.com/yurayle-yue/EfficientNetV2B0.git
+cd EfficientNetV2B0
+
+# Install dependencies
 npm install
-```
 
-### 2. Jalankan Aplikasi
-
-```bash
+# Jalankan development server
 npm start
 ```
 
 Aplikasi akan berjalan di **http://localhost:3000**
 
-### 3. Upload dan Klasifikasi
+### Cara Penggunaan
 
-1. Klik area upload atau seret gambar makanan
-2. Preview gambar akan muncul
-3. Klik tombol **"Submit untuk Klasifikasi"**
-4. Hasil prediksi dan informasi gizi akan muncul
-
----
-
-## ✨ Fitur
-
-| Fitur | Deskripsi |
-|-------|-----------|
-| **Klasifikasi Makanan** | Menggunakan EfficientNetV2B0 dengan 101 kelas |
-| **Akurasi Tinggi** | 94.8% accuracy pada Food-101 dataset |
-| **TensorFlow.js** | Model berjalan langsung di browser |
-| **Informasi Gizi** | Kalori, protein, lemak, karbohidrat |
-| **Top-5 Predictions** | 5 prediksi teratas dengan confidence |
-| **Indikator Kepercayaan** | Visualisasi tingkat confidence prediksi |
-| **Responsive** | Desktop & mobile friendly |
-| **Drag & Drop** | Upload gambar mudah |
-| **Preview Sebelum Klasifikasi** | Lihat gambar sebelum submit |
-| **Real-time** | Prediksi instan tanpa server |
-| **Farm-to-Table Theme** | Desain organic dan natural |
+1. Pilih mode input: **Upload**, **Kamera**, atau **Batch Test**
+2. Upload gambar / ambil foto / pilih beberapa gambar
+3. Klik **"Submit untuk Klasifikasi"**
+4. Lihat hasil prediksi, informasi gizi, benchmark, dan confidence chart
+5. Berikan feedback (Benar/Salah) untuk setiap prediksi
+6. Lihat riwayat dan statistik akurasi di panel History
 
 ---
 
-## 🛠️ Teknologi
+## Struktur Proyek
 
-### Frontend
-- **React 18** - UI Framework
-- **TensorFlow.js 4.22** - Deep Learning di Browser
-- **styled-jsx** - Component-scoped styling
-- **CSS3** - Modern styling dengan gradient dan animasi
-
-### Model
-- **Arsitektur:** EfficientNetV2B0
-- **Dataset:** Food-101 (101 kelas)
-- **Input:** 224x224 RGB
-- **Output:** 101 class probabilities
-- **Akurasi:** 94.8%
-
----
-
-## 🎨 Tampilan Aplikasi
-
-### Header
-- Icon aplikasi dengan gradient background
-- Judul dan subtitle informatif
-- Badge: EfficientNetV2B0, Akurasi, Food-101, 101 Kelas
-
-### Halaman Upload
-- Area drag & drop yang modern dengan tema Farm-to-Table
-- Preview gambar sebelum klasifikasi
-- Tombol "Submit untuk Klasifikasi" (warna olive green)
-- Tombol "Ubah Gambar" (warna earth brown)
-
-### Halaman Hasil
-- **Gambar Input** dengan overlay label
-- **Detail Model** - Arsitektur, Akurasi, Dataset, Jumlah Kelas
-- **Prediksi #1** dengan badge confidence
-- **Indikator Kepercayaan** - Tinggi (≥80%), Sedang (50-79%), Rendah (<50%)
-- **Informasi Nilai Gizi** - Kalori, Protein, Lemak, Karbohidrat dengan icon berwarna
-- **Prediksi Lainnya** - Progress bar untuk prediksi #2-#4
-
-### Tema Farm-to-Table
-- Background warm cream (`#FAF7F2`)
-- Olive green primary buttons (`#8B9556`)
-- Earth brown secondary elements (`#A67B5B`)
-- Organic textures dan subtle patterns
-- Smooth animations dan transitions
+```
+EfficientNetV2B0/
+├── public/
+│   ├── index.html                  # HTML template dengan preloader
+│   └── models/                     # Model TensorFlow.js
+│       ├── model.json              # Arsitektur model
+│       ├── classes.json            # 101 label kelas
+│       ├── nutrition.json          # Database informasi gizi
+│       ├── descriptions.json       # Deskripsi makanan
+│       └── group1-shard[1-3]of3.bin  # Model weights (~3 shards)
+│
+├── src/
+│   ├── App.jsx                     # Komponen utama + state management
+│   ├── App.css                     # Styling + responsive breakpoints
+│   ├── index.js                    # Entry point React
+│   ├── index.css                   # Global styles
+│   ├── components/
+│   │   ├── ImageUploader.jsx       # [Fitur] Upload dengan drag & drop
+│   │   ├── ResultCard.jsx          # [Fitur] Hasil + feedback + benchmark
+│   │   ├── FoodList.jsx            # [Fitur] Katalog 101 makanan (searchable)
+│   │   ├── SampleGallery.jsx       # [Fitur 1] Challenge mode test
+│   │   ├── CameraCapture.jsx       # [Fitur 6] Kamera langsung
+│   │   ├── BatchTest.jsx           # [Fitur 5] Multi-image batch test
+│   │   ├── ConfidenceChart.jsx     # [Fitur 7] Distribusi confidence chart
+│   │   ├── PredictionHistory.jsx   # [Fitur 3] Riwayat prediksi + stats
+│   │   ├── DebugPanel.jsx          # [Fitur 8] Model info & debug
+│   │   └── LoadingSpinner.jsx      # Loading animation
+│   └── services/
+│       └── tfjsService.js          # [Fitur 4] TF.js service + benchmark
+│
+├── package.json
+├── vercel.json                     # Konfigurasi deploy Vercel
+└── start.bat                       # Script untuk menjalankan di Windows
+```
 
 ---
 
-## 📁 File Model
+## Arsitektur Sistem
 
-File yang diperlukan di `public/models/`:
-
-- ✅ `model.json` - Model architecture
-- ✅ `classes.json` - 101 label kelas
-- ✅ `nutrition.json` - Database gizi
-- ✅ `group1-shard*.bin` - Model weights
+```
+                    ┌───────────────────────────────────────────┐
+                    │              Browser (Client)              │
+                    │                                           │
+  Upload/Kamera ──> │  React App                                │
+                    │    │                                      │
+                    │    ├── Preprocessing (resize 224x224)     │
+                    │    │         Benchmark: ⏱ preprocess      │
+                    │    │                                      │
+                    │    ├── TensorFlow.js (WebGL)              │
+                    │    │     └── EfficientNetV2B0             │
+                    │    │         Benchmark: ⏱ inference       │
+                    │    │                                      │
+                    │    ├── Top-5 Predictions                  │
+                    │    ├── Confidence Distribution (101 kelas)│
+                    │    ├── Informasi Gizi (nutrition.json)    │
+                    │    ├── User Feedback (Benar/Salah)        │
+                    │    └── History + Stats (localStorage)     │
+                    │                                           │
+                    └───────────────────────────────────────────┘
+                              Tidak ada server backend
+```
 
 ---
 
-## 🔧 Troubleshooting
+## Model EfficientNetV2B0
 
-### Performance lambat
+EfficientNetV2 adalah arsitektur CNN generasi terbaru dari Google yang menggunakan **Fused-MBConv** dan **progressive learning** untuk training yang lebih cepat dan akurat.
 
-**Solusi:**
-1. Gunakan browser modern (Chrome, Firefox, Edge)
-2. Tutup tab lain untuk free up memory
-3. Pastikan GPU acceleration aktif
-4. Gunakan hardware dengan GPU yang mendukung WebGL
+| Properti | Detail |
+|----------|--------|
+| **Arsitektur** | EfficientNetV2B0 |
+| **Input Size** | 224 x 224 x 3 (RGB) |
+| **Output** | 101 class probabilities (softmax) |
+| **Dataset** | Food-101 (101 kelas, 101.000 gambar) |
+| **Akurasi** | **94.8%** |
+| **Preprocessing** | Resize + Normalize [0, 1] |
 
-### "Unknown operation" error
+### Keunggulan EfficientNetV2
 
-**Solusi:**
-Pastikan model sudah di-convert dengan benar menggunakan tensorflowjs_converter:
+- **Faster training** — Fused-MBConv mengurangi overhead training
+- **Better accuracy** — Progressive learning meningkatkan akurasi
+- **Smaller model** — Parameter lebih efisien dibanding EfficientNet v1
+- **Mobile-friendly** — Cocok untuk deployment di browser dan perangkat mobile
+
+> **Paper:** [EfficientNetV2: Smaller Models and Faster Training](https://arxiv.org/abs/2104.00298)
+
+---
+
+## Daftar 101 Jenis Makanan (Food-101)
+
+Berikut adalah daftar lengkap makanan yang dapat dikenali oleh model. Pastikan gambar yang di-upload termasuk dalam salah satu kategori ini.
+
+<details>
+<summary><b>Daging & Seafood (21)</b></summary>
+
+| No | Nama | No | Nama |
+|----|------|----|------|
+| 1 | Baby Back Ribs | 12 | Mussels |
+| 2 | Beef Carpaccio | 13 | Oysters |
+| 3 | Beef Tartare | 14 | Peking Duck |
+| 4 | Chicken Curry | 15 | Pork Chop |
+| 5 | Chicken Wings | 16 | Prime Rib |
+| 6 | Crab Cakes | 17 | Pulled Pork Sandwich |
+| 7 | Filet Mignon | 18 | Scallops |
+| 8 | Foie Gras | 19 | Shrimp And Grits |
+| 9 | Grilled Salmon | 20 | Steak |
+| 10 | Lobster Bisque | 21 | Tuna Tartare |
+| 11 | Lobster Roll Sandwich | | |
+
+</details>
+
+<details>
+<summary><b>Pasta & Nasi (12)</b></summary>
+
+| No | Nama | No | Nama |
+|----|------|----|------|
+| 1 | Fried Rice | 7 | Ramen |
+| 2 | Gnocchi | 8 | Ravioli |
+| 3 | Lasagna | 9 | Risotto |
+| 4 | Macaroni And Cheese | 10 | Spaghetti Bolognese |
+| 5 | Pad Thai | 11 | Spaghetti Carbonara |
+| 6 | Paella | 12 | Pho |
+
+</details>
+
+<details>
+<summary><b>Sandwich & Burger (8)</b></summary>
+
+| No | Nama | No | Nama |
+|----|------|----|------|
+| 1 | Breakfast Burrito | 5 | Hot Dog |
+| 2 | Club Sandwich | 6 | Chicken Quesadilla |
+| 3 | Grilled Cheese Sandwich | 7 | Croque Madame |
+| 4 | Hamburger | 8 | Tacos |
+
+</details>
+
+<details>
+<summary><b>Salad & Sayuran (8)</b></summary>
+
+| No | Nama | No | Nama |
+|----|------|----|------|
+| 1 | Beet Salad | 5 | Greek Salad |
+| 2 | Caesar Salad | 6 | Guacamole |
+| 3 | Caprese Salad | 7 | Hummus |
+| 4 | Edamame | 8 | Seaweed Salad |
+
+</details>
+
+<details>
+<summary><b>Sup & Kuah (4)</b></summary>
+
+| No | Nama | No | Nama |
+|----|------|----|------|
+| 1 | Clam Chowder | 3 | Hot And Sour Soup |
+| 2 | French Onion Soup | 4 | Miso Soup |
+
+</details>
+
+<details>
+<summary><b>Makanan Ringan & Goreng (19)</b></summary>
+
+| No | Nama | No | Nama |
+|----|------|----|------|
+| 1 | Bruschetta | 11 | Nachos |
+| 2 | Churros | 12 | Onion Rings |
+| 3 | Deviled Eggs | 13 | Pancakes |
+| 4 | Dumplings | 14 | Samosa |
+| 5 | Escargots | 15 | Spring Rolls |
+| 6 | Falafel | 16 | Takoyaki |
+| 7 | Fish And Chips | 17 | Waffles |
+| 8 | French Fries | 18 | French Toast |
+| 9 | Fried Calamari | 19 | Garlic Bread |
+| 10 | Gyoza | | |
+
+</details>
+
+<details>
+<summary><b>Sushi & Jepang (3)</b></summary>
+
+| No | Nama |
+|----|------|
+| 1 | Bibimbap |
+| 2 | Sashimi |
+| 3 | Sushi |
+
+</details>
+
+<details>
+<summary><b>Kue & Dessert (18)</b></summary>
+
+| No | Nama | No | Nama |
+|----|------|----|------|
+| 1 | Apple Pie | 10 | Frozen Yogurt |
+| 2 | Baklava | 11 | Ice Cream |
+| 3 | Bread Pudding | 12 | Macarons |
+| 4 | Cannoli | 13 | Panna Cotta |
+| 5 | Carrot Cake | 14 | Red Velvet Cake |
+| 6 | Cheesecake | 15 | Strawberry Shortcake |
+| 7 | Chocolate Cake | 16 | Tiramisu |
+| 8 | Chocolate Mousse | 17 | Cup Cakes |
+| 9 | Creme Brulee | 18 | Donuts |
+
+</details>
+
+<details>
+<summary><b>Lainnya (8)</b></summary>
+
+| No | Nama | No | Nama |
+|----|------|----|------|
+| 1 | Beignets | 5 | Huevos Rancheros |
+| 2 | Ceviche | 6 | Omelette |
+| 3 | Cheese Plate | 7 | Pizza |
+| 4 | Eggs Benedict | 8 | Poutine |
+
+</details>
+
+---
+
+## Tema Farm-to-Table
+
+Aplikasi menggunakan tema **Farm-to-Table** dengan nuansa organic, fresh, dan natural.
+
+| Warna | Hex | Penggunaan |
+|-------|-----|------------|
+| Olive Green | `#8B9556` | Primary buttons, accents |
+| Sage Green | `#9CAF88` | Secondary elements |
+| Earth Brown | `#A67B5B` | Secondary buttons |
+| Warm Cream | `#FAF7F2` | Background |
+| Light Beige | `#EBE5DE` | Borders, dividers |
+| Terracotta | `#C47F6B` | Error states |
+
+---
+
+## Deploy ke Vercel
+
+### Option 1: Vercel CLI
+
 ```bash
-tensorflowjs_converter --input_format=tf_saved_model \
+npm install -g vercel
+vercel
+```
+
+### Option 2: Vercel Dashboard
+
+1. Push code ke GitHub
+2. Buka [vercel.com](https://vercel.com) dan klik **Import Project**
+3. Pilih repository — Vercel otomatis mendeteksi konfigurasi
+
+### File Model (Wajib Ada)
+
+Pastikan `public/models/` berisi semua file sebelum deploy:
+
+```
+public/models/
+├── model.json              # Wajib
+├── classes.json            # Wajib
+├── nutrition.json          # Wajib
+├── descriptions.json       # Wajib
+├── group1-shard1of3.bin    # Wajib
+├── group1-shard2of3.bin    # Wajib
+└── group1-shard3of3.bin    # Wajib
+```
+
+File `vercel.json` sudah dikonfigurasi dengan cache untuk model files, COOP/COEP headers untuk TensorFlow.js, dan SPA routing.
+
+---
+
+## Troubleshooting
+
+<details>
+<summary><b>Performa lambat saat inferensi</b></summary>
+
+- Gunakan browser modern (Chrome / Edge / Firefox)
+- Tutup tab yang tidak diperlukan untuk membebaskan memori
+- Pastikan **GPU acceleration** aktif di pengaturan browser
+- Cek Debug Panel — pastikan backend adalah **webgl**, bukan **cpu**
+- Perangkat dengan GPU yang mendukung WebGL akan jauh lebih cepat
+
+</details>
+
+<details>
+<summary><b>Error "Unknown operation"</b></summary>
+
+Model perlu di-convert ulang dengan tensorflowjs_converter:
+
+```bash
+tensorflowjs_converter \
+  --input_format=tf_saved_model \
   --output_format=tfjs_graph_model \
   --signature_name=serving_default \
   --saved_model_tags=serve \
@@ -202,127 +484,59 @@ tensorflowjs_converter --input_format=tf_saved_model \
   public/models/
 ```
 
----
+</details>
 
-## 💡 Keunggulan Arsitektur Ini
+<details>
+<summary><b>Kamera tidak bisa diakses</b></summary>
 
-1. ✅ **Client-side** - Tidak perlu server backend
-2. ✅ **Real-time** - Instan tanpa network latency
-3. ✅ **Privacy** - Gambar tidak dikirim ke server
-4. ✅ **Scalable** - Processing di device user
-5. ✅ **Offline-ready** - Bisa jalan tanpa internet setelah load model
-6. ✅ **Modern** - Teknologi web terbaru
-7. ✅ **Beautiful UI** - Tema Farm-to-Table yang cocok untuk food app
+- Pastikan website diakses via **HTTPS** atau **localhost**
+- Berikan izin kamera di browser saat diminta
+- Di mobile, pastikan tidak ada aplikasi lain yang menggunakan kamera
+- Coba switch antara kamera depan/belakang
 
----
+</details>
 
-## 📝 Catatan untuk Skripsi
+<details>
+<summary><b>History / Riwayat hilang</b></summary>
 
-### Implementasi EfficientNetV2B0 untuk Klasifikasi Citra Makanan
+Riwayat prediksi disimpan di `localStorage` browser. Data bisa hilang jika:
+- Browser di-clear cache/cookies
+- Menggunakan mode Incognito/Private
+- `localStorage` penuh (maks 50 entri disimpan)
 
-**Poin penting:**
-1. **Algoritma:** EfficientNetV2B0 (Modern CNN yang efisien)
-2. **Dataset:** Food-101 (101 kelas, 101K gambar)
-3. **Platform:** Web Browser (Client-side)
-4. **Framework:** TensorFlow.js 4.22.0
-5. **Preprocessing:** Resize 224x224, normalize [0,1]
-6. **Output:** Top-5 predictions + nutrition info
-7. **Akurasi:** 94.8%
-8. **Tema UI:** Farm-to-Table (Organic & Natural)
-
-### Arsitektur Sistem
-
-```
-User → Upload Gambar → Preview → Submit → TensorFlow.js → Prediction → Result + Nutrition
-                                               ↓
-                                        EfficientNetV2B0 (browser)
-                                        model.json + weights
-```
-
-### EfficientNetV2B0
-
-EfficientNetV2 adalah arsitektur CNN modern yang lebih cepat dan lebih akurat dibandingkan versi sebelumnya. Keunggulan:
-- **Faster training** - Fused-MBConv untuk training yang lebih cepat
-- **Better accuracy** - Progressive learning untuk akurasi yang lebih baik
-- **Smaller model** - Parameter lebih efisien
-- **Mobile-friendly** - Cocok untuk deployment di perangkat mobile
+</details>
 
 ---
 
-## 📚 Referensi
+## Keunggulan
 
-- [TensorFlow.js Docs](https://www.tensorflow.org/js)
-- [EfficientNetV2 Paper](https://arxiv.org/abs/2104.00298)
-- [Food-101 Dataset](https://www.kaggle.com/datasets/dansbecker/food-101)
-- [React Docs](https://react.dev)
-
----
-
-## 🎯 Quick Start
-
-### Local Development
-
-1. **Install:** `npm install`
-2. **Start:** `npm start`
-3. **Buka:** http://localhost:3000
-4. **Upload gambar makanan, preview, submit, dan lihat hasilnya!**
+| No | Aspek | Keterangan |
+|----|-------|------------|
+| 1 | **Client-side** | Tidak memerlukan server backend |
+| 2 | **Real-time** | Prediksi instan tanpa network latency |
+| 3 | **Privacy** | Gambar tidak dikirim ke server manapun |
+| 4 | **Scalable** | Processing di device masing-masing user |
+| 5 | **Offline-ready** | Berjalan tanpa internet setelah model dimuat |
+| 6 | **Testable** | 8 fitur pengujian membuktikan model bekerja |
+| 7 | **Transparent** | Benchmark, debug info, dan confidence chart |
 
 ---
 
-## 🌐 Deploy ke Vercel
+## Referensi
 
-### Cara Deploy
-
-#### Option 1: Melalui Vercel CLI
-
-```bash
-# Install Vercel CLI
-npm install -g vercel
-
-# Deploy ke Vercel
-vercel
-```
-
-#### Option 2: Melalui Vercel Dashboard
-
-1. Push code ke GitHub/GitLab/Bitbucket
-2. Buka [vercel.com](https://vercel.com)
-3. Klik "Import Project"
-4. Pilih repository
-5. Vercel akan otomatis mendeteksi konfigurasi
-
-### ⚠️ Penting: File Model Harus Ada
-
-Sebelum deploy, pastikan folder `public/models/` berisi semua file:
-
-```
-public/models/
-├── model.json           ← WAJIB
-├── classes.json         ← WAJIB
-├── nutrition.json       ← WAJIB
-├── group1-shard1of3.bin ← WAJIB
-├── group1-shard2of3.bin ← WAJIB
-└── group1-shard3of3.bin ← WAJIB
-```
-
-### Konfigurasi Vercel
-
-File `vercel.json` sudah disertakan dengan konfigurasi:
-- Cache untuk model files (1 tahun)
-- COOP/COEP headers untuk TensorFlow.js
-- SPA routing untuk React
-
-### Setelah Deploy
-
-Aplikasi akan dapat diakses di:
-- `https://your-project.vercel.app`
+- [EfficientNetV2: Smaller Models and Faster Training](https://arxiv.org/abs/2104.00298) — Paper asli
+- [TensorFlow.js Documentation](https://www.tensorflow.org/js) — Framework inferensi
+- [Food-101 Dataset](https://www.kaggle.com/datasets/dansbecker/food-101) — Dataset training
+- [React Documentation](https://react.dev) — UI framework
 
 ---
 
-## 📄 License
+<div align="center">
 
-**© 2025 - Satria Tarigan**
+**&copy; 2025 Satria Tarigan**
 
-**Skripsi:** Implementasi CNN untuk Klasifikasi Citra Makanan dan Informasi Gizi Berbasis Web
+Skripsi: Implementasi CNN (EfficientNetV2B0) untuk Klasifikasi Citra Makanan dan Informasi Gizi Berbasis Web
 
-**Tech Stack:** React 18 + TensorFlow.js 4.22 + EfficientNetV2B0 + Food-101 + Farm-to-Table Theme
+`React 18` &middot; `TensorFlow.js 4.22` &middot; `EfficientNetV2B0` &middot; `Food-101`
+
+</div>

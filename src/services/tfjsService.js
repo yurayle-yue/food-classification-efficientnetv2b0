@@ -14,6 +14,7 @@ class TFJSService {
     this.model = null;
     this.classes = [];
     this.nutritionData = {};
+    this.descriptionData = {};
     this.isModelLoaded = false;
     this.isLoading = false;
     this.modelInfo = {
@@ -37,16 +38,12 @@ class TFJSService {
     this.isLoading = true;
 
     try {
-      // Load model EfficientNetV2B0 (Graph Model format)
       const modelUrl = '/models/model.json';
-      console.log('🔄 Loading model from:', modelUrl);
+      console.log('Loading model from:', modelUrl);
 
       this.model = await tf.loadGraphModel(modelUrl);
-      console.log('✅ Model loaded successfully!');
-      console.log('📥 Model inputs:', this.model.inputNodes);
-      console.log('📤 Model outputs:', this.model.outputNodes);
+      console.log('Model loaded successfully!');
 
-      // Load classes, nutrition data, dan descriptions
       const [classesResponse, nutritionResponse, descriptionsResponse] = await Promise.all([
         fetch('/models/classes.json'),
         fetch('/models/nutrition.json'),
@@ -60,129 +57,105 @@ class TFJSService {
       this.isModelLoaded = true;
       this.isLoading = false;
 
-      console.log(`✅ Classes loaded: ${this.classes.length} classes`);
-      console.log(`✅ Nutrition data loaded: ${Object.keys(this.nutritionData).length} items`);
-      console.log(`✅ Descriptions loaded: ${Object.keys(this.descriptionData).length} items`);
+      console.log(`Classes loaded: ${this.classes.length} classes`);
+      console.log(`Nutrition data loaded: ${Object.keys(this.nutritionData).length} items`);
+      console.log(`Descriptions loaded: ${Object.keys(this.descriptionData).length} items`);
 
       return this.model;
     } catch (error) {
       this.isLoading = false;
-      console.error('❌ Error loading model:', error);
+      console.error('Error loading model:', error);
       throw new Error(`Gagal memuat model: ${error.message}`);
     }
   }
 
   /**
    * Preprocess gambar sebelum diprediksi
-   * SESUAI COLAB: image_dataset_from_directory scale ke [0, 1]
-   * dan tf.keras.utils.img_to_array() return [0, 255] lalu model accept itu
    */
   preprocessImage(imageElement) {
     return tf.tidy(() => {
-      // Convert image ke tensor (RGB) - returns [0, 255]
       const tensor = tf.browser.fromPixels(imageElement);
-
-      // Resize ke 224x224
       const resized = tf.image.resizeBilinear(tensor, [224, 224]);
-
-      // NORMAL: cast ke float32 dan range [0, 255] (sesuai img_to_array)
-      // Lalu model akan handle preprocessing-nya sendiri
       const floatImg = resized.toFloat();
-
-      // Add batch dimension
       const batched = floatImg.expandDims(0);
-
       return batched;
     });
   }
 
   /**
    * Melakukan prediksi klasifikasi makanan
+   * Returns: { predictions, benchmark, allProbabilities }
    */
   async predict(imageElement) {
     if (!this.isModelLoaded) {
       await this.loadModel();
     }
 
+    const benchmark = {
+      preprocessTime: 0,
+      inferenceTime: 0,
+      postprocessTime: 0,
+      totalTime: 0
+    };
+
+    const totalStart = performance.now();
+
     try {
-      // Preprocess gambar
+      // Preprocess
+      const preprocessStart = performance.now();
       const preprocessed = this.preprocessImage(imageElement);
-      console.log('📸 Preprocessed shape:', preprocessed.shape);
-      console.log('📸 Preprocessed min/max:', await preprocessed.min().data(), await preprocessed.max().data());
+      benchmark.preprocessTime = Math.round(performance.now() - preprocessStart);
 
-      // Coba beberapa cara untuk memanggil model
-      let predictionTensor;
+      // Inference
+      const inferenceStart = performance.now();
       let result;
-
-      // Cara 1: Gunakan signature inputs/outputs (recommended)
       try {
         result = this.model.predict({ 'input_2': preprocessed });
-        console.log('✅ Using signature predict with input_2');
       } catch (e) {
-        console.log('⚠️ Signature predict failed, trying execute...');
-
-        // Cara 2: Gunakan execute dengan input node
         const inputName = this.model.inputNodes[0];
-        console.log('🔍 Using input node:', inputName);
-
         result = this.model.execute({ [inputName]: preprocessed });
       }
+      benchmark.inferenceTime = Math.round(performance.now() - inferenceStart);
 
-      console.log('📊 Execute result type:', typeof result);
-      console.log('📊 Is tensor?', result instanceof tf.Tensor);
+      // Postprocess
+      const postprocessStart = performance.now();
 
-      // Handle output - bisa tensor atau object
+      let predictionTensor;
       if (result instanceof tf.Tensor) {
         predictionTensor = result;
-        console.log('✅ Result is a tensor');
       } else if (Array.isArray(result)) {
         predictionTensor = result[0];
-        console.log('✅ Result is array, taking first element');
       } else if (typeof result === 'object' && result !== null) {
-        // Cari tensor pertama dalam object
-        console.log('🔍 Result is object, keys:', Object.keys(result));
         const values = Object.values(result);
         for (const val of values) {
           if (val instanceof tf.Tensor) {
             predictionTensor = val;
-            console.log('✅ Found tensor in object');
             break;
           }
         }
       }
 
       if (!predictionTensor) {
-        throw new Error('No valid tensor found in prediction result. Result type: ' + typeof result);
+        throw new Error('No valid tensor found in prediction result.');
       }
 
-      console.log('✅ Prediction tensor shape:', predictionTensor.shape);
-
-      // Model di Colab punya activation='softmax' di layer terakhir
-      // Jadi output SUDAH probabilities, TIDAK perlu softmax lagi!
       const probabilities = await predictionTensor.data();
-      console.log('📈 Raw probabilities sample (first 5):', Array.from(probabilities).slice(0, 5));
 
-      // Verify sum mendekati 1
-      const sum = Array.from(probabilities).reduce((a, b) => a + b, 0);
-      console.log('📊 Sum of probabilities (should be ~1.0):', sum.toFixed(4));
+      // All probabilities for chart
+      const allProbabilities = Array.from(probabilities).map((prob, index) => ({
+        className: this.classes[index],
+        displayName: this.formatClassName(this.classes[index]),
+        probability: prob,
+        percentage: (prob * 100).toFixed(4)
+      })).sort((a, b) => b.probability - a.probability);
 
-      console.log('📈 Top 5 Probabilities:', Array.from(probabilities)
-        .map((p, i) => ({ idx: i, prob: p }))
-        .sort((a, b) => b.prob - a.prob)
-        .slice(0, 5)
-        .map(x => `${this.classes[x.idx] || 'class_' + x.idx}: ${(x.prob * 100).toFixed(2)}%`)
-      );
-
-      // Sort dan ambil top 5
+      // Top 5
       const topIndices = Array.from(probabilities)
         .map((prob, index) => ({ prob, index }))
         .sort((a, b) => b.prob - a.prob)
         .slice(0, 5);
 
-      console.log('🏆 Top predictions:', topIndices);
-
-      // Format hasil
-      const results = topIndices.map((item, rank) => {
+      const predictions = topIndices.map((item, rank) => {
         const className = this.classes[item.index];
         const confidence = (item.prob * 100).toFixed(2);
         const nutrition = this.nutritionData[className] || null;
@@ -198,18 +171,20 @@ class TFJSService {
         };
       });
 
-      console.log('✅ Final results:', results);
+      benchmark.postprocessTime = Math.round(performance.now() - postprocessStart);
+      benchmark.totalTime = Math.round(performance.now() - totalStart);
 
       // Cleanup tensors
       preprocessed.dispose();
-      if (predictionTensor) {
-        predictionTensor.dispose();
-      }
+      if (predictionTensor) predictionTensor.dispose();
 
-      return results;
+      return {
+        predictions,
+        benchmark,
+        allProbabilities
+      };
     } catch (error) {
-      console.error('❌ Error during prediction:', error);
-      console.error('Stack:', error.stack);
+      console.error('Error during prediction:', error);
       throw error;
     }
   }
@@ -218,6 +193,7 @@ class TFJSService {
    * Format nama kelas menjadi lebih readable
    */
   formatClassName(className) {
+    if (!className) return '';
     return className
       .split('_')
       .map(word => word.charAt(0).toUpperCase() + word.slice(1))
@@ -225,22 +201,51 @@ class TFJSService {
   }
 
   /**
-   * Check apakah model sudah diload
+   * Get all class names
    */
+  getClasses() {
+    return this.classes;
+  }
+
+  /**
+   * Get debug/technical info about the model and TF.js
+   */
+  getDebugInfo() {
+    const memInfo = tf.memory();
+    return {
+      backend: tf.getBackend(),
+      tfVersion: tf.version.tfjs,
+      numTensors: memInfo.numTensors,
+      numBytes: memInfo.numBytes,
+      numBytesFormatted: this.formatBytes(memInfo.numBytes),
+      unreliable: memInfo.unreliable,
+      modelLoaded: this.isModelLoaded,
+      inputNodes: this.model?.inputNodes || [],
+      outputNodes: this.model?.outputNodes || [],
+      numClasses: this.classes.length,
+      inputSize: '224 x 224 x 3',
+      modelArchitecture: 'EfficientNetV2B0',
+      dataset: 'Food-101',
+      webglSupport: !!document.createElement('canvas').getContext('webgl2') || !!document.createElement('canvas').getContext('webgl')
+    };
+  }
+
+  formatBytes(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+  }
+
   isReady() {
     return this.isModelLoaded;
   }
 
-  /**
-   * Mendapatkan informasi model
-   */
   getModelInfo() {
     return this.modelInfo;
   }
 
-  /**
-   * Cleanup resources
-   */
   dispose() {
     if (this.model) {
       this.model.dispose();
@@ -250,6 +255,5 @@ class TFJSService {
   }
 }
 
-// Export singleton instance
 const tfjsService = new TFJSService();
 export default tfjsService;

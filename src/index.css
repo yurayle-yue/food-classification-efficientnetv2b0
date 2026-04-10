@@ -6,14 +6,22 @@
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
 body {
-  font-family: 'Segoe UI', 'Georgia', serif;
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Georgia', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #FAF7F2;
   color: #2c2c2c;
   min-height: 100vh;
-  position: relative;
+  min-height: -webkit-fill-available;
+  line-height: 1.5;
+  overflow-x: hidden;
 }
 
 /* Organic texture overlay */
@@ -25,19 +33,28 @@ body::before {
   right: 0;
   bottom: 0;
   background-image:
-    radial-gradient(ellipse at 20% 30%, rgba(139, 149, 86, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(166, 123, 91, 0.06) 0%, transparent 50%);
+    radial-gradient(ellipse at 20% 30%, rgba(139, 149, 86, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(166, 123, 91, 0.05) 0%, transparent 50%);
   pointer-events: none;
   z-index: 0;
 }
 
-code {
-  font-family: 'Segoe UI', 'Georgia', serif;
+img {
+  max-width: 100%;
+  height: auto;
 }
 
-/* Scrollbar Styling - Farm-to-Table */
+button {
+  font-family: inherit;
+}
+
+input {
+  font-family: inherit;
+}
+
+/* Scrollbar Styling */
 ::-webkit-scrollbar {
-  width: 14px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -46,7 +63,7 @@ code {
 
 ::-webkit-scrollbar-thumb {
   background: linear-gradient(180deg, #8B9556, #A67B5B);
-  border-radius: 7px;
+  border-radius: 5px;
   border: 2px solid #EBE5DE;
 }
 
@@ -54,107 +71,34 @@ code {
   background: linear-gradient(180deg, #7A8449, #8B6B4A);
 }
 
-/* Selection - Farm-to-Table */
+/* Selection */
 ::selection {
-  background: rgba(139, 149, 86, 0.3);
+  background: rgba(139, 149, 86, 0.25);
   color: #2c2c2c;
-}
-
-/* Cursor */
-.caret {
-  color: #8B9556;
 }
 
 /* Animations */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+  from { opacity: 0; transform: translateX(-15px); }
+  to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
+.fade-in { animation: fadeIn 0.6s ease-out; }
+.slide-in { animation: slideIn 0.5s ease-out; }
 
-@keyframes grow {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.8;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes sway {
-  0%, 100% {
-    transform: rotate(-2deg);
-  }
-  50% {
-    transform: rotate(2deg);
-  }
-}
-
-@keyframes floatUp {
-  0% {
-    transform: translateY(10px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.8s ease-out;
-}
-
-.slide-in {
-  animation: slideIn 0.6s ease-out;
-}
-
-.pulse {
-  animation: pulse 3s infinite;
-}
-
-.float-up {
-  animation: floatUp 0.6s ease-out;
-}
-
-/* Loading Spinner */
+/* Loading Spinner utility */
 .spinner {
-  border: 4px solid rgba(139, 149, 86, 0.2);
+  border: 3px solid rgba(139, 149, 86, 0.2);
   border-top-color: #8B9556;
   border-left-color: #A67B5B;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   animation: spin 1s ease-in-out infinite;
 }
 
@@ -163,15 +107,42 @@ code {
   100% { transform: rotate(360deg); }
 }
 
-/* Responsive Utilities */
+/* Touch improvements for mobile */
+@media (hover: none) and (pointer: coarse) {
+  button, .upload-area, .category-tab, .food-list-toggle {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* Safe area for notched devices */
+@supports (padding: max(0px)) {
+  .app {
+    padding-left: max(0px, env(safe-area-inset-left));
+    padding-right: max(0px, env(safe-area-inset-right));
+  }
+
+  .footer {
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+  }
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   body {
-    font-size: 14px;
+    font-size: 15px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
   }
 }
 
 @media (max-width: 480px) {
   body {
-    font-size: 13px;
+    font-size: 14px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
   }
 }
