@@ -526,7 +526,7 @@ Riwayat prediksi disimpan di `localStorage` browser. Data bisa hilang jika:
 
 - [EfficientNetV2: Smaller Models and Faster Training](https://arxiv.org/abs/2104.00298) — Paper asli
 - [TensorFlow.js Documentation](https://www.tensorflow.org/js) — Framework inferensi
-- [Food-101 Dataset](https://www.kaggle.com/datasets/dansbecker/food-101) — Dataset training
+- [Food-101 Dataset]([https://www.kaggle.com/datasets/dansbecker/food-101](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/)) — Dataset training
 - [React Documentation](https://react.dev) — UI framework
 
 ---
