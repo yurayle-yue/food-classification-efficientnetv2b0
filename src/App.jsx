@@ -6,7 +6,6 @@ import ResultCard from './components/ResultCard';
 import LoadingSpinner from './components/LoadingSpinner';
 import FoodList from './components/FoodList';
 import SampleGallery from './components/SampleGallery';
-import CameraCapture from './components/CameraCapture';
 import BatchTest from './components/BatchTest';
 import PredictionHistory from './components/PredictionHistory';
 import DebugPanel from './components/DebugPanel';
@@ -29,7 +28,7 @@ function App() {
   const [currentFeedback, setCurrentFeedback] = useState(null);
   const [predictionHistory, setPredictionHistory] = useState([]);
   const [feedbackStats, setFeedbackStats] = useState({ correct: 0, wrong: 0 });
-  const [activeTab, setActiveTab] = useState('upload'); // upload, camera, batch
+  const [activeTab, setActiveTab] = useState('upload'); // upload, batch
 
   // Load model
   useEffect(() => {
@@ -139,12 +138,6 @@ function App() {
       setIsProcessing(false);
     }
   }, [modelStatus, selectedImageData, selectedFile, expectedFood, predictionHistory, feedbackStats, runPrediction, saveHistory]);
-
-  const handleCameraCapture = useCallback((dataUrl, file) => {
-    handleImageSelect(dataUrl, file, null);
-    // Auto-switch to upload view after capture
-    setActiveTab('upload');
-  }, [handleImageSelect]);
 
   const handleFeedback = useCallback((type) => {
     setCurrentFeedback(type);
@@ -292,16 +285,6 @@ function App() {
                 Upload
               </button>
               <button
-                className={`input-tab ${activeTab === 'camera' ? 'active' : ''}`}
-                onClick={() => setActiveTab('camera')}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                  <circle cx="12" cy="13" r="4" />
-                </svg>
-                Kamera
-              </button>
-              <button
                 className={`input-tab ${activeTab === 'batch' ? 'active' : ''}`}
                 onClick={() => setActiveTab('batch')}
               >
@@ -327,16 +310,6 @@ function App() {
                 {/* Challenge Mode */}
                 <SampleGallery
                   onImageSelect={handleImageSelect}
-                  disabled={!isModelReady}
-                />
-              </div>
-            )}
-
-            {/* Camera Tab */}
-            {activeTab === 'camera' && (
-              <div className="tab-content">
-                <CameraCapture
-                  onCapture={handleCameraCapture}
                   disabled={!isModelReady}
                 />
               </div>
@@ -425,7 +398,7 @@ function App() {
             <span className="tech-item">Food-101</span>
           </div>
         </div>
-        <p className="copyright">&copy; 2025 - Satria Tarigan</p>
+        <p className="copyright">&copy; 2026 - Satria Tarigan</p>
       </footer>
 
       {isProcessing && <LoadingSpinner message="Menganalisis gambar dengan EfficientNetV2B0..." />}

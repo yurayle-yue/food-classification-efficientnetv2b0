@@ -10,7 +10,7 @@ Implementasi Convolutional Neural Network untuk Klasifikasi Citra Makanan dan In
 [![TensorFlow.js](https://img.shields.io/badge/TensorFlow.js-4.22-FF6F00?logo=tensorflow&logoColor=white)](https://www.tensorflow.org/js)
 [![Food-101](https://img.shields.io/badge/Dataset-Food--101-8B9556)](https://www.kaggle.com/datasets/dansbecker/food-101)
 [![Accuracy](https://img.shields.io/badge/Akurasi-94.8%25-success)](/)
-[![License](https://img.shields.io/badge/License-%C2%A9%202025%20Satria%20Tarigan-blue)](/)
+[![License](https://img.shields.io/badge/License-%C2%A9%202026%20Satria%20Tarigan-blue)](/)
 
 ---
 
@@ -45,9 +45,9 @@ Seluruh inferensi berjalan **client-side** menggunakan TensorFlow.js — tanpa s
 
 ---
 
-## 8 Fitur Pengujian Model
+## 7 Fitur Pengujian Model
 
-Aplikasi ini dilengkapi **8 fitur khusus** untuk membuktikan bahwa model AI benar-benar bekerja:
+Aplikasi ini dilengkapi **7 fitur khusus** untuk membuktikan bahwa model AI benar-benar bekerja:
 
 ### 1. Sample Test Gallery (Challenge Mode)
 
@@ -96,15 +96,7 @@ Upload **hingga 20 gambar sekaligus** untuk pengujian massal. Hasilnya ditampilk
 - Waktu inferensi per gambar
 - Rata-rata confidence dan waktu keseluruhan
 
-### 6. Camera Capture (Ambil Foto Langsung)
-
-Buka kamera langsung dari browser:
-- Mendukung kamera depan dan belakang (switch)
-- Viewfinder dengan frame guide
-- Hasil foto langsung dikirim ke model untuk prediksi
-- Membuktikan model bekerja real-time dengan gambar nyata
-
-### 7. Confidence Distribution Chart
+### 6. Confidence Distribution Chart
 
 Grafik batang interaktif yang menampilkan **probabilitas semua 101 kelas** untuk setiap prediksi:
 - Collapsible (bisa di-expand/collapse)
@@ -112,7 +104,7 @@ Grafik batang interaktif yang menampilkan **probabilitas semua 101 kelas** untuk
 - Bar chart proporsional terhadap prediksi tertinggi
 - Membuktikan model benar-benar menghitung probabilitas untuk semua kelas
 
-### 8. Model Info & Debug Panel
+### 7. Model Info & Debug Panel
 
 Panel teknis yang menampilkan informasi internal:
 
@@ -163,8 +155,8 @@ TensorFlow.js   : 4.22.0
 
 ```bash
 # Clone repository
-git clone https://github.com/yurayle-yue/food-classification-efficientnetv2b0.git
-cd food-classification-efficientnetv2b0
+git clone https://github.com/yurayle-yue/EfficientNetV2B0.git
+cd EfficientNetV2B0
 
 # Install dependencies
 npm install
@@ -177,8 +169,8 @@ Aplikasi akan berjalan di **http://localhost:3000**
 
 ### Cara Penggunaan
 
-1. Pilih mode input: **Upload**, **Kamera**, atau **Batch Test**
-2. Upload gambar / ambil foto / pilih beberapa gambar
+1. Pilih mode input: **Upload** atau **Batch Test**
+2. Upload gambar / pilih beberapa gambar
 3. Klik **"Submit untuk Klasifikasi"**
 4. Lihat hasil prediksi, informasi gizi, benchmark, dan confidence chart
 5. Berikan feedback (Benar/Salah) untuk setiap prediksi
@@ -209,11 +201,10 @@ EfficientNetV2B0/
 │   │   ├── ResultCard.jsx          # [Fitur] Hasil + feedback + benchmark
 │   │   ├── FoodList.jsx            # [Fitur] Katalog 101 makanan (searchable)
 │   │   ├── SampleGallery.jsx       # [Fitur 1] Challenge mode test
-│   │   ├── CameraCapture.jsx       # [Fitur 6] Kamera langsung
 │   │   ├── BatchTest.jsx           # [Fitur 5] Multi-image batch test
-│   │   ├── ConfidenceChart.jsx     # [Fitur 7] Distribusi confidence chart
+│   │   ├── ConfidenceChart.jsx     # [Fitur 6] Distribusi confidence chart
 │   │   ├── PredictionHistory.jsx   # [Fitur 3] Riwayat prediksi + stats
-│   │   ├── DebugPanel.jsx          # [Fitur 8] Model info & debug
+│   │   ├── DebugPanel.jsx          # [Fitur 7] Model info & debug
 │   │   └── LoadingSpinner.jsx      # Loading animation
 │   └── services/
 │       └── tfjsService.js          # [Fitur 4] TF.js service + benchmark
@@ -231,7 +222,7 @@ EfficientNetV2B0/
                     ┌───────────────────────────────────────────┐
                     │              Browser (Client)              │
                     │                                           │
-  Upload/Kamera ──> │  React App                                │
+  Upload        ──> │  React App                                │
                     │    │                                      │
                     │    ├── Preprocessing (resize 224x224)     │
                     │    │         Benchmark: ⏱ preprocess      │
@@ -254,7 +245,7 @@ EfficientNetV2B0/
 
 ## Model EfficientNetV2B0
 
-EfficientNetV2 adalah arsitektur CNN generasi terbaru dari Google yang menggunakan **Fused-MBConv** dan **progressive learning** untuk training yang lebih cepat dan akurat.
+EfficientNetV2B0 adalah arsitektur CNN generasi terbaru dari Google yang menggunakan **Fused-MBConv** dan **progressive learning** untuk training yang lebih cepat dan akurat.
 
 | Properti | Detail |
 |----------|--------|
@@ -265,7 +256,7 @@ EfficientNetV2 adalah arsitektur CNN generasi terbaru dari Google yang menggunak
 | **Akurasi** | **94.8%** |
 | **Preprocessing** | Resize + Normalize [0, 1] |
 
-### Keunggulan EfficientNetV2
+### Keunggulan EfficientNetV2B0
 
 - **Faster training** — Fused-MBConv mengurangi overhead training
 - **Better accuracy** — Progressive learning meningkatkan akurasi
@@ -487,16 +478,6 @@ tensorflowjs_converter \
 </details>
 
 <details>
-<summary><b>Kamera tidak bisa diakses</b></summary>
-
-- Pastikan website diakses via **HTTPS** atau **localhost**
-- Berikan izin kamera di browser saat diminta
-- Di mobile, pastikan tidak ada aplikasi lain yang menggunakan kamera
-- Coba switch antara kamera depan/belakang
-
-</details>
-
-<details>
 <summary><b>History / Riwayat hilang</b></summary>
 
 Riwayat prediksi disimpan di `localStorage` browser. Data bisa hilang jika:
@@ -517,7 +498,7 @@ Riwayat prediksi disimpan di `localStorage` browser. Data bisa hilang jika:
 | 3 | **Privacy** | Gambar tidak dikirim ke server manapun |
 | 4 | **Scalable** | Processing di device masing-masing user |
 | 5 | **Offline-ready** | Berjalan tanpa internet setelah model dimuat |
-| 6 | **Testable** | 8 fitur pengujian membuktikan model bekerja |
+| 6 | **Testable** | 7 fitur pengujian membuktikan model bekerja |
 | 7 | **Transparent** | Benchmark, debug info, dan confidence chart |
 
 ---
@@ -526,14 +507,14 @@ Riwayat prediksi disimpan di `localStorage` browser. Data bisa hilang jika:
 
 - [EfficientNetV2: Smaller Models and Faster Training](https://arxiv.org/abs/2104.00298) — Paper asli
 - [TensorFlow.js Documentation](https://www.tensorflow.org/js) — Framework inferensi
-- [Food-101 Dataset]([https://www.kaggle.com/datasets/dansbecker/food-101](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/)) — Dataset training
+- [Food-101 Dataset](https://www.kaggle.com/datasets/dansbecker/food-101) — Dataset training
 - [React Documentation](https://react.dev) — UI framework
 
 ---
 
 <div align="center">
 
-**&copy; 2025 Satria Tarigan**
+**&copy; 2026 Satria Tarigan**
 
 Skripsi: Implementasi CNN (EfficientNetV2B0) untuk Klasifikasi Citra Makanan dan Informasi Gizi Berbasis Web
 
