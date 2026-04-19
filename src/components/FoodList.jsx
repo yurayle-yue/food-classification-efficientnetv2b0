@@ -122,12 +122,12 @@ const FoodList = ({ isExpanded, onToggle }) => {
               </svg>
               <input
                 type="text"
-                placeholder="Cari makanan... (contoh: pizza, sushi, ramen)"
+                placeholder="Cari makanan (contoh: pizza, sushi, ramen)"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
               {searchTerm && (
-                <button className="clear-search" onClick={() => setSearchTerm('')}>
+                <button className="clear-search" onClick={() => setSearchTerm('')} aria-label="Bersihkan pencarian">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="18" y1="6" x2="6" y2="18" />
                     <line x1="6" y1="6" x2="18" y2="18" />
@@ -136,7 +136,7 @@ const FoodList = ({ isExpanded, onToggle }) => {
               )}
             </div>
             <div className="search-count">
-              <span>{filteredFoods.length}</span> dari <span>101</span> makanan
+              Menampilkan <span>{filteredFoods.length}</span> dari <span>101</span> makanan
             </div>
           </div>
 
@@ -260,15 +260,14 @@ const FoodList = ({ isExpanded, onToggle }) => {
 
         .food-list-search {
           display: flex;
-          align-items: center;
-          gap: 1rem;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.5rem;
           margin-bottom: 1rem;
-          flex-wrap: wrap;
         }
 
         .search-input-wrapper {
-          flex: 1;
-          min-width: 220px;
+          width: 100%;
           display: flex;
           align-items: center;
           gap: 0.6rem;
@@ -277,6 +276,7 @@ const FoodList = ({ isExpanded, onToggle }) => {
           border-radius: 12px;
           padding: 0.7rem 1rem;
           transition: border-color 0.3s ease, box-shadow 0.3s ease;
+          box-sizing: border-box;
         }
 
         .search-input-wrapper:focus-within {
@@ -319,13 +319,14 @@ const FoodList = ({ isExpanded, onToggle }) => {
         }
 
         .search-count {
-          font-size: 0.82rem;
+          font-size: 0.8rem;
           color: #6B5D4F;
-          white-space: nowrap;
+          padding-left: 0.25rem;
+          line-height: 1.4;
         }
 
         .search-count span {
-          font-weight: 600;
+          font-weight: 700;
           color: #8B9556;
         }
 

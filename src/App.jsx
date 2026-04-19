@@ -156,6 +156,31 @@ function App() {
     saveHistory(newHistory, newStats);
   }, [feedbackStats, predictionHistory, saveHistory]);
 
+  const handleClearHistory = useCallback(() => {
+    const emptyStats = { correct: 0, wrong: 0 };
+    setPredictionHistory([]);
+    setFeedbackStats(emptyStats);
+    try {
+      localStorage.removeItem('predictionHistory');
+      localStorage.removeItem('feedbackStats');
+    } catch (e) { /* ignore */ }
+  }, []);
+
+  const handleDeleteHistoryItem = useCallback((id) => {
+    const newHistory = predictionHistory.filter((item) => item.id !== id);
+    const newStats = newHistory.reduce(
+      (acc, it) => {
+        if (it.feedback === 'correct') acc.correct += 1;
+        else if (it.feedback === 'wrong') acc.wrong += 1;
+        return acc;
+      },
+      { correct: 0, wrong: 0 }
+    );
+    setPredictionHistory(newHistory);
+    setFeedbackStats(newStats);
+    saveHistory(newHistory, newStats);
+  }, [predictionHistory, saveHistory]);
+
   const handleCancelImage = useCallback(() => {
     setSelectedImageData(null);
     setSelectedFile(null);
@@ -355,6 +380,8 @@ function App() {
               <PredictionHistory
                 history={predictionHistory}
                 feedbackStats={feedbackStats}
+                onClearAll={handleClearHistory}
+                onDeleteItem={handleDeleteHistoryItem}
               />
               <DebugPanel />
             </div>
@@ -377,6 +404,8 @@ function App() {
               <PredictionHistory
                 history={predictionHistory}
                 feedbackStats={feedbackStats}
+                onClearAll={handleClearHistory}
+                onDeleteItem={handleDeleteHistoryItem}
               />
               <DebugPanel />
             </div>

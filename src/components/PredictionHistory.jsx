@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const PredictionHistory = ({ history, feedbackStats }) => {
+const PredictionHistory = ({ history, feedbackStats, onClearAll, onDeleteItem }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (!history || history.length === 0) return null;
@@ -9,6 +9,17 @@ const PredictionHistory = ({ history, feedbackStats }) => {
   const feedbackAccuracy = totalFeedback > 0
     ? ((feedbackStats.correct / totalFeedback) * 100).toFixed(1)
     : null;
+
+  const handleClearAll = (e) => {
+    e.stopPropagation();
+    if (window.confirm(`Hapus semua ${history.length} riwayat prediksi? Tindakan ini tidak bisa dibatalkan.`)) {
+      onClearAll && onClearAll();
+    }
+  };
+
+  const handleDelete = (id) => {
+    onDeleteItem && onDeleteItem(id);
+  };
 
   return (
     <div className="prediction-history">
@@ -25,12 +36,30 @@ const PredictionHistory = ({ history, feedbackStats }) => {
             )}
           </div>
         </div>
-        <svg
-          className={`history-arrow ${isExpanded ? 'expanded' : ''}`}
-          width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
-        >
-          <polyline points="6 9 12 15 18 9" />
-        </svg>
+        <div className="history-toggle-right">
+          {history.length > 0 && (
+            <button
+              type="button"
+              className="clear-all-btn"
+              onClick={handleClearAll}
+              title="Hapus semua riwayat"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <polyline points="3 6 5 6 21 6" />
+                <path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6" />
+                <path d="M10 11v6M14 11v6" />
+                <path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+              </svg>
+              <span>Hapus Semua</span>
+            </button>
+          )}
+          <svg
+            className={`history-arrow ${isExpanded ? 'expanded' : ''}`}
+            width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
+          >
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </div>
       </div>
 
       {isExpanded && (
@@ -69,6 +98,7 @@ const PredictionHistory = ({ history, feedbackStats }) => {
                   <th>Confidence</th>
                   <th>Waktu</th>
                   <th>Status</th>
+                  <th aria-label="Aksi"></th>
                 </tr>
               </thead>
               <tbody>
@@ -108,6 +138,20 @@ const PredictionHistory = ({ history, feedbackStats }) => {
                       {!item.feedback && (
                         <span className="fb-icon pending">-</span>
                       )}
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        className="row-delete-btn"
+                        onClick={() => handleDelete(item.id)}
+                        title="Hapus entri ini"
+                        aria-label="Hapus entri ini"
+                      >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <polyline points="3 6 5 6 21 6" />
+                          <path d="M19 6l-2 14a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2L5 6" />
+                        </svg>
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -175,6 +219,37 @@ const PredictionHistory = ({ history, feedbackStats }) => {
 
         .history-toggle-left p strong { color: #7A8449; }
 
+        .history-toggle-right {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+          flex-shrink: 0;
+        }
+
+        .clear-all-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.35rem;
+          padding: 0.4rem 0.8rem;
+          background: rgba(196, 127, 107, 0.08);
+          border: 1px solid rgba(196, 127, 107, 0.4);
+          border-radius: 8px;
+          color: #C47F6B;
+          font-size: 0.75rem;
+          font-weight: 600;
+          font-family: 'Segoe UI', 'Georgia', serif;
+          cursor: pointer;
+          transition: all 0.2s ease;
+        }
+
+        .clear-all-btn:hover {
+          background: rgba(196, 127, 107, 0.18);
+          border-color: #C47F6B;
+          color: #A56354;
+        }
+
+        .clear-all-btn svg { flex-shrink: 0; }
+
         .history-arrow {
           color: #8B9556;
           transition: transform 0.3s ease;
@@ -182,6 +257,26 @@ const PredictionHistory = ({ history, feedbackStats }) => {
         }
 
         .history-arrow.expanded { transform: rotate(180deg); }
+
+        .row-delete-btn {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 28px;
+          height: 28px;
+          background: transparent;
+          border: 1px solid transparent;
+          border-radius: 6px;
+          color: #A09888;
+          cursor: pointer;
+          transition: all 0.15s ease;
+        }
+
+        .row-delete-btn:hover {
+          background: rgba(196, 127, 107, 0.12);
+          border-color: rgba(196, 127, 107, 0.35);
+          color: #C47F6B;
+        }
 
         .history-content {
           border-top: 1px solid #EBE5DE;
@@ -340,6 +435,9 @@ const PredictionHistory = ({ history, feedbackStats }) => {
           .history-table { font-size: 0.72rem; }
           .history-thumb { width: 28px; height: 28px; }
           .fb-stat { font-size: 0.75rem; padding: 0.4rem 0.75rem; }
+          .clear-all-btn span { display: none; }
+          .clear-all-btn { padding: 0.4rem; }
+          .history-toggle-right { gap: 0.5rem; }
         }
       `}</style>
     </div>

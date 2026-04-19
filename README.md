@@ -74,6 +74,9 @@ Semua prediksi yang pernah dilakukan tersimpan dalam tabel riwayat (maks 50 entr
 | Confidence | Persentase keyakinan model |
 | Waktu | Waktu inferensi (ms) |
 | Status | Feedback user (Benar/Salah/-) |
+| Aksi | Tombol hapus per entri |
+
+Tersedia juga tombol **Hapus Semua** di header panel untuk membersihkan seluruh riwayat sekaligus (dengan konfirmasi), yang juga menghapus data di `localStorage` dan mereset statistik feedback.
 
 ### 4. Benchmark / Speed Test
 
@@ -175,6 +178,7 @@ Aplikasi akan berjalan di **http://localhost:3000**
 4. Lihat hasil prediksi, informasi gizi, benchmark, dan confidence chart
 5. Berikan feedback (Benar/Salah) untuk setiap prediksi
 6. Lihat riwayat dan statistik akurasi di panel History
+7. Hapus entri per baris dengan tombol trash, atau kosongkan seluruh riwayat via **Hapus Semua**
 
 ---
 
@@ -484,6 +488,7 @@ Riwayat prediksi disimpan di `localStorage` browser. Data bisa hilang jika:
 - Browser di-clear cache/cookies
 - Menggunakan mode Incognito/Private
 - `localStorage` penuh (maks 50 entri disimpan)
+- User menekan tombol **Hapus Semua** atau tombol hapus per entri di panel History
 
 </details>
 
