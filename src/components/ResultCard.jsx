@@ -1,7 +1,7 @@
 import React from 'react';
 import ConfidenceChart from './ConfidenceChart';
 
-const ResultCard = ({ results, imageData, onReset, modelInfo, benchmark, allProbabilities, onFeedback, currentFeedback, expectedFood }) => {
+const ResultCard = ({ results, imageData, onReset, modelInfo, benchmark, allProbabilities, expectedFood }) => {
   if (!results || results.length === 0) return null;
 
   const topResult = results[0];
@@ -175,41 +175,6 @@ const ResultCard = ({ results, imageData, onReset, modelInfo, benchmark, allProb
               </div>
             )}
           </div>
-
-          {/* Feedback */}
-          {onFeedback && (
-            <div className="feedback-section">
-              <p className="feedback-question">Apakah prediksi ini benar?</p>
-              <div className="feedback-buttons">
-                <button
-                  className={`fb-btn correct ${currentFeedback === 'correct' ? 'active' : ''}`}
-                  onClick={() => onFeedback('correct')}
-                  disabled={!!currentFeedback}
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="20 6 9 17 4 12" />
-                  </svg>
-                  Benar
-                </button>
-                <button
-                  className={`fb-btn wrong ${currentFeedback === 'wrong' ? 'active' : ''}`}
-                  onClick={() => onFeedback('wrong')}
-                  disabled={!!currentFeedback}
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                  Salah
-                </button>
-              </div>
-              {currentFeedback && (
-                <p className="feedback-thanks">
-                  {currentFeedback === 'correct' ? 'Terima kasih! Feedback dicatat.' : 'Terima kasih! Kami catat prediksi ini salah.'}
-                </p>
-              )}
-            </div>
-          )}
 
           {/* Description */}
           {topResult.description && (
@@ -643,73 +608,6 @@ const ResultCard = ({ results, imageData, onReset, modelInfo, benchmark, allProb
         .confidence-indicator.medium { background: rgba(196, 150, 58, 0.12); color: #C4963A; border: 1px solid #C4963A; }
         .confidence-indicator.low { background: rgba(196, 127, 107, 0.12); color: #C47F6B; border: 1px solid #C47F6B; }
 
-        /* Feedback */
-        .feedback-section {
-          text-align: center;
-          padding: 1rem 1.25rem;
-          background: rgba(139, 149, 86, 0.05);
-          border-radius: 12px;
-          border: 1px dashed #D4CDB8;
-        }
-
-        .feedback-question {
-          font-size: 0.9rem;
-          font-weight: 500;
-          color: #2c2c2c;
-          margin: 0 0 0.75rem 0;
-          font-family: 'Segoe UI', 'Georgia', serif;
-        }
-
-        .feedback-buttons {
-          display: flex;
-          gap: 0.6rem;
-          justify-content: center;
-        }
-
-        .fb-btn {
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-          padding: 0.55rem 1.2rem;
-          border: 2px solid;
-          border-radius: 10px;
-          font-size: 0.85rem;
-          font-weight: 500;
-          cursor: pointer;
-          transition: all 0.25s ease;
-          font-family: 'Segoe UI', 'Georgia', serif;
-          background: white;
-        }
-
-        .fb-btn.correct {
-          border-color: #9CAF88;
-          color: #7A8449;
-        }
-
-        .fb-btn.correct:hover:not(:disabled), .fb-btn.correct.active {
-          background: #7A8449;
-          color: white;
-        }
-
-        .fb-btn.wrong {
-          border-color: #C47F6B;
-          color: #C47F6B;
-        }
-
-        .fb-btn.wrong:hover:not(:disabled), .fb-btn.wrong.active {
-          background: #C47F6B;
-          color: white;
-        }
-
-        .fb-btn:disabled { opacity: 0.7; cursor: default; }
-
-        .feedback-thanks {
-          font-size: 0.78rem;
-          color: #8B9556;
-          margin: 0.6rem 0 0 0;
-          font-style: italic;
-        }
-
         /* Info Cards */
         .info-card {
           background: rgba(139, 149, 86, 0.06);
@@ -888,8 +786,6 @@ const ResultCard = ({ results, imageData, onReset, modelInfo, benchmark, allProb
           .nutrition-grid { grid-template-columns: 1fr; }
           .detail-grid, .benchmark-grid { grid-template-columns: 1fr 1fr; gap: 0.4rem; }
           .challenge-result { font-size: 0.78rem; padding: 0.7rem 1rem; }
-          .feedback-buttons { flex-direction: column; }
-          .fb-btn { justify-content: center; }
         }
       `}</style>
     </div>

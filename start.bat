@@ -1,4 +1,7 @@
 @echo off
+
+:menu
+cls
 echo ====================================
 echo  Food Classification CNN - TensorFlow.js
 echo ====================================
@@ -14,6 +17,7 @@ if "%choice%"=="1" goto install
 if "%choice%"=="2" goto start
 if "%choice%"=="3" goto build
 if "%choice%"=="4" goto end
+goto menu
 
 :install
 echo.
@@ -54,7 +58,8 @@ echo.
 echo Press Ctrl+C to stop
 echo.
 call npm start
-goto end
+pause
+goto menu
 
 :build
 echo.
@@ -68,10 +73,6 @@ echo Build complete! Files in /build folder
 echo.
 pause
 goto menu
-
-:menu
-cls
-goto :eof
 
 :end
 echo.

@@ -45,25 +45,15 @@ Seluruh inferensi berjalan **client-side** menggunakan TensorFlow.js — tanpa s
 
 ---
 
-## 7 Fitur Pengujian Model
+## 6 Fitur Pengujian Model
 
-Aplikasi ini dilengkapi **7 fitur khusus** untuk membuktikan bahwa model AI benar-benar bekerja:
+Aplikasi ini dilengkapi **6 fitur khusus** untuk membuktikan bahwa model AI benar-benar bekerja:
 
 ### 1. Sample Test Gallery (Challenge Mode)
 
 Pilih salah satu dari 15 jenis makanan populer (Pizza, Sushi, Hamburger, dll.), lalu upload foto makanan tersebut. Aplikasi akan mencocokkan prediksi model dengan makanan yang dipilih dan menampilkan apakah model **berhasil mengenali** atau **gagal**.
 
-### 2. Confusion Feedback (Benar / Salah)
-
-Setelah setiap prediksi, user dapat memberikan feedback:
-- **"Benar"** — prediksi model sesuai kenyataan
-- **"Salah"** — prediksi model tidak sesuai
-
-Statistik feedback ditampilkan secara real-time dan disimpan di `localStorage`:
-- Jumlah prediksi benar vs salah
-- Persentase akurasi berdasarkan feedback user
-
-### 3. Riwayat Prediksi (History)
+### 2. Riwayat Prediksi (History)
 
 Semua prediksi yang pernah dilakukan tersimpan dalam tabel riwayat (maks 50 entri, disimpan di `localStorage`):
 
@@ -73,12 +63,11 @@ Semua prediksi yang pernah dilakukan tersimpan dalam tabel riwayat (maks 50 entr
 | Prediksi | Nama makanan hasil prediksi |
 | Confidence | Persentase keyakinan model |
 | Waktu | Waktu inferensi (ms) |
-| Status | Feedback user (Benar/Salah/-) |
 | Aksi | Tombol hapus per entri |
 
-Tersedia juga tombol **Hapus Semua** di header panel untuk membersihkan seluruh riwayat sekaligus (dengan konfirmasi), yang juga menghapus data di `localStorage` dan mereset statistik feedback.
+Tersedia juga tombol **Hapus Semua** di header panel untuk membersihkan seluruh riwayat sekaligus (dengan konfirmasi), yang juga menghapus data di `localStorage`.
 
-### 4. Benchmark / Speed Test
+### 3. Benchmark / Speed Test
 
 Setiap prediksi menampilkan **breakdown waktu** secara detail:
 
@@ -91,7 +80,7 @@ Setiap prediksi menampilkan **breakdown waktu** secara detail:
 
 Ini membuktikan model berjalan di browser, bukan di server.
 
-### 5. Multi-Image Batch Test
+### 4. Multi-Image Batch Test
 
 Upload **hingga 20 gambar sekaligus** untuk pengujian massal. Hasilnya ditampilkan dalam tabel dengan:
 - Thumbnail setiap gambar
@@ -99,7 +88,7 @@ Upload **hingga 20 gambar sekaligus** untuk pengujian massal. Hasilnya ditampilk
 - Waktu inferensi per gambar
 - Rata-rata confidence dan waktu keseluruhan
 
-### 6. Confidence Distribution Chart
+### 5. Confidence Distribution Chart
 
 Grafik batang interaktif yang menampilkan **probabilitas semua 101 kelas** untuk setiap prediksi:
 - Collapsible (bisa di-expand/collapse)
@@ -107,7 +96,7 @@ Grafik batang interaktif yang menampilkan **probabilitas semua 101 kelas** untuk
 - Bar chart proporsional terhadap prediksi tertinggi
 - Membuktikan model benar-benar menghitung probabilitas untuk semua kelas
 
-### 7. Model Info & Debug Panel
+### 6. Model Info & Debug Panel
 
 Panel teknis yang menampilkan informasi internal:
 
@@ -176,9 +165,8 @@ Aplikasi akan berjalan di **http://localhost:3000**
 2. Upload gambar / pilih beberapa gambar
 3. Klik **"Submit untuk Klasifikasi"**
 4. Lihat hasil prediksi, informasi gizi, benchmark, dan confidence chart
-5. Berikan feedback (Benar/Salah) untuk setiap prediksi
-6. Lihat riwayat dan statistik akurasi di panel History
-7. Hapus entri per baris dengan tombol trash, atau kosongkan seluruh riwayat via **Hapus Semua**
+5. Lihat riwayat prediksi di panel History
+6. Hapus entri per baris dengan tombol trash, atau kosongkan seluruh riwayat via **Hapus Semua**
 
 ---
 
@@ -202,16 +190,16 @@ EfficientNetV2B0/
 │   ├── index.css                   # Global styles
 │   ├── components/
 │   │   ├── ImageUploader.jsx       # [Fitur] Upload dengan drag & drop
-│   │   ├── ResultCard.jsx          # [Fitur] Hasil + feedback + benchmark
+│   │   ├── ResultCard.jsx          # [Fitur] Hasil prediksi + benchmark
 │   │   ├── FoodList.jsx            # [Fitur] Katalog 101 makanan (searchable)
 │   │   ├── SampleGallery.jsx       # [Fitur 1] Challenge mode test
-│   │   ├── BatchTest.jsx           # [Fitur 5] Multi-image batch test
-│   │   ├── ConfidenceChart.jsx     # [Fitur 6] Distribusi confidence chart
-│   │   ├── PredictionHistory.jsx   # [Fitur 3] Riwayat prediksi + stats
-│   │   ├── DebugPanel.jsx          # [Fitur 7] Model info & debug
+│   │   ├── BatchTest.jsx           # [Fitur 4] Multi-image batch test
+│   │   ├── ConfidenceChart.jsx     # [Fitur 5] Distribusi confidence chart
+│   │   ├── PredictionHistory.jsx   # [Fitur 2] Riwayat prediksi
+│   │   ├── DebugPanel.jsx          # [Fitur 6] Model info & debug
 │   │   └── LoadingSpinner.jsx      # Loading animation
 │   └── services/
-│       └── tfjsService.js          # [Fitur 4] TF.js service + benchmark
+│       └── tfjsService.js          # [Fitur 3] TF.js service + benchmark
 │
 ├── package.json
 ├── vercel.json                     # Konfigurasi deploy Vercel
@@ -238,8 +226,7 @@ EfficientNetV2B0/
                     │    ├── Top-5 Predictions                  │
                     │    ├── Confidence Distribution (101 kelas)│
                     │    ├── Informasi Gizi (nutrition.json)    │
-                    │    ├── User Feedback (Benar/Salah)        │
-                    │    └── History + Stats (localStorage)     │
+                    │    └── History (localStorage)             │
                     │                                           │
                     └───────────────────────────────────────────┘
                               Tidak ada server backend
@@ -503,7 +490,7 @@ Riwayat prediksi disimpan di `localStorage` browser. Data bisa hilang jika:
 | 3 | **Privacy** | Gambar tidak dikirim ke server manapun |
 | 4 | **Scalable** | Processing di device masing-masing user |
 | 5 | **Offline-ready** | Berjalan tanpa internet setelah model dimuat |
-| 6 | **Testable** | 7 fitur pengujian membuktikan model bekerja |
+| 6 | **Testable** | 6 fitur pengujian membuktikan model bekerja |
 | 7 | **Transparent** | Benchmark, debug info, dan confidence chart |
 
 ---

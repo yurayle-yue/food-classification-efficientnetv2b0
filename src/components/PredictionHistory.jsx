@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
 
-const PredictionHistory = ({ history, feedbackStats, onClearAll, onDeleteItem }) => {
+const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   if (!history || history.length === 0) return null;
-
-  const totalFeedback = feedbackStats.correct + feedbackStats.wrong;
-  const feedbackAccuracy = totalFeedback > 0
-    ? ((feedbackStats.correct / totalFeedback) * 100).toFixed(1)
-    : null;
 
   const handleClearAll = (e) => {
     e.stopPropagation();
@@ -31,9 +26,6 @@ const PredictionHistory = ({ history, feedbackStats, onClearAll, onDeleteItem })
           </svg>
           <div>
             <h4>Riwayat Prediksi <span className="history-count">{history.length}</span></h4>
-            {feedbackAccuracy !== null && (
-              <p>Akurasi user feedback: <strong>{feedbackAccuracy}%</strong> ({feedbackStats.correct}/{totalFeedback})</p>
-            )}
           </div>
         </div>
         <div className="history-toggle-right">
@@ -64,29 +56,6 @@ const PredictionHistory = ({ history, feedbackStats, onClearAll, onDeleteItem })
 
       {isExpanded && (
         <div className="history-content">
-          {/* Feedback Stats */}
-          {totalFeedback > 0 && (
-            <div className="feedback-summary">
-              <div className="fb-stat correct">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                <span>{feedbackStats.correct} Benar</span>
-              </div>
-              <div className="fb-stat wrong">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <line x1="18" y1="6" x2="6" y2="18" />
-                  <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-                <span>{feedbackStats.wrong} Salah</span>
-              </div>
-              <div className="fb-stat accuracy">
-                <span className="accuracy-value">{feedbackAccuracy}%</span>
-                <span>Akurasi</span>
-              </div>
-            </div>
-          )}
-
           {/* History Table */}
           <div className="history-table-wrapper">
             <table className="history-table">
@@ -97,7 +66,6 @@ const PredictionHistory = ({ history, feedbackStats, onClearAll, onDeleteItem })
                   <th>Prediksi</th>
                   <th>Confidence</th>
                   <th>Waktu</th>
-                  <th>Status</th>
                   <th aria-label="Aksi"></th>
                 </tr>
               </thead>
@@ -128,17 +96,6 @@ const PredictionHistory = ({ history, feedbackStats, onClearAll, onDeleteItem })
                       </span>
                     </td>
                     <td className="time-cell">{item.inferenceTime}ms</td>
-                    <td>
-                      {item.feedback === 'correct' && (
-                        <span className="fb-icon correct" title="Benar">&#10003;</span>
-                      )}
-                      {item.feedback === 'wrong' && (
-                        <span className="fb-icon wrong" title="Salah">&#10007;</span>
-                      )}
-                      {!item.feedback && (
-                        <span className="fb-icon pending">-</span>
-                      )}
-                    </td>
                     <td>
                       <button
                         type="button"
@@ -286,45 +243,6 @@ const PredictionHistory = ({ history, feedbackStats, onClearAll, onDeleteItem })
 
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .feedback-summary {
-          display: flex;
-          gap: 0.75rem;
-          margin-bottom: 1.25rem;
-          flex-wrap: wrap;
-        }
-
-        .fb-stat {
-          display: flex;
-          align-items: center;
-          gap: 0.4rem;
-          padding: 0.5rem 1rem;
-          border-radius: 10px;
-          font-size: 0.82rem;
-          font-weight: 500;
-          font-family: 'Segoe UI', 'Georgia', serif;
-        }
-
-        .fb-stat.correct {
-          background: rgba(122, 132, 73, 0.12);
-          color: #7A8449;
-          border: 1px solid #7A8449;
-        }
-
-        .fb-stat.wrong {
-          background: rgba(196, 127, 107, 0.12);
-          color: #C47F6B;
-          border: 1px solid #C47F6B;
-        }
-
-        .fb-stat.accuracy {
-          background: rgba(107, 143, 206, 0.12);
-          color: #5A7DB5;
-          border: 1px solid #6B8FCE;
-          gap: 0.3rem;
-        }
-
-        .accuracy-value { font-weight: 700; font-size: 1rem; }
-
         .history-table-wrapper {
           overflow-x: auto;
           border-radius: 10px;
@@ -414,27 +332,11 @@ const PredictionHistory = ({ history, feedbackStats, onClearAll, onDeleteItem })
           color: #6B5D4F;
         }
 
-        .fb-icon {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 24px;
-          height: 24px;
-          border-radius: 50%;
-          font-size: 0.82rem;
-          font-weight: 700;
-        }
-
-        .fb-icon.correct { background: rgba(122, 132, 73, 0.15); color: #7A8449; }
-        .fb-icon.wrong { background: rgba(196, 127, 107, 0.15); color: #C47F6B; }
-        .fb-icon.pending { background: rgba(139, 149, 86, 0.08); color: #A09888; }
-
         @media (max-width: 480px) {
           .history-content { padding: 1rem; }
           .history-toggle { padding: 0.9rem 1.1rem; }
           .history-table { font-size: 0.72rem; }
           .history-thumb { width: 28px; height: 28px; }
-          .fb-stat { font-size: 0.75rem; padding: 0.4rem 0.75rem; }
           .clear-all-btn span { display: none; }
           .clear-all-btn { padding: 0.4rem; }
           .history-toggle-right { gap: 0.5rem; }

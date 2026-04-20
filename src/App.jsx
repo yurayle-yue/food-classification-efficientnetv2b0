@@ -21,13 +21,10 @@ function App() {
   const [modelInfo, setModelInfo] = useState(null);
   const [isFoodListExpanded, setIsFoodListExpanded] = useState(false);
 
-  // New states for 8 features
   const [benchmark, setBenchmark] = useState(null);
   const [allProbabilities, setAllProbabilities] = useState(null);
   const [expectedFood, setExpectedFood] = useState(null);
-  const [currentFeedback, setCurrentFeedback] = useState(null);
   const [predictionHistory, setPredictionHistory] = useState([]);
-  const [feedbackStats, setFeedbackStats] = useState({ correct: 0, wrong: 0 });
   const [activeTab, setActiveTab] = useState('upload'); // upload, batch
 
   // Load model
@@ -50,21 +47,16 @@ function App() {
     return () => { tfjsService.dispose(); };
   }, []);
 
-  // Load history from localStorage
   useEffect(() => {
     try {
       const saved = localStorage.getItem('predictionHistory');
-      const savedStats = localStorage.getItem('feedbackStats');
       if (saved) setPredictionHistory(JSON.parse(saved));
-      if (savedStats) setFeedbackStats(JSON.parse(savedStats));
     } catch (e) { /* ignore */ }
   }, []);
 
-  // Save history to localStorage
-  const saveHistory = useCallback((history, stats) => {
+  const saveHistory = useCallback((history) => {
     try {
       localStorage.setItem('predictionHistory', JSON.stringify(history.slice(-50)));
-      localStorage.setItem('feedbackStats', JSON.stringify(stats));
     } catch (e) { /* ignore */ }
   }, []);
 
@@ -75,7 +67,6 @@ function App() {
     setPredictionResults(null);
     setBenchmark(null);
     setAllProbabilities(null);
-    setCurrentFeedback(null);
   }, []);
 
   const runPrediction = useCallback(async (imgDataUrl) => {
@@ -107,7 +98,6 @@ function App() {
 
     setImageData(selectedImageData);
     setIsProcessing(true);
-    setCurrentFeedback(null);
 
     try {
       const result = await runPrediction(selectedImageData);
@@ -115,7 +105,6 @@ function App() {
       setBenchmark(result.benchmark);
       setAllProbabilities(result.allProbabilities);
 
-      // Add to history
       const historyItem = {
         id: Date.now(),
         thumbnail: selectedImageData,
@@ -124,61 +113,31 @@ function App() {
         confidence: result.predictions[0].confidence,
         inferenceTime: result.benchmark.totalTime,
         expectedFood: expectedFood,
-        feedback: null,
         timestamp: new Date().toLocaleTimeString('id-ID')
       };
 
       const newHistory = [...predictionHistory, historyItem];
       setPredictionHistory(newHistory);
-      saveHistory(newHistory, feedbackStats);
+      saveHistory(newHistory);
     } catch (error) {
       console.error('Prediction error:', error);
       alert(`Gagal melakukan prediksi: ${error.message}`);
     } finally {
       setIsProcessing(false);
     }
-  }, [modelStatus, selectedImageData, selectedFile, expectedFood, predictionHistory, feedbackStats, runPrediction, saveHistory]);
-
-  const handleFeedback = useCallback((type) => {
-    setCurrentFeedback(type);
-
-    const newStats = { ...feedbackStats };
-    if (type === 'correct') newStats.correct += 1;
-    else newStats.wrong += 1;
-    setFeedbackStats(newStats);
-
-    // Update last history item with feedback
-    const newHistory = [...predictionHistory];
-    if (newHistory.length > 0) {
-      newHistory[newHistory.length - 1].feedback = type;
-    }
-    setPredictionHistory(newHistory);
-    saveHistory(newHistory, newStats);
-  }, [feedbackStats, predictionHistory, saveHistory]);
+  }, [modelStatus, selectedImageData, selectedFile, expectedFood, predictionHistory, runPrediction, saveHistory]);
 
   const handleClearHistory = useCallback(() => {
-    const emptyStats = { correct: 0, wrong: 0 };
     setPredictionHistory([]);
-    setFeedbackStats(emptyStats);
     try {
       localStorage.removeItem('predictionHistory');
-      localStorage.removeItem('feedbackStats');
     } catch (e) { /* ignore */ }
   }, []);
 
   const handleDeleteHistoryItem = useCallback((id) => {
     const newHistory = predictionHistory.filter((item) => item.id !== id);
-    const newStats = newHistory.reduce(
-      (acc, it) => {
-        if (it.feedback === 'correct') acc.correct += 1;
-        else if (it.feedback === 'wrong') acc.wrong += 1;
-        return acc;
-      },
-      { correct: 0, wrong: 0 }
-    );
     setPredictionHistory(newHistory);
-    setFeedbackStats(newStats);
-    saveHistory(newHistory, newStats);
+    saveHistory(newHistory);
   }, [predictionHistory, saveHistory]);
 
   const handleCancelImage = useCallback(() => {
@@ -195,7 +154,6 @@ function App() {
     setBenchmark(null);
     setAllProbabilities(null);
     setExpectedFood(null);
-    setCurrentFeedback(null);
   }, []);
 
   const renderModelStatus = () => {
@@ -356,13 +314,12 @@ function App() {
                           confidence: r.confidence,
                           inferenceTime: r.time,
                           expectedFood: null,
-                          feedback: null,
                           timestamp: new Date().toLocaleTimeString('id-ID')
                         });
                       }
                     });
                     setPredictionHistory(newHistory);
-                    saveHistory(newHistory, feedbackStats);
+                    saveHistory(newHistory);
                   }}
                   disabled={!isModelReady}
                 />
@@ -379,7 +336,6 @@ function App() {
             <div className="bottom-panels">
               <PredictionHistory
                 history={predictionHistory}
-                feedbackStats={feedbackStats}
                 onClearAll={handleClearHistory}
                 onDeleteItem={handleDeleteHistoryItem}
               />
@@ -395,15 +351,12 @@ function App() {
               modelInfo={modelInfo}
               benchmark={benchmark}
               allProbabilities={allProbabilities}
-              onFeedback={handleFeedback}
-              currentFeedback={currentFeedback}
               expectedFood={expectedFood}
             />
             {/* History & Debug below result */}
             <div className="bottom-panels">
               <PredictionHistory
                 history={predictionHistory}
-                feedbackStats={feedbackStats}
                 onClearAll={handleClearHistory}
                 onDeleteItem={handleDeleteHistoryItem}
               />
