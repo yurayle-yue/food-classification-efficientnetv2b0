@@ -1,15 +1,11 @@
 import React from 'react';
 import ConfidenceChart from './ConfidenceChart';
 
-const ResultCard = ({ results, imageData, onReset, modelInfo, benchmark, allProbabilities, expectedFood }) => {
+const ResultCard = ({ results, imageData, onReset, modelInfo, benchmark, allProbabilities }) => {
   if (!results || results.length === 0) return null;
 
   const topResult = results[0];
   const otherResults = results.slice(1, 5);
-
-  const isMatchExpected = expectedFood
-    ? topResult.className === expectedFood
-    : null;
 
   return (
     <div className="result-card fade-in">
@@ -44,30 +40,6 @@ const ResultCard = ({ results, imageData, onReset, modelInfo, benchmark, allProb
           Ulangi
         </button>
       </div>
-
-      {/* Challenge Result */}
-      {expectedFood && (
-        <div className={`challenge-result ${isMatchExpected ? 'match' : 'mismatch'}`}>
-          {isMatchExpected ? (
-            <>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                <polyline points="22 4 12 14.01 9 11.01" />
-              </svg>
-              <span>Model berhasil mengenali! Diharapkan: <strong>{topResult.displayName}</strong></span>
-            </>
-          ) : (
-            <>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10" />
-                <line x1="15" y1="9" x2="9" y2="15" />
-                <line x1="9" y1="9" x2="15" y2="15" />
-              </svg>
-              <span>Diharapkan: <strong>{expectedFood.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}</strong>, Prediksi: <strong>{topResult.displayName}</strong></span>
-            </>
-          )}
-        </div>
-      )}
 
       {/* Content */}
       <div className="result-content">
@@ -383,28 +355,6 @@ const ResultCard = ({ results, imageData, onReset, modelInfo, benchmark, allProb
         .reset-button:hover {
           transform: translateY(-2px);
           box-shadow: 0 4px 14px rgba(139, 149, 86, 0.3);
-        }
-
-        /* Challenge Result Banner */
-        .challenge-result {
-          display: flex;
-          align-items: center;
-          gap: 0.6rem;
-          padding: 0.85rem 1.5rem;
-          font-size: 0.88rem;
-          font-family: 'Segoe UI', 'Georgia', serif;
-        }
-
-        .challenge-result.match {
-          background: rgba(122, 132, 73, 0.12);
-          color: #7A8449;
-          border-bottom: 1px solid rgba(122, 132, 73, 0.2);
-        }
-
-        .challenge-result.mismatch {
-          background: rgba(196, 127, 107, 0.12);
-          color: #C47F6B;
-          border-bottom: 1px solid rgba(196, 127, 107, 0.2);
         }
 
         /* Content */
@@ -785,7 +735,6 @@ const ResultCard = ({ results, imageData, onReset, modelInfo, benchmark, allProb
           .info-card { padding: 0.85rem; }
           .nutrition-grid { grid-template-columns: 1fr; }
           .detail-grid, .benchmark-grid { grid-template-columns: 1fr 1fr; gap: 0.4rem; }
-          .challenge-result { font-size: 0.78rem; padding: 0.7rem 1rem; }
         }
       `}</style>
     </div>

@@ -33,7 +33,7 @@ Seluruh inferensi berjalan **client-side** menggunakan TensorFlow.js — tanpa s
 | No | Fitur | Deskripsi |
 |----|-------|-----------|
 | 1 | **Klasifikasi 101 Kelas** | Mengenali 101 jenis makanan dari dataset Food-101 |
-| 2 | **Informasi Gizi** | Kalori, protein, lemak, dan karbohidrat per sajian |
+| 2 | **Informasi Gizi** | Kalori, protein, lemak, dan karbohidrat per 100g |
 | 3 | **Top-5 Predictions** | 5 prediksi teratas beserta tingkat confidence |
 | 4 | **Indikator Kepercayaan** | Visualisasi: Tinggi (>=80%), Sedang (50-79%), Rendah (<50%) |
 | 5 | **Client-side Inference** | Prediksi langsung di browser via TensorFlow.js |
@@ -45,15 +45,11 @@ Seluruh inferensi berjalan **client-side** menggunakan TensorFlow.js — tanpa s
 
 ---
 
-## 6 Fitur Pengujian Model
+## 4 Fitur Pengujian Model
 
-Aplikasi ini dilengkapi **6 fitur khusus** untuk membuktikan bahwa model AI benar-benar bekerja:
+Aplikasi ini dilengkapi **4 fitur khusus** untuk membuktikan bahwa model AI benar-benar bekerja:
 
-### 1. Sample Test Gallery (Challenge Mode)
-
-Pilih salah satu dari 15 jenis makanan populer (Pizza, Sushi, Hamburger, dll.), lalu upload foto makanan tersebut. Aplikasi akan mencocokkan prediksi model dengan makanan yang dipilih dan menampilkan apakah model **berhasil mengenali** atau **gagal**.
-
-### 2. Riwayat Prediksi (History)
+### 1. Riwayat Prediksi (History)
 
 Semua prediksi yang pernah dilakukan tersimpan dalam tabel riwayat (maks 50 entri, disimpan di `localStorage`):
 
@@ -67,7 +63,7 @@ Semua prediksi yang pernah dilakukan tersimpan dalam tabel riwayat (maks 50 entr
 
 Tersedia juga tombol **Hapus Semua** di header panel untuk membersihkan seluruh riwayat sekaligus (dengan konfirmasi), yang juga menghapus data di `localStorage`.
 
-### 3. Benchmark / Speed Test
+### 2. Benchmark / Speed Test
 
 Setiap prediksi menampilkan **breakdown waktu** secara detail:
 
@@ -80,15 +76,7 @@ Setiap prediksi menampilkan **breakdown waktu** secara detail:
 
 Ini membuktikan model berjalan di browser, bukan di server.
 
-### 4. Multi-Image Batch Test
-
-Upload **hingga 20 gambar sekaligus** untuk pengujian massal. Hasilnya ditampilkan dalam tabel dengan:
-- Thumbnail setiap gambar
-- Prediksi dan confidence per gambar
-- Waktu inferensi per gambar
-- Rata-rata confidence dan waktu keseluruhan
-
-### 5. Confidence Distribution Chart
+### 3. Confidence Distribution Chart
 
 Grafik batang interaktif yang menampilkan **probabilitas semua 101 kelas** untuk setiap prediksi:
 - Collapsible (bisa di-expand/collapse)
@@ -96,7 +84,7 @@ Grafik batang interaktif yang menampilkan **probabilitas semua 101 kelas** untuk
 - Bar chart proporsional terhadap prediksi tertinggi
 - Membuktikan model benar-benar menghitung probabilitas untuk semua kelas
 
-### 6. Model Info & Debug Panel
+### 4. Model Info & Debug Panel
 
 Panel teknis yang menampilkan informasi internal:
 
@@ -161,12 +149,11 @@ Aplikasi akan berjalan di **http://localhost:3000**
 
 ### Cara Penggunaan
 
-1. Pilih mode input: **Upload** atau **Batch Test**
-2. Upload gambar / pilih beberapa gambar
-3. Klik **"Submit untuk Klasifikasi"**
-4. Lihat hasil prediksi, informasi gizi, benchmark, dan confidence chart
-5. Lihat riwayat prediksi di panel History
-6. Hapus entri per baris dengan tombol trash, atau kosongkan seluruh riwayat via **Hapus Semua**
+1. Upload gambar makanan lewat drag & drop atau klik area upload
+2. Klik **"Submit untuk Klasifikasi"**
+3. Lihat hasil prediksi, informasi gizi, benchmark, dan confidence chart
+4. Lihat riwayat prediksi di panel History
+5. Hapus entri per baris dengan tombol trash, atau kosongkan seluruh riwayat via **Hapus Semua**
 
 ---
 
@@ -192,14 +179,12 @@ EfficientNetV2B0/
 │   │   ├── ImageUploader.jsx       # [Fitur] Upload dengan drag & drop
 │   │   ├── ResultCard.jsx          # [Fitur] Hasil prediksi + benchmark
 │   │   ├── FoodList.jsx            # [Fitur] Katalog 101 makanan (searchable)
-│   │   ├── SampleGallery.jsx       # [Fitur 1] Challenge mode test
-│   │   ├── BatchTest.jsx           # [Fitur 4] Multi-image batch test
-│   │   ├── ConfidenceChart.jsx     # [Fitur 5] Distribusi confidence chart
-│   │   ├── PredictionHistory.jsx   # [Fitur 2] Riwayat prediksi
-│   │   ├── DebugPanel.jsx          # [Fitur 6] Model info & debug
+│   │   ├── ConfidenceChart.jsx     # [Fitur 3] Distribusi confidence chart
+│   │   ├── PredictionHistory.jsx   # [Fitur 1] Riwayat prediksi
+│   │   ├── DebugPanel.jsx          # [Fitur 4] Model info & debug
 │   │   └── LoadingSpinner.jsx      # Loading animation
 │   └── services/
-│       └── tfjsService.js          # [Fitur 3] TF.js service + benchmark
+│       └── tfjsService.js          # [Fitur 2] TF.js service + benchmark
 │
 ├── package.json
 ├── vercel.json                     # Konfigurasi deploy Vercel
@@ -490,7 +475,7 @@ Riwayat prediksi disimpan di `localStorage` browser. Data bisa hilang jika:
 | 3 | **Privacy** | Gambar tidak dikirim ke server manapun |
 | 4 | **Scalable** | Processing di device masing-masing user |
 | 5 | **Offline-ready** | Berjalan tanpa internet setelah model dimuat |
-| 6 | **Testable** | 6 fitur pengujian membuktikan model bekerja |
+| 6 | **Testable** | 4 fitur pengujian membuktikan model bekerja |
 | 7 | **Transparent** | Benchmark, debug info, dan confidence chart |
 
 ---

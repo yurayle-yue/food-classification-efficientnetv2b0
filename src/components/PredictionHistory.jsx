@@ -83,11 +83,6 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
                     <td>
                       <div className="history-pred">
                         <strong>{item.prediction}</strong>
-                        {item.expectedFood && (
-                          <span className={`expected-label ${item.prediction.toLowerCase().replace(/\s+/g, '_') === item.expectedFood ? 'match' : 'mismatch'}`}>
-                            {item.prediction.toLowerCase().replace(/\s+/g, '_') === item.expectedFood ? 'Cocok!' : `Diharapkan: ${item.expectedFood}`}
-                          </span>
-                        )}
                       </div>
                     </td>
                     <td>
@@ -293,25 +288,6 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
         .history-pred strong {
           display: block;
           font-size: 0.82rem;
-        }
-
-        .expected-label {
-          font-size: 0.68rem;
-          font-weight: 500;
-          padding: 0.1rem 0.4rem;
-          border-radius: 6px;
-          display: inline-block;
-          margin-top: 0.15rem;
-        }
-
-        .expected-label.match {
-          background: rgba(122, 132, 73, 0.15);
-          color: #7A8449;
-        }
-
-        .expected-label.mismatch {
-          background: rgba(196, 127, 107, 0.15);
-          color: #C47F6B;
         }
 
         .conf-badge {

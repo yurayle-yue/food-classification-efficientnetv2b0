@@ -5,8 +5,6 @@ import ImageUploader from './components/ImageUploader';
 import ResultCard from './components/ResultCard';
 import LoadingSpinner from './components/LoadingSpinner';
 import FoodList from './components/FoodList';
-import SampleGallery from './components/SampleGallery';
-import BatchTest from './components/BatchTest';
 import PredictionHistory from './components/PredictionHistory';
 import DebugPanel from './components/DebugPanel';
 
@@ -23,9 +21,7 @@ function App() {
 
   const [benchmark, setBenchmark] = useState(null);
   const [allProbabilities, setAllProbabilities] = useState(null);
-  const [expectedFood, setExpectedFood] = useState(null);
   const [predictionHistory, setPredictionHistory] = useState([]);
-  const [activeTab, setActiveTab] = useState('upload'); // upload, batch
 
   // Load model
   useEffect(() => {
@@ -60,10 +56,9 @@ function App() {
     } catch (e) { /* ignore */ }
   }, []);
 
-  const handleImageSelect = useCallback((dataUrl, file, expected = null) => {
+  const handleImageSelect = useCallback((dataUrl, file) => {
     setSelectedImageData(dataUrl);
     setSelectedFile(file);
-    setExpectedFood(expected);
     setPredictionResults(null);
     setBenchmark(null);
     setAllProbabilities(null);
@@ -112,7 +107,6 @@ function App() {
         className: result.predictions[0].className,
         confidence: result.predictions[0].confidence,
         inferenceTime: result.benchmark.totalTime,
-        expectedFood: expectedFood,
         timestamp: new Date().toLocaleTimeString('id-ID')
       };
 
@@ -125,7 +119,7 @@ function App() {
     } finally {
       setIsProcessing(false);
     }
-  }, [modelStatus, selectedImageData, selectedFile, expectedFood, predictionHistory, runPrediction, saveHistory]);
+  }, [modelStatus, selectedImageData, selectedFile, predictionHistory, runPrediction, saveHistory]);
 
   const handleClearHistory = useCallback(() => {
     setPredictionHistory([]);
@@ -143,7 +137,6 @@ function App() {
   const handleCancelImage = useCallback(() => {
     setSelectedImageData(null);
     setSelectedFile(null);
-    setExpectedFood(null);
   }, []);
 
   const handleReset = useCallback(() => {
@@ -153,7 +146,6 @@ function App() {
     setPredictionResults(null);
     setBenchmark(null);
     setAllProbabilities(null);
-    setExpectedFood(null);
   }, []);
 
   const renderModelStatus = () => {
@@ -190,8 +182,6 @@ function App() {
       </div>
     );
   };
-
-  const isModelReady = modelStatus === 'ready';
 
   return (
     <div className="app">
@@ -254,77 +244,12 @@ function App() {
 
         {!predictionResults ? (
           <>
-            {/* Input Mode Tabs */}
-            <div className="input-tabs">
-              <button
-                className={`input-tab ${activeTab === 'upload' ? 'active' : ''}`}
-                onClick={() => setActiveTab('upload')}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="17 8 12 3 7 8" />
-                  <line x1="12" y1="3" x2="12" y2="15" />
-                </svg>
-                Upload
-              </button>
-              <button
-                className={`input-tab ${activeTab === 'batch' ? 'active' : ''}`}
-                onClick={() => setActiveTab('batch')}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="3" y="3" width="7" height="7" />
-                  <rect x="14" y="3" width="7" height="7" />
-                  <rect x="14" y="14" width="7" height="7" />
-                  <rect x="3" y="14" width="7" height="7" />
-                </svg>
-                Batch Test
-              </button>
-            </div>
-
-            {/* Upload Tab */}
-            {activeTab === 'upload' && (
-              <div className="tab-content">
-                <ImageUploader
-                  imageData={selectedImageData}
-                  onImageSelect={handleImageSelect}
-                  onSubmit={handleSubmit}
-                  onCancel={handleCancelImage}
-                />
-                {/* Challenge Mode */}
-                <SampleGallery
-                  onImageSelect={handleImageSelect}
-                  disabled={!isModelReady}
-                />
-              </div>
-            )}
-
-            {/* Batch Test Tab */}
-            {activeTab === 'batch' && (
-              <div className="tab-content">
-                <BatchTest
-                  onBatchComplete={(results) => {
-                    const newHistory = [...predictionHistory];
-                    results.forEach(r => {
-                      if (r.success) {
-                        newHistory.push({
-                          id: Date.now() + r.id,
-                          thumbnail: r.thumbnail,
-                          prediction: r.prediction,
-                          className: r.className,
-                          confidence: r.confidence,
-                          inferenceTime: r.time,
-                          expectedFood: null,
-                          timestamp: new Date().toLocaleTimeString('id-ID')
-                        });
-                      }
-                    });
-                    setPredictionHistory(newHistory);
-                    saveHistory(newHistory);
-                  }}
-                  disabled={!isModelReady}
-                />
-              </div>
-            )}
+            <ImageUploader
+              imageData={selectedImageData}
+              onImageSelect={handleImageSelect}
+              onSubmit={handleSubmit}
+              onCancel={handleCancelImage}
+            />
 
             {/* Food List (always visible) */}
             <FoodList
@@ -351,7 +276,6 @@ function App() {
               modelInfo={modelInfo}
               benchmark={benchmark}
               allProbabilities={allProbabilities}
-              expectedFood={expectedFood}
             />
             {/* History & Debug below result */}
             <div className="bottom-panels">
