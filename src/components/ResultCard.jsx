@@ -267,7 +267,7 @@ const ResultCard = ({ results, imageData, onReset, modelInfo, benchmark, allProb
           border-radius: 16px;
           box-shadow: 0 8px 32px rgba(139, 149, 86, 0.15);
           overflow: hidden;
-          max-width: 960px;
+          width: 100%;
           margin: 0 auto;
           border: 2px solid #D4CDB8;
           animation: slideUp 0.6s ease-out;

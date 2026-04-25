@@ -107,8 +107,9 @@ const ImageUploader = ({ imageData, onImageSelect, onSubmit, onCancel }) => {
         .image-uploader {
           display: flex;
           flex-direction: column;
-          align-items: center;
-          padding: 2rem;
+          align-items: stretch;
+          justify-content: center;
+          padding: 1.5rem;
           background: rgba(255, 255, 255, 0.92);
           border-radius: 16px;
           box-shadow: 0 6px 24px rgba(139, 149, 86, 0.12);
@@ -117,6 +118,8 @@ const ImageUploader = ({ imageData, onImageSelect, onSubmit, onCancel }) => {
           animation: fadeInUp 0.6s ease-out;
           position: relative;
           overflow: hidden;
+          height: 100%;
+          min-height: 380px;
         }
 
         .image-uploader::before {
@@ -136,7 +139,7 @@ const ImageUploader = ({ imageData, onImageSelect, onSubmit, onCancel }) => {
 
         .upload-area {
           width: 100%;
-          max-width: 480px;
+          flex: 1;
           padding: 3rem 2rem;
           border: 2px dashed #B8A99A;
           border-radius: 14px;
@@ -145,6 +148,11 @@ const ImageUploader = ({ imageData, onImageSelect, onSubmit, onCancel }) => {
           transition: all 0.3s ease;
           background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(242, 235, 220, 0.5) 100%);
           position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          min-height: 320px;
         }
 
         .upload-area:hover {
@@ -196,7 +204,6 @@ const ImageUploader = ({ imageData, onImageSelect, onSubmit, onCancel }) => {
         /* Image Preview */
         .image-preview-container {
           width: 100%;
-          max-width: 520px;
           animation: fadeInUp 0.5s ease-out;
         }
 

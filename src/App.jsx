@@ -244,20 +244,19 @@ function App() {
 
         {!predictionResults ? (
           <>
-            <ImageUploader
-              imageData={selectedImageData}
-              onImageSelect={handleImageSelect}
-              onSubmit={handleSubmit}
-              onCancel={handleCancelImage}
-            />
+            <div className="top-row">
+              <ImageUploader
+                imageData={selectedImageData}
+                onImageSelect={handleImageSelect}
+                onSubmit={handleSubmit}
+                onCancel={handleCancelImage}
+              />
+              <FoodList
+                isExpanded={isFoodListExpanded}
+                onToggle={() => setIsFoodListExpanded(!isFoodListExpanded)}
+              />
+            </div>
 
-            {/* Food List (always visible) */}
-            <FoodList
-              isExpanded={isFoodListExpanded}
-              onToggle={() => setIsFoodListExpanded(!isFoodListExpanded)}
-            />
-
-            {/* History & Debug (below all) */}
             <div className="bottom-panels">
               <PredictionHistory
                 history={predictionHistory}
@@ -277,7 +276,6 @@ function App() {
               benchmark={benchmark}
               allProbabilities={allProbabilities}
             />
-            {/* History & Debug below result */}
             <div className="bottom-panels">
               <PredictionHistory
                 history={predictionHistory}
