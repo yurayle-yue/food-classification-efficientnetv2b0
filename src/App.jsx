@@ -106,6 +106,7 @@ function App() {
         prediction: result.predictions[0].displayName,
         className: result.predictions[0].className,
         confidence: result.predictions[0].confidence,
+        pureInferenceTime: result.benchmark.inferenceTime,
         inferenceTime: result.benchmark.totalTime,
         timestamp: new Date().toLocaleTimeString('id-ID')
       };

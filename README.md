@@ -58,8 +58,11 @@ Semua prediksi yang pernah dilakukan tersimpan dalam tabel riwayat (maks 50 entr
 | Gambar | Thumbnail gambar input |
 | Prediksi | Nama makanan hasil prediksi |
 | Confidence | Persentase keyakinan model |
-| Waktu | Waktu inferensi (ms) |
+| **Inferensi** | **Waktu inferensi murni model (ms) — untuk pengujian benchmark di berbagai perangkat** |
+| Waktu | Total waktu end-to-end: preprocess + inference + postprocess (ms) |
 | Aksi | Tombol hapus per entri |
+
+Di atas tabel ditampilkan banner **Rata-rata Waktu Inferensi** yang dihitung otomatis dari seluruh entri riwayat — sangat berguna untuk skripsi/penelitian dalam mengukur "Hasil Pengujian Waktu Inferensi pada Berbagai Perangkat".
 
 Tersedia juga tombol **Hapus Semua** di header panel untuk membersihkan seluruh riwayat sekaligus (dengan konfirmasi), yang juga menghapus data di `localStorage`.
 

@@ -5,6 +5,13 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
 
   if (!history || history.length === 0) return null;
 
+  const inferenceSamples = history
+    .map((item) => Number(item.pureInferenceTime))
+    .filter((v) => Number.isFinite(v) && v >= 0);
+  const avgInference = inferenceSamples.length > 0
+    ? Math.round(inferenceSamples.reduce((sum, v) => sum + v, 0) / inferenceSamples.length)
+    : null;
+
   const handleClearAll = (e) => {
     e.stopPropagation();
     if (window.confirm(`Hapus semua ${history.length} riwayat prediksi? Tindakan ini tidak bisa dibatalkan.`)) {
@@ -56,6 +63,23 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
 
       {isExpanded && (
         <div className="history-content">
+          {/* Average Inference Summary */}
+          {avgInference !== null && (
+            <div className="history-avg-banner">
+              <div className="history-avg-left">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 3v18h18" />
+                  <path d="M7 14l4-4 4 4 5-5" />
+                </svg>
+                <span className="history-avg-label">Rata-rata Waktu Inferensi</span>
+              </div>
+              <div className="history-avg-right">
+                <span className="history-avg-value">{avgInference}ms</span>
+                <span className="history-avg-meta">dari {inferenceSamples.length} pengujian</span>
+              </div>
+            </div>
+          )}
+
           {/* History Table */}
           <div className="history-table-wrapper">
             <table className="history-table">
@@ -65,6 +89,7 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
                   <th>Gambar</th>
                   <th>Prediksi</th>
                   <th>Confidence</th>
+                  <th>Inferensi</th>
                   <th>Waktu</th>
                   <th aria-label="Aksi"></th>
                 </tr>
@@ -89,6 +114,9 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
                       <span className={`conf-badge ${parseFloat(item.confidence) >= 80 ? 'high' : parseFloat(item.confidence) >= 50 ? 'med' : 'low'}`}>
                         {item.confidence}%
                       </span>
+                    </td>
+                    <td className="time-cell inference-cell">
+                      {Number.isFinite(Number(item.pureInferenceTime)) ? `${item.pureInferenceTime}ms` : '-'}
                     </td>
                     <td className="time-cell">{item.inferenceTime}ms</td>
                     <td>
@@ -308,6 +336,59 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
           color: #6B5D4F;
         }
 
+        .inference-cell {
+          color: #4A5D3A;
+          font-weight: 600;
+        }
+
+        .history-avg-banner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+          padding: 0.85rem 1.1rem;
+          margin-bottom: 1rem;
+          background: linear-gradient(135deg, rgba(139, 149, 86, 0.1), rgba(139, 149, 86, 0.04));
+          border: 1px solid rgba(139, 149, 86, 0.3);
+          border-radius: 10px;
+        }
+
+        .history-avg-left {
+          display: flex;
+          align-items: center;
+          gap: 0.6rem;
+          color: #4A5D3A;
+        }
+
+        .history-avg-left svg { flex-shrink: 0; }
+
+        .history-avg-label {
+          font-size: 0.82rem;
+          font-weight: 600;
+          color: #4A5D3A;
+          font-family: 'Segoe UI', 'Georgia', serif;
+        }
+
+        .history-avg-right {
+          display: flex;
+          align-items: baseline;
+          gap: 0.5rem;
+        }
+
+        .history-avg-value {
+          font-family: 'Consolas', monospace;
+          font-size: 1.15rem;
+          font-weight: 700;
+          color: #7A8449;
+          letter-spacing: 0.5px;
+        }
+
+        .history-avg-meta {
+          font-size: 0.7rem;
+          color: #6B5D4F;
+          font-family: 'Segoe UI', 'Georgia', serif;
+        }
+
         @media (max-width: 480px) {
           .history-content { padding: 1rem; }
           .history-toggle { padding: 0.9rem 1.1rem; }
@@ -316,6 +397,13 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
           .clear-all-btn span { display: none; }
           .clear-all-btn { padding: 0.4rem; }
           .history-toggle-right { gap: 0.5rem; }
+          .history-avg-banner {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.4rem;
+            padding: 0.75rem 0.9rem;
+          }
+          .history-avg-value { font-size: 1rem; }
         }
       `}</style>
     </div>
