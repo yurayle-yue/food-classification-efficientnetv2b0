@@ -64,6 +64,20 @@ Semua prediksi yang pernah dilakukan tersimpan dalam tabel riwayat (maks 50 entr
 
 Di atas tabel ditampilkan banner **Rata-rata Waktu Inferensi** yang dihitung otomatis dari seluruh entri riwayat — sangat berguna untuk skripsi/penelitian dalam mengukur "Hasil Pengujian Waktu Inferensi pada Berbagai Perangkat".
 
+#### Opsi: Abaikan Run Pertama (Cold Start)
+
+Tersedia checkbox **"Abaikan run pertama (cold start) dari rata-rata"** (default: aktif) — sangat penting untuk benchmarking yang akurat:
+
+| Aspek | Run #1 (Cold Start) | Run #2+ (Warm) |
+|-------|--------------------|----------------|
+| Waktu khas | ~2000–3000 ms | ~14–22 ms |
+| Penyebab lambat | Shader compilation WebGL, alokasi VRAM, JIT compilation | GPU "panas", shader & memori sudah siap |
+| Mencerminkan performa? | Tidak (overhead one-time) | Ya (performa sesungguhnya) |
+
+Prediksi pertama setiap session ditandai otomatis dengan `isColdStart=true` (via `useRef` di `App.jsx`) dan diberi badge **`cold`** di tabel. Saat checkbox aktif, baris tersebut di-_dim_ + dicoret dan tidak diikutsertakan dalam perhitungan rata-rata. Banner menampilkan informasi `N cold start dilewati`. Preferensi disimpan di `localStorage` (`excludeColdStart`).
+
+> **Praktik standar benchmarking**: "Discard the first inference (warm-up) as it includes shader compilation overhead, and compute the average from subsequent runs."
+
 Tersedia juga tombol **Hapus Semua** di header panel untuk membersihkan seluruh riwayat sekaligus (dengan konfirmasi), yang juga menghapus data di `localStorage`.
 
 ### 2. Benchmark / Speed Test

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import './App.css';
 import tfjsService from './services/tfjsService';
 import ImageUploader from './components/ImageUploader';
@@ -22,6 +22,11 @@ function App() {
   const [benchmark, setBenchmark] = useState(null);
   const [allProbabilities, setAllProbabilities] = useState(null);
   const [predictionHistory, setPredictionHistory] = useState([]);
+
+  // Cold start tracking: prediksi pertama di session ini akan ditandai isColdStart=true
+  // (overhead WebGL shader compilation + GPU memory allocation pada run #1).
+  // Ref di-reset otomatis setiap page reload / model reload.
+  const hasMadeFirstPredictionRef = useRef(false);
 
   // Load model
   useEffect(() => {
@@ -100,6 +105,9 @@ function App() {
       setBenchmark(result.benchmark);
       setAllProbabilities(result.allProbabilities);
 
+      const isColdStart = !hasMadeFirstPredictionRef.current;
+      hasMadeFirstPredictionRef.current = true;
+
       const historyItem = {
         id: Date.now(),
         thumbnail: selectedImageData,
@@ -108,6 +116,7 @@ function App() {
         confidence: result.predictions[0].confidence,
         pureInferenceTime: result.benchmark.inferenceTime,
         inferenceTime: result.benchmark.totalTime,
+        isColdStart,
         timestamp: new Date().toLocaleTimeString('id-ID')
       };
 

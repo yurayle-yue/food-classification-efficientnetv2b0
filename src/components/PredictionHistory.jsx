@@ -2,15 +2,45 @@ import React, { useState } from 'react';
 
 const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const [excludeColdStart, setExcludeColdStart] = useState(() => {
+    try {
+      const saved = localStorage.getItem('excludeColdStart');
+      return saved === null ? true : JSON.parse(saved);
+    } catch (e) {
+      return true;
+    }
+  });
 
   if (!history || history.length === 0) return null;
 
-  const inferenceSamples = history
+  // Cold start detection:
+  // - Entri baru: punya field item.isColdStart (di-set di App.jsx untuk prediksi pertama session)
+  // - Entri lama (sebelum fitur ini): fallback ke entri tertua (history[0])
+  const hasAnyColdStartFlag = history.some((item) => item.isColdStart === true);
+  const isColdStartEntry = (item, originalIdx) => {
+    if (item.isColdStart) return true;
+    if (!hasAnyColdStartFlag && originalIdx === 0) return true;
+    return false;
+  };
+
+  const sourceHistory = excludeColdStart
+    ? history.filter((item, idx) => !isColdStartEntry(item, idx))
+    : history;
+
+  const inferenceSamples = sourceHistory
     .map((item) => Number(item.pureInferenceTime))
     .filter((v) => Number.isFinite(v) && v >= 0);
   const avgInference = inferenceSamples.length > 0
     ? Math.round(inferenceSamples.reduce((sum, v) => sum + v, 0) / inferenceSamples.length)
     : null;
+  const skippedCount = excludeColdStart ? history.length - sourceHistory.length : 0;
+
+  const handleToggleColdStart = (checked) => {
+    setExcludeColdStart(checked);
+    try {
+      localStorage.setItem('excludeColdStart', JSON.stringify(checked));
+    } catch (e) { /* ignore */ }
+  };
 
   const handleClearAll = (e) => {
     e.stopPropagation();
@@ -64,7 +94,7 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
       {isExpanded && (
         <div className="history-content">
           {/* Average Inference Summary */}
-          {avgInference !== null && (
+          {avgInference !== null ? (
             <div className="history-avg-banner">
               <div className="history-avg-left">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -75,10 +105,38 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
               </div>
               <div className="history-avg-right">
                 <span className="history-avg-value">{avgInference}ms</span>
-                <span className="history-avg-meta">dari {inferenceSamples.length} pengujian</span>
+                <span className="history-avg-meta">
+                  dari {inferenceSamples.length} pengujian
+                  {skippedCount > 0 && (
+                    <span className="history-avg-skip"> &middot; {skippedCount} cold start dilewati</span>
+                  )}
+                </span>
               </div>
             </div>
+          ) : excludeColdStart && history.length > 0 && (
+            <div className="history-avg-banner empty">
+              <span className="history-avg-empty-text">
+                Lakukan minimal 2 prediksi untuk melihat Rata-rata Waktu Inferensi (run #1 dilewati sebagai cold start).
+              </span>
+            </div>
           )}
+
+          {/* Cold Start Toggle */}
+          <label className="cold-start-toggle">
+            <input
+              type="checkbox"
+              checked={excludeColdStart}
+              onChange={(e) => handleToggleColdStart(e.target.checked)}
+            />
+            <span className="cold-start-text">
+              <strong>Abaikan run pertama (cold start) dari rata-rata</strong>
+              <small>
+                Run #1 mengandung overhead WebGL shader compilation &amp; GPU memory allocation
+                (sering ~100&ndash;200&times; lebih lambat). Praktik standar benchmarking: buang
+                warm-up run agar rata-rata mencerminkan performa GPU yang sudah panas.
+              </small>
+            </span>
+          </label>
 
           {/* History Table */}
           <div className="history-table-wrapper">
@@ -95,9 +153,23 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
                 </tr>
               </thead>
               <tbody>
-                {[...history].reverse().map((item, idx) => (
-                  <tr key={item.id}>
-                    <td>{history.length - idx}</td>
+                {[...history].reverse().map((item, idx) => {
+                  const originalIdx = history.length - 1 - idx;
+                  const coldStart = isColdStartEntry(item, originalIdx);
+                  const isExcluded = coldStart && excludeColdStart;
+                  return (
+                  <tr key={item.id} className={isExcluded ? 'cold-start-row' : ''}>
+                    <td>
+                      <span>{history.length - idx}</span>
+                      {coldStart && (
+                        <span
+                          className={`cold-badge ${isExcluded ? 'excluded' : ''}`}
+                          title={isExcluded ? 'Cold start - dilewati dari rata-rata' : 'Cold start (run pertama session)'}
+                        >
+                          cold
+                        </span>
+                      )}
+                    </td>
                     <td>
                       {item.thumbnail ? (
                         <img src={item.thumbnail} alt="" className="history-thumb" />
@@ -134,7 +206,8 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
                       </button>
                     </td>
                   </tr>
-                ))}
+                  );
+                })}
               </tbody>
             </table>
           </div>
@@ -387,6 +460,100 @@ const PredictionHistory = ({ history, onClearAll, onDeleteItem }) => {
           font-size: 0.7rem;
           color: #6B5D4F;
           font-family: 'Segoe UI', 'Georgia', serif;
+        }
+
+        .history-avg-skip {
+          color: #8B6F1A;
+          font-weight: 600;
+        }
+
+        .history-avg-banner.empty {
+          background: rgba(160, 152, 136, 0.08);
+          border-color: rgba(160, 152, 136, 0.3);
+          justify-content: flex-start;
+        }
+
+        .history-avg-empty-text {
+          font-size: 0.78rem;
+          color: #6B5D4F;
+          font-family: 'Segoe UI', 'Georgia', serif;
+          font-style: italic;
+        }
+
+        .cold-start-toggle {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.65rem;
+          padding: 0.85rem 1rem;
+          margin-bottom: 1rem;
+          background: rgba(255, 255, 255, 0.55);
+          border: 1px solid #EBE5DE;
+          border-radius: 10px;
+          cursor: pointer;
+          transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .cold-start-toggle:hover {
+          background: rgba(139, 149, 86, 0.05);
+          border-color: rgba(139, 149, 86, 0.35);
+        }
+
+        .cold-start-toggle input[type="checkbox"] {
+          margin-top: 0.18rem;
+          flex-shrink: 0;
+          width: 16px;
+          height: 16px;
+          accent-color: #8B9556;
+          cursor: pointer;
+        }
+
+        .cold-start-text {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+          font-family: 'Segoe UI', 'Georgia', serif;
+        }
+
+        .cold-start-text strong {
+          font-size: 0.84rem;
+          color: #2c2c2c;
+          font-weight: 600;
+        }
+
+        .cold-start-text small {
+          font-size: 0.72rem;
+          color: #6B5D4F;
+          line-height: 1.5;
+        }
+
+        .cold-badge {
+          display: inline-block;
+          margin-left: 0.4rem;
+          padding: 0.08rem 0.42rem;
+          background: rgba(196, 150, 58, 0.18);
+          color: #8B6F1A;
+          border-radius: 8px;
+          font-size: 0.6rem;
+          font-weight: 700;
+          letter-spacing: 0.6px;
+          text-transform: uppercase;
+          vertical-align: middle;
+          font-family: 'Segoe UI', 'Georgia', serif;
+        }
+
+        .cold-badge.excluded {
+          background: rgba(160, 152, 136, 0.22);
+          color: #8B7B68;
+        }
+
+        .cold-start-row {
+          opacity: 0.6;
+          background: rgba(160, 152, 136, 0.05);
+        }
+
+        .cold-start-row .inference-cell {
+          color: #8B7B68;
+          text-decoration: line-through;
         }
 
         @media (max-width: 480px) {
