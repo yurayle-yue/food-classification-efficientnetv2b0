@@ -49,7 +49,7 @@ const LoadingSpinner = ({ message = 'Memuat...' }) => {
           border-top-color: #8B9556;
           border-right-color: #A67B5B;
           animation: spin 1.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
-          margin: 0 auto 1.25rem;
+          margin: 0 auto;
           position: relative;
         }
 
@@ -72,7 +72,7 @@ const LoadingSpinner = ({ message = 'Memuat...' }) => {
           height: 18px;
           background: linear-gradient(135deg, #8B9556, #A67B5B);
           border-radius: 50%;
-          margin: -52px auto 1.25rem;
+          margin: -45px auto 1.25rem;
           animation: pulse 2s ease-in-out infinite;
           box-shadow: 0 3px 10px rgba(139, 149, 86, 0.25);
         }
@@ -132,7 +132,7 @@ const LoadingSpinner = ({ message = 'Memuat...' }) => {
           .spinner-core {
             width: 14px;
             height: 14px;
-            margin-top: -42px;
+            margin-top: -35px;
           }
 
           .loading-message {
