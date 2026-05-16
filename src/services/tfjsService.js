@@ -51,7 +51,8 @@ class TFJSService {
       ]);
 
       this.classes = await classesResponse.json();
-      this.nutritionData = await nutritionResponse.json();
+      const rawNutrition = await nutritionResponse.json();
+      this.nutritionData = this.normalizeNutritionData(rawNutrition);
       this.descriptionData = await descriptionsResponse.json();
 
       this.isModelLoaded = true;
@@ -187,6 +188,47 @@ class TFJSService {
       console.error('Error during prediction:', error);
       throw error;
     }
+  }
+
+  /**
+   * Normalisasi nutrition data: map field bahasa Inggris (Calories, Protein (g), ...)
+   * ke field internal (kalori, protein, ...) supaya UI tetap kompatibel.
+   * Tetap support format lama (kalori/protein/...) untuk backward compatibility.
+   */
+  normalizeNutritionData(raw) {
+    if (!raw || typeof raw !== 'object') return {};
+    const normalized = {};
+    for (const [key, data] of Object.entries(raw)) {
+      if (!data || typeof data !== 'object') {
+        normalized[key] = data;
+        continue;
+      }
+      const isNewFormat = 'Calories' in data || 'Portion' in data;
+      if (isNewFormat) {
+        normalized[key] = {
+          ...data,
+          kalori: this.formatNutritionValue(data['Calories']),
+          protein: this.formatNutritionValue(data['Protein (g)']),
+          lemak: this.formatNutritionValue(data['Fat (g)']),
+          karbohidrat: this.formatNutritionValue(data['Carbohydrates (g)']),
+          takaran: data['Portion'] || '100g'
+        };
+      } else {
+        normalized[key] = data;
+      }
+    }
+    return normalized;
+  }
+
+  /**
+   * Format nilai nutrisi numerik ke string dengan 1 decimal place untuk integer
+   * (300 -> "300.0", 25.33 -> "25.33") supaya tampilan konsisten dengan format lama.
+   */
+  formatNutritionValue(value) {
+    if (value === undefined || value === null) return '-';
+    if (typeof value === 'string') return value;
+    if (typeof value !== 'number' || !Number.isFinite(value)) return '-';
+    return Number.isInteger(value) ? value.toFixed(1) : value.toString();
   }
 
   /**

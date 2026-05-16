@@ -1,810 +1,1012 @@
 {
-  "apple_pie": {
-    "kalori": "300.0",
-    "protein": "3.0",
-    "lemak": "12.0",
-    "karbohidrat": "45.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "baby_back_ribs": {
-    "kalori": "360.0",
-    "protein": "25.33",
-    "lemak": "22.0",
-    "karbohidrat": "10.0",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "baklava": {
-    "kalori": "330.0",
-    "protein": "6.0",
-    "lemak": "16.0",
-    "karbohidrat": "40.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "beef_carpaccio": {
-    "kalori": "200.0",
-    "protein": "20.0",
-    "lemak": "12.0",
-    "karbohidrat": "1.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "beef_tartare": {
-    "kalori": "250.0",
-    "protein": "25.0",
-    "lemak": "15.0",
-    "karbohidrat": "2.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "beet_salad": {
-    "kalori": "80.0",
-    "protein": "3.0",
-    "lemak": "2.0",
-    "karbohidrat": "12.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "beignets": {
-    "kalori": "400.0",
-    "protein": "6.0",
-    "lemak": "20.0",
-    "karbohidrat": "50.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "bibimbap": {
-    "kalori": "150.0",
-    "protein": "5.0",
-    "lemak": "4.0",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "300g"
-  },
-  "bread_pudding": {
-    "kalori": "250.0",
-    "protein": "6.0",
-    "lemak": "10.0",
-    "karbohidrat": "35.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "breakfast_burrito": {
-    "kalori": "200.0",
-    "protein": "10.0",
-    "lemak": "7.5",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "bruschetta": {
-    "kalori": "200.0",
-    "protein": "6.0",
-    "lemak": "8.0",
-    "karbohidrat": "30.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "caesar_salad": {
-    "kalori": "150.0",
-    "protein": "5.0",
-    "lemak": "10.0",
-    "karbohidrat": "7.5",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "cannoli": {
-    "kalori": "400.0",
-    "protein": "8.0",
-    "lemak": "20.0",
-    "karbohidrat": "50.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "caprese_salad": {
-    "kalori": "133.33",
-    "protein": "5.33",
-    "lemak": "10.0",
-    "karbohidrat": "6.67",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "carrot_cake": {
-    "kalori": "350.0",
-    "protein": "4.0",
-    "lemak": "18.0",
-    "karbohidrat": "45.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "ceviche": {
-    "kalori": "133.33",
-    "protein": "13.33",
-    "lemak": "3.33",
-    "karbohidrat": "6.67",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "cheesecake": {
-    "kalori": "350.0",
-    "protein": "6.0",
-    "lemak": "22.0",
-    "karbohidrat": "30.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "cheese_plate": {
-    "kalori": "300.0",
-    "protein": "13.33",
-    "lemak": "23.33",
-    "karbohidrat": "3.33",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "chicken_curry": {
-    "kalori": "150.0",
-    "protein": "10.0",
-    "lemak": "7.5",
-    "karbohidrat": "7.5",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "chicken_quesadilla": {
-    "kalori": "233.33",
-    "protein": "13.33",
-    "lemak": "10.0",
-    "karbohidrat": "16.67",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "chicken_wings": {
-    "kalori": "300.0",
-    "protein": "20.0",
-    "lemak": "20.0",
-    "karbohidrat": "10.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "chocolate_cake": {
-    "kalori": "400.0",
-    "protein": "5.0",
-    "lemak": "20.0",
-    "karbohidrat": "50.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "chocolate_mousse": {
-    "kalori": "300.0",
-    "protein": "5.0",
-    "lemak": "20.0",
-    "karbohidrat": "25.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "churros": {
-    "kalori": "400.0",
-    "protein": "6.0",
-    "lemak": "20.0",
-    "karbohidrat": "50.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "clam_chowder": {
-    "kalori": "125.0",
-    "protein": "5.0",
-    "lemak": "6.0",
-    "karbohidrat": "10.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "club_sandwich": {
-    "kalori": "200.0",
-    "protein": "10.0",
-    "lemak": "9.0",
-    "karbohidrat": "17.5",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "crab_cakes": {
-    "kalori": "250.0",
-    "protein": "15.0",
-    "lemak": "15.0",
-    "karbohidrat": "10.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "creme_brulee": {
-    "kalori": "300.0",
-    "protein": "5.0",
-    "lemak": "20.0",
-    "karbohidrat": "25.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "croque_madame": {
-    "kalori": "225.0",
-    "protein": "10.0",
-    "lemak": "12.5",
-    "karbohidrat": "15.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "cup_cakes": {
-    "kalori": "400.0",
-    "protein": "6.0",
-    "lemak": "20.0",
-    "karbohidrat": "50.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "deviled_eggs": {
-    "kalori": "200.0",
-    "protein": "12.0",
-    "lemak": "16.0",
-    "karbohidrat": "2.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "donuts": {
-    "kalori": "400.0",
-    "protein": "6.0",
-    "lemak": "20.0",
-    "karbohidrat": "50.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "dumplings": {
-    "kalori": "250.0",
-    "protein": "8.0",
-    "lemak": "10.0",
-    "karbohidrat": "30.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "edamame": {
-    "kalori": "120.0",
-    "protein": "11.0",
-    "lemak": "5.0",
-    "karbohidrat": "10.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "eggs_benedict": {
-    "kalori": "200.0",
-    "protein": "10.0",
-    "lemak": "12.5",
-    "karbohidrat": "10.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "escargots": {
-    "kalori": "200.0",
-    "protein": "15.0",
-    "lemak": "12.0",
-    "karbohidrat": "5.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "falafel": {
-    "kalori": "300.0",
-    "protein": "10.0",
-    "lemak": "16.0",
-    "karbohidrat": "30.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "filet_mignon": {
-    "kalori": "250.0",
-    "protein": "20.0",
-    "lemak": "16.67",
-    "karbohidrat": "0.0",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "fish_and_chips": {
-    "kalori": "250.0",
-    "protein": "10.0",
-    "lemak": "12.5",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "foie_gras": {
-    "kalori": "400.0",
-    "protein": "10.0",
-    "lemak": "40.0",
-    "karbohidrat": "4.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "french_fries": {
-    "kalori": "300.0",
-    "protein": "4.0",
-    "lemak": "15.0",
-    "karbohidrat": "35.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "french_onion_soup": {
-    "kalori": "125.0",
-    "protein": "5.0",
-    "lemak": "6.0",
-    "karbohidrat": "10.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "french_toast": {
-    "kalori": "250.0",
-    "protein": "8.0",
-    "lemak": "10.0",
-    "karbohidrat": "30.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "fried_calamari": {
-    "kalori": "300.0",
-    "protein": "15.0",
-    "lemak": "15.0",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "fried_rice": {
-    "kalori": "150.0",
-    "protein": "4.0",
-    "lemak": "5.0",
-    "karbohidrat": "25.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "frozen_yogurt": {
-    "kalori": "150.0",
-    "protein": "4.0",
-    "lemak": "3.0",
-    "karbohidrat": "25.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "garlic_bread": {
-    "kalori": "300.0",
-    "protein": "8.0",
-    "lemak": "12.0",
-    "karbohidrat": "40.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "gnocchi": {
-    "kalori": "166.67",
-    "protein": "4.0",
-    "lemak": "3.33",
-    "karbohidrat": "26.67",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "greek_salad": {
-    "kalori": "125.0",
-    "protein": "4.0",
-    "lemak": "9.0",
-    "karbohidrat": "7.5",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "grilled_cheese_sandwich": {
-    "kalori": "266.67",
-    "protein": "10.0",
-    "lemak": "13.33",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "grilled_salmon": {
-    "kalori": "200.0",
-    "protein": "23.33",
-    "lemak": "10.0",
-    "karbohidrat": "0.0",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "guacamole": {
-    "kalori": "200.0",
-    "protein": "4.0",
-    "lemak": "16.0",
-    "karbohidrat": "10.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "gyoza": {
-    "kalori": "200.0",
-    "protein": "8.0",
-    "lemak": "8.0",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "hamburger": {
-    "kalori": "250.0",
-    "protein": "13.33",
-    "lemak": "12.0",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "hot_and_sour_soup": {
-    "kalori": "75.0",
-    "protein": "4.0",
-    "lemak": "2.5",
-    "karbohidrat": "7.5",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "hot_dog": {
-    "kalori": "250.0",
-    "protein": "10.0",
-    "lemak": "15.0",
-    "karbohidrat": "15.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "huevos_rancheros": {
-    "kalori": "150.0",
-    "protein": "7.5",
-    "lemak": "7.5",
-    "karbohidrat": "10.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "hummus": {
-    "kalori": "200.0",
-    "protein": "8.0",
-    "lemak": "12.0",
-    "karbohidrat": "16.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "ice_cream": {
-    "kalori": "200.0",
-    "protein": "4.0",
-    "lemak": "10.0",
-    "karbohidrat": "25.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "lasagna": {
-    "kalori": "200.0",
-    "protein": "10.0",
-    "lemak": "10.0",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "lobster_bisque": {
-    "kalori": "125.0",
-    "protein": "5.0",
-    "lemak": "7.5",
-    "karbohidrat": "7.5",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "lobster_roll_sandwich": {
-    "kalori": "200.0",
-    "protein": "10.0",
-    "lemak": "10.0",
-    "karbohidrat": "15.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "macaroni_and_cheese": {
-    "kalori": "200.0",
-    "protein": "6.0",
-    "lemak": "9.0",
-    "karbohidrat": "25.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "macarons": {
-    "kalori": "400.0",
-    "protein": "6.0",
-    "lemak": "20.0",
-    "karbohidrat": "50.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "miso_soup": {
-    "kalori": "50.0",
-    "protein": "3.0",
-    "lemak": "1.5",
-    "karbohidrat": "5.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "mussels": {
-    "kalori": "133.33",
-    "protein": "16.67",
-    "lemak": "5.33",
-    "karbohidrat": "3.33",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "nachos": {
-    "kalori": "250.0",
-    "protein": "5.0",
-    "lemak": "12.5",
-    "karbohidrat": "25.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "omelette": {
-    "kalori": "166.67",
-    "protein": "10.0",
-    "lemak": "12.0",
-    "karbohidrat": "1.33",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "onion_rings": {
-    "kalori": "300.0",
-    "protein": "4.0",
-    "lemak": "15.0",
-    "karbohidrat": "35.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "oysters": {
-    "kalori": "100.0",
-    "protein": "10.0",
-    "lemak": "3.0",
-    "karbohidrat": "5.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "pad_thai": {
-    "kalori": "200.0",
-    "protein": "7.5",
-    "lemak": "6.0",
-    "karbohidrat": "30.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "paella": {
-    "kalori": "175.0",
-    "protein": "10.0",
-    "lemak": "5.0",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "pancakes": {
-    "kalori": "250.0",
-    "protein": "6.0",
-    "lemak": "8.0",
-    "karbohidrat": "35.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "panna_cotta": {
-    "kalori": "300.0",
-    "protein": "5.0",
-    "lemak": "20.0",
-    "karbohidrat": "25.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "peking_duck": {
-    "kalori": "266.67",
-    "protein": "20.0",
-    "lemak": "16.67",
-    "karbohidrat": "6.67",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "pho": {
-    "kalori": "116.67",
-    "protein": "6.67",
-    "lemak": "2.67",
-    "karbohidrat": "16.67",
-    "takaran": "100g",
-    "sumber_takaran": "300g"
-  },
-  "pizza": {
-    "kalori": "250.0",
-    "protein": "10.0",
-    "lemak": "10.0",
-    "karbohidrat": "30.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "pork_chop": {
-    "kalori": "233.33",
-    "protein": "20.0",
-    "lemak": "14.67",
-    "karbohidrat": "0.0",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "poutine": {
-    "kalori": "250.0",
-    "protein": "5.0",
-    "lemak": "12.5",
-    "karbohidrat": "25.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "prime_rib": {
-    "kalori": "300.0",
-    "protein": "20.0",
-    "lemak": "22.5",
-    "karbohidrat": "0.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "pulled_pork_sandwich": {
-    "kalori": "200.0",
-    "protein": "10.0",
-    "lemak": "7.5",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "ramen": {
-    "kalori": "133.33",
-    "protein": "5.0",
-    "lemak": "3.33",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "300g"
-  },
-  "ravioli": {
-    "kalori": "150.0",
-    "protein": "6.0",
-    "lemak": "5.0",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "red_velvet_cake": {
-    "kalori": "350.0",
-    "protein": "5.0",
-    "lemak": "18.0",
-    "karbohidrat": "45.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "risotto": {
-    "kalori": "150.0",
-    "protein": "4.0",
-    "lemak": "4.0",
-    "karbohidrat": "25.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "samosa": {
-    "kalori": "300.0",
-    "protein": "6.0",
-    "lemak": "12.0",
-    "karbohidrat": "40.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "sashimi": {
-    "kalori": "150.0",
-    "protein": "25.0",
-    "lemak": "5.0",
-    "karbohidrat": "0.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "scallops": {
-    "kalori": "120.0",
-    "protein": "20.0",
-    "lemak": "3.0",
-    "karbohidrat": "2.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "seaweed_salad": {
-    "kalori": "50.0",
-    "protein": "2.0",
-    "lemak": "1.0",
-    "karbohidrat": "8.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "shrimp_and_grits": {
-    "kalori": "150.0",
-    "protein": "10.0",
-    "lemak": "5.0",
-    "karbohidrat": "15.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "spaghetti_bolognese": {
-    "kalori": "175.0",
-    "protein": "7.5",
-    "lemak": "6.0",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "spaghetti_carbonara": {
-    "kalori": "200.0",
-    "protein": "7.5",
-    "lemak": "9.0",
-    "karbohidrat": "22.5",
-    "takaran": "100g",
-    "sumber_takaran": "200g"
-  },
-  "spring_rolls": {
-    "kalori": "200.0",
-    "protein": "6.0",
-    "lemak": "8.0",
-    "karbohidrat": "30.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "steak": {
-    "kalori": "250.0",
-    "protein": "23.33",
-    "lemak": "16.67",
-    "karbohidrat": "0.0",
-    "takaran": "100g",
-    "sumber_takaran": "150g"
-  },
-  "strawberry_shortcake": {
-    "kalori": "300.0",
-    "protein": "4.0",
-    "lemak": "12.0",
-    "karbohidrat": "40.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "sushi": {
-    "kalori": "200.0",
-    "protein": "8.0",
-    "lemak": "2.0",
-    "karbohidrat": "30.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "tacos": {
-    "kalori": "250.0",
-    "protein": "10.0",
-    "lemak": "12.0",
-    "karbohidrat": "20.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "takoyaki": {
-    "kalori": "200.0",
-    "protein": "8.0",
-    "lemak": "8.0",
-    "karbohidrat": "25.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "tiramisu": {
-    "kalori": "300.0",
-    "protein": "6.0",
-    "lemak": "15.0",
-    "karbohidrat": "30.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "tuna_tartare": {
-    "kalori": "150.0",
-    "protein": "20.0",
-    "lemak": "5.0",
-    "karbohidrat": "2.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  },
-  "waffles": {
-    "kalori": "300.0",
-    "protein": "6.0",
-    "lemak": "12.0",
-    "karbohidrat": "40.0",
-    "takaran": "100g",
-    "sumber_takaran": "100g"
-  }
+    "apple_pie": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 3.0,
+        "Fat (g)": 12.0,
+        "Carbohydrates (g)": 45.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 150.0
+    },
+    "baby_back_ribs": {
+        "Portion": "100g",
+        "Calories": 360.0,
+        "Protein (g)": 25.33,
+        "Fat (g)": 22.0,
+        "Carbohydrates (g)": 10.0,
+        "Fiber (g)": 0.67,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 480.0
+    },
+    "baklava": {
+        "Portion": "100g",
+        "Calories": 330.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 16.0,
+        "Carbohydrates (g)": 40.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 120.0
+    },
+    "beef_carpaccio": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 20.0,
+        "Fat (g)": 12.0,
+        "Carbohydrates (g)": 1.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "beef_tartare": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 25.0,
+        "Fat (g)": 15.0,
+        "Carbohydrates (g)": 2.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "beet_salad": {
+        "Portion": "100g",
+        "Calories": 80.0,
+        "Protein (g)": 3.0,
+        "Fat (g)": 2.0,
+        "Carbohydrates (g)": 12.0,
+        "Fiber (g)": 3.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 150.0
+    },
+    "beignets": {
+        "Portion": "100g",
+        "Calories": 400.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 20.0,
+        "Carbohydrates (g)": 50.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "bibimbap": {
+        "Portion": "100g",
+        "Calories": 150.0,
+        "Protein (g)": 5.0,
+        "Fat (g)": 4.0,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 1.67,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 266.67
+    },
+    "bread_pudding": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 10.0,
+        "Carbohydrates (g)": 35.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "breakfast_burrito": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 7.5,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 2.5,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "bruschetta": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 8.0,
+        "Carbohydrates (g)": 30.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "caesar_salad": {
+        "Portion": "100g",
+        "Calories": 150.0,
+        "Protein (g)": 5.0,
+        "Fat (g)": 10.0,
+        "Carbohydrates (g)": 7.5,
+        "Fiber (g)": 1.5,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 250.0
+    },
+    "cannoli": {
+        "Portion": "100g",
+        "Calories": 400.0,
+        "Protein (g)": 8.0,
+        "Fat (g)": 20.0,
+        "Carbohydrates (g)": 50.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 100.0
+    },
+    "caprese_salad": {
+        "Portion": "100g",
+        "Calories": 133.33,
+        "Protein (g)": 5.33,
+        "Fat (g)": 10.0,
+        "Carbohydrates (g)": 6.67,
+        "Fiber (g)": 1.33,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 133.33
+    },
+    "carrot_cake": {
+        "Portion": "100g",
+        "Calories": 350.0,
+        "Protein (g)": 4.0,
+        "Fat (g)": 18.0,
+        "Carbohydrates (g)": 45.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "ceviche": {
+        "Portion": "100g",
+        "Calories": 133.33,
+        "Protein (g)": 13.33,
+        "Fat (g)": 3.33,
+        "Carbohydrates (g)": 6.67,
+        "Fiber (g)": 1.33,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 266.67
+    },
+    "cheesecake": {
+        "Portion": "100g",
+        "Calories": 350.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 22.0,
+        "Carbohydrates (g)": 30.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 250.0
+    },
+    "cheese_plate": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 13.33,
+        "Fat (g)": 23.33,
+        "Carbohydrates (g)": 3.33,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "chicken_curry": {
+        "Portion": "100g",
+        "Calories": 150.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 7.5,
+        "Carbohydrates (g)": 7.5,
+        "Fiber (g)": 1.5,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 250.0
+    },
+    "chicken_quesadilla": {
+        "Portion": "100g",
+        "Calories": 233.33,
+        "Protein (g)": 13.33,
+        "Fat (g)": 10.0,
+        "Carbohydrates (g)": 16.67,
+        "Fiber (g)": 1.33,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "chicken_wings": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 20.0,
+        "Fat (g)": 20.0,
+        "Carbohydrates (g)": 10.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "chocolate_cake": {
+        "Portion": "100g",
+        "Calories": 400.0,
+        "Protein (g)": 5.0,
+        "Fat (g)": 20.0,
+        "Carbohydrates (g)": 50.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "chocolate_mousse": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 5.0,
+        "Fat (g)": 20.0,
+        "Carbohydrates (g)": 25.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 100.0
+    },
+    "churros": {
+        "Portion": "100g",
+        "Calories": 400.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 20.0,
+        "Carbohydrates (g)": 50.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "clam_chowder": {
+        "Portion": "100g",
+        "Calories": 125.0,
+        "Protein (g)": 5.0,
+        "Fat (g)": 6.0,
+        "Carbohydrates (g)": 10.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "club_sandwich": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 9.0,
+        "Carbohydrates (g)": 17.5,
+        "Fiber (g)": 1.5,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "crab_cakes": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 15.0,
+        "Fat (g)": 15.0,
+        "Carbohydrates (g)": 10.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "creme_brulee": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 5.0,
+        "Fat (g)": 20.0,
+        "Carbohydrates (g)": 25.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 100.0
+    },
+    "croque_madame": {
+        "Portion": "100g",
+        "Calories": 225.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 12.5,
+        "Carbohydrates (g)": 15.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "cup_cakes": {
+        "Portion": "100g",
+        "Calories": 400.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 20.0,
+        "Carbohydrates (g)": 50.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "deviled_eggs": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 12.0,
+        "Fat (g)": 16.0,
+        "Carbohydrates (g)": 2.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 240.0
+    },
+    "donuts": {
+        "Portion": "100g",
+        "Calories": 400.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 20.0,
+        "Carbohydrates (g)": 50.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "dumplings": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 8.0,
+        "Fat (g)": 10.0,
+        "Carbohydrates (g)": 30.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "edamame": {
+        "Portion": "100g",
+        "Calories": 120.0,
+        "Protein (g)": 11.0,
+        "Fat (g)": 5.0,
+        "Carbohydrates (g)": 10.0,
+        "Fiber (g)": 5.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 10.0
+    },
+    "eggs_benedict": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 12.5,
+        "Carbohydrates (g)": 10.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "escargots": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 15.0,
+        "Fat (g)": 12.0,
+        "Carbohydrates (g)": 5.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "falafel": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 16.0,
+        "Carbohydrates (g)": 30.0,
+        "Fiber (g)": 6.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "filet_mignon": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 20.0,
+        "Fat (g)": 16.67,
+        "Carbohydrates (g)": 0.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 66.67
+    },
+    "fish_and_chips": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 12.5,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 1.5,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "foie_gras": {
+        "Portion": "100g",
+        "Calories": 400.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 40.0,
+        "Carbohydrates (g)": 4.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "french_fries": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 4.0,
+        "Fat (g)": 15.0,
+        "Carbohydrates (g)": 35.0,
+        "Fiber (g)": 3.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "french_onion_soup": {
+        "Portion": "100g",
+        "Calories": 125.0,
+        "Protein (g)": 5.0,
+        "Fat (g)": 6.0,
+        "Carbohydrates (g)": 10.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "french_toast": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 8.0,
+        "Fat (g)": 10.0,
+        "Carbohydrates (g)": 30.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "fried_calamari": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 15.0,
+        "Fat (g)": 15.0,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "fried_rice": {
+        "Portion": "100g",
+        "Calories": 150.0,
+        "Protein (g)": 4.0,
+        "Fat (g)": 5.0,
+        "Carbohydrates (g)": 25.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "frozen_yogurt": {
+        "Portion": "100g",
+        "Calories": 150.0,
+        "Protein (g)": 4.0,
+        "Fat (g)": 3.0,
+        "Carbohydrates (g)": 25.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 50.0
+    },
+    "garlic_bread": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 8.0,
+        "Fat (g)": 12.0,
+        "Carbohydrates (g)": 40.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "gnocchi": {
+        "Portion": "100g",
+        "Calories": 166.67,
+        "Protein (g)": 4.0,
+        "Fat (g)": 3.33,
+        "Carbohydrates (g)": 26.67,
+        "Fiber (g)": 1.33,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "greek_salad": {
+        "Portion": "100g",
+        "Calories": 125.0,
+        "Protein (g)": 4.0,
+        "Fat (g)": 9.0,
+        "Carbohydrates (g)": 7.5,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "grilled_cheese_sandwich": {
+        "Portion": "100g",
+        "Calories": 266.67,
+        "Protein (g)": 10.0,
+        "Fat (g)": 13.33,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 1.33,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "grilled_salmon": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 23.33,
+        "Fat (g)": 10.0,
+        "Carbohydrates (g)": 0.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 66.67
+    },
+    "guacamole": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 4.0,
+        "Fat (g)": 16.0,
+        "Carbohydrates (g)": 10.0,
+        "Fiber (g)": 6.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 100.0
+    },
+    "gyoza": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 8.0,
+        "Fat (g)": 8.0,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "hamburger": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 13.33,
+        "Fat (g)": 12.0,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 1.33,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "hot_and_sour_soup": {
+        "Portion": "100g",
+        "Calories": 75.0,
+        "Protein (g)": 4.0,
+        "Fat (g)": 2.5,
+        "Carbohydrates (g)": 7.5,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "hot_dog": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 15.0,
+        "Carbohydrates (g)": 15.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 500.0
+    },
+    "huevos_rancheros": {
+        "Portion": "100g",
+        "Calories": 150.0,
+        "Protein (g)": 7.5,
+        "Fat (g)": 7.5,
+        "Carbohydrates (g)": 10.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "hummus": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 8.0,
+        "Fat (g)": 12.0,
+        "Carbohydrates (g)": 16.0,
+        "Fiber (g)": 6.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "ice_cream": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 4.0,
+        "Fat (g)": 10.0,
+        "Carbohydrates (g)": 25.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 50.0
+    },
+    "lasagna": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 10.0,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "lobster_bisque": {
+        "Portion": "100g",
+        "Calories": 125.0,
+        "Protein (g)": 5.0,
+        "Fat (g)": 7.5,
+        "Carbohydrates (g)": 7.5,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 250.0
+    },
+    "lobster_roll_sandwich": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 10.0,
+        "Carbohydrates (g)": 15.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "macaroni_and_cheese": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 9.0,
+        "Carbohydrates (g)": 25.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "macarons": {
+        "Portion": "100g",
+        "Calories": 400.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 20.0,
+        "Carbohydrates (g)": 50.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 100.0
+    },
+    "miso_soup": {
+        "Portion": "100g",
+        "Calories": 50.0,
+        "Protein (g)": 3.0,
+        "Fat (g)": 1.5,
+        "Carbohydrates (g)": 5.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "mussels": {
+        "Portion": "100g",
+        "Calories": 133.33,
+        "Protein (g)": 16.67,
+        "Fat (g)": 5.33,
+        "Carbohydrates (g)": 3.33,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 266.67
+    },
+    "nachos": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 5.0,
+        "Fat (g)": 12.5,
+        "Carbohydrates (g)": 25.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "omelette": {
+        "Portion": "100g",
+        "Calories": 166.67,
+        "Protein (g)": 10.0,
+        "Fat (g)": 12.0,
+        "Carbohydrates (g)": 1.33,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "onion_rings": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 4.0,
+        "Fat (g)": 15.0,
+        "Carbohydrates (g)": 35.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "oysters": {
+        "Portion": "100g",
+        "Calories": 100.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 3.0,
+        "Carbohydrates (g)": 5.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "pad_thai": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 7.5,
+        "Fat (g)": 6.0,
+        "Carbohydrates (g)": 30.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "paella": {
+        "Portion": "100g",
+        "Calories": 175.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 5.0,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 1.5,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 250.0
+    },
+    "pancakes": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 8.0,
+        "Carbohydrates (g)": 35.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "panna_cotta": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 5.0,
+        "Fat (g)": 20.0,
+        "Carbohydrates (g)": 25.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 50.0
+    },
+    "peking_duck": {
+        "Portion": "100g",
+        "Calories": 266.67,
+        "Protein (g)": 20.0,
+        "Fat (g)": 16.67,
+        "Carbohydrates (g)": 6.67,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 333.33
+    },
+    "pho": {
+        "Portion": "100g",
+        "Calories": 116.67,
+        "Protein (g)": 6.67,
+        "Fat (g)": 2.67,
+        "Carbohydrates (g)": 16.67,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 266.67
+    },
+    "pizza": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 10.0,
+        "Carbohydrates (g)": 30.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "pork_chop": {
+        "Portion": "100g",
+        "Calories": 233.33,
+        "Protein (g)": 20.0,
+        "Fat (g)": 14.67,
+        "Carbohydrates (g)": 0.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 266.67
+    },
+    "poutine": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 5.0,
+        "Fat (g)": 12.5,
+        "Carbohydrates (g)": 25.0,
+        "Fiber (g)": 1.5,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "prime_rib": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 20.0,
+        "Fat (g)": 22.5,
+        "Carbohydrates (g)": 0.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 250.0
+    },
+    "pulled_pork_sandwich": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 7.5,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 1.5,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "ramen": {
+        "Portion": "100g",
+        "Calories": 133.33,
+        "Protein (g)": 5.0,
+        "Fat (g)": 3.33,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 1.33,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 266.67
+    },
+    "ravioli": {
+        "Portion": "100g",
+        "Calories": 150.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 5.0,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 1.5,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 250.0
+    },
+    "red_velvet_cake": {
+        "Portion": "100g",
+        "Calories": 350.0,
+        "Protein (g)": 5.0,
+        "Fat (g)": 18.0,
+        "Carbohydrates (g)": 45.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "risotto": {
+        "Portion": "100g",
+        "Calories": 150.0,
+        "Protein (g)": 4.0,
+        "Fat (g)": 4.0,
+        "Carbohydrates (g)": 25.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "samosa": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 12.0,
+        "Carbohydrates (g)": 40.0,
+        "Fiber (g)": 4.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 400.0
+    },
+    "sashimi": {
+        "Portion": "100g",
+        "Calories": 150.0,
+        "Protein (g)": 25.0,
+        "Fat (g)": 5.0,
+        "Carbohydrates (g)": 0.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 100.0
+    },
+    "scallops": {
+        "Portion": "100g",
+        "Calories": 120.0,
+        "Protein (g)": 20.0,
+        "Fat (g)": 3.0,
+        "Carbohydrates (g)": 2.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "seaweed_salad": {
+        "Portion": "100g",
+        "Calories": 50.0,
+        "Protein (g)": 2.0,
+        "Fat (g)": 1.0,
+        "Carbohydrates (g)": 8.0,
+        "Fiber (g)": 3.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "shrimp_and_grits": {
+        "Portion": "100g",
+        "Calories": 150.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 5.0,
+        "Carbohydrates (g)": 15.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 250.0
+    },
+    "spaghetti_bolognese": {
+        "Portion": "100g",
+        "Calories": 175.0,
+        "Protein (g)": 7.5,
+        "Fat (g)": 6.0,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 1.5,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "spaghetti_carbonara": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 7.5,
+        "Fat (g)": 9.0,
+        "Carbohydrates (g)": 22.5,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 250.0
+    },
+    "spring_rolls": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 8.0,
+        "Carbohydrates (g)": 30.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "steak": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 23.33,
+        "Fat (g)": 16.67,
+        "Carbohydrates (g)": 0.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 66.67
+    },
+    "strawberry_shortcake": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 4.0,
+        "Fat (g)": 12.0,
+        "Carbohydrates (g)": 40.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "sushi": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 8.0,
+        "Fat (g)": 2.0,
+        "Carbohydrates (g)": 30.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "tacos": {
+        "Portion": "100g",
+        "Calories": 250.0,
+        "Protein (g)": 10.0,
+        "Fat (g)": 12.0,
+        "Carbohydrates (g)": 20.0,
+        "Fiber (g)": 3.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "takoyaki": {
+        "Portion": "100g",
+        "Calories": 200.0,
+        "Protein (g)": 8.0,
+        "Fat (g)": 8.0,
+        "Carbohydrates (g)": 25.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    },
+    "tiramisu": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 15.0,
+        "Carbohydrates (g)": 30.0,
+        "Fiber (g)": 1.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 100.0
+    },
+    "tuna_tartare": {
+        "Portion": "100g",
+        "Calories": 150.0,
+        "Protein (g)": 20.0,
+        "Fat (g)": 5.0,
+        "Carbohydrates (g)": 2.0,
+        "Fiber (g)": 0.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 200.0
+    },
+    "waffles": {
+        "Portion": "100g",
+        "Calories": 300.0,
+        "Protein (g)": 6.0,
+        "Fat (g)": 12.0,
+        "Carbohydrates (g)": 40.0,
+        "Fiber (g)": 2.0,
+        "Sugar (g)": 0,
+        "Sodium (mg)": 300.0
+    }
 }
